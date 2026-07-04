@@ -30,6 +30,7 @@ const SITE_URL = "https://melbournewebdesigners.com";
 const SITE_NAME = "MelbourneWebDesigners.com";
 const OPERATOR = "SOCIALFUEL";
 const CONTACT_EMAIL = "hello@socialfuel.media";
+const INDEXNOW_KEY = "4706a4308b21182e1f6919d7fc35268a";
 
 const TODAY = new Date().toISOString().slice(0, 10);       // YYYY-MM-DD
 const TODAY_HUMAN = new Date(TODAY + "T00:00:00Z").toLocaleDateString("en-AU", {
@@ -88,6 +89,31 @@ const ORDERED = editorialOrder(agencies).map((a) => Object.assign({}, a, { slug:
 // all platforms present, for the filter chips
 const ALL_PLATFORMS = ["WordPress", "Shopify", "Webflow", "Custom"];
 
+// platform-specialist pages: metadata + the exact platform token matched in
+// each agency's `platforms` array. Order here drives the "Browse by specialty"
+// strip and the footer.
+const PLATFORM_PAGES = [
+  {
+    key: "wordpress",
+    platform: "WordPress",
+    path: "wordpress-web-design-melbourne/",
+    label: "WordPress web designers",
+  },
+  {
+    key: "shopify",
+    platform: "Shopify",
+    path: "shopify-web-design-melbourne/",
+    label: "Shopify web designers",
+  },
+  {
+    key: "webflow",
+    platform: "Webflow",
+    path: "webflow-web-design-melbourne/",
+    label: "Webflow web designers",
+  },
+];
+const GUIDE_PATH = "how-to-choose-a-web-designer-melbourne/";
+
 function chip(text, cls) { return `<span class="chip ${cls || ""}">${esc(text)}</span>`; }
 
 // star string for a rating (whole + optional half-ish rendered as text)
@@ -144,12 +170,15 @@ function footer(depth) {
     <div class="footer-col">
       <h4>Directory</h4>
       ${col("index.html#directory", "All agencies")}
-      ${col("web-design-cost-melbourne/", "Web design cost")}
-      ${col("get-quote/", "Get a quote")}
-      ${col("methodology/", "How we rank")}
+      ${col("wordpress-web-design-melbourne/", "WordPress designers")}
+      ${col("shopify-web-design-melbourne/", "Shopify designers")}
+      ${col("webflow-web-design-melbourne/", "Webflow designers")}
+      ${col("how-to-choose-a-web-designer-melbourne/", "How to choose")}
     </div>
     <div class="footer-col">
       <h4>About</h4>
+      ${col("web-design-cost-melbourne/", "Web design cost")}
+      ${col("get-quote/", "Get a quote")}
       ${col("about/", "Who runs this")}
       ${col("methodology/", "Methodology")}
       ${col("privacy/", "Privacy")}
@@ -328,6 +357,36 @@ function agencyCard(depth, a, rank) {
 </article>`;
 }
 
+// "Browse by specialty" strip — links the 3 platform pages + the guide.
+// Rendered on the home page. Counts reflect the filtered agency lists.
+function specialtyStrip(depth) {
+  const r = rel(depth);
+  const card = (href, kicker, title, text) => `
+      <a class="spec-card" href="${r}${href}">
+        <span class="spec-kicker">${esc(kicker)}</span>
+        <span class="spec-title">${esc(title)}</span>
+        <span class="spec-text">${esc(text)}</span>
+        <span class="spec-more">Explore <span class="arr">→</span></span>
+      </a>`;
+  const cards = PLATFORM_PAGES.map((p) => {
+    const n = ORDERED.filter((a) => (a.platforms || []).includes(p.platform)).length;
+    return card(p.path, "Platform", `${p.platform} designers`, `${n} Melbourne ${p.platform} specialists, compared.`);
+  }).join("");
+  const guide = card(GUIDE_PATH, "Guide", "How to choose", "A 7-step checklist, red flags and questions to ask before you sign.");
+  return `
+<section class="section-tight">
+  <div class="wrap">
+    <p class="eyebrow">Browse by specialty</p>
+    <h2>Find a specialist for your platform</h2>
+    <p class="dir-note">Looking for a specific platform, or not sure which is right? Start here.</p>
+    <div class="spec-grid">
+      ${cards}
+      ${guide}
+    </div>
+  </div>
+</section>`;
+}
+
 // -------------------------------------------------------------------------
 // PAGE: Home
 // -------------------------------------------------------------------------
@@ -403,6 +462,8 @@ function pageHome() {
     <p id="dir-empty" class="dir-note hide" style="margin-top:1.5rem">No agencies match that platform in this shortlist. <button class="filter-btn" data-filter="all">Show all</button></p>
   </div>
 </section>
+
+${specialtyStrip(depth)}
 
 <section class="section-tight">
   <div class="wrap">
@@ -764,7 +825,7 @@ function pageCost() {
     </ul>
 
     <h2>Template vs custom: which is right for you?</h2>
-    <p>A well-chosen template (or a Webflow/Shopify theme) can look great and launch fast for A$1,500–4,000 — ideal when you're testing an idea or on a tight budget. The trade-off is flexibility: you're designing within someone else's system, and heavy customisation eventually costs more than a custom build would have.</p>
+    <p>A well-chosen template (or a <a href="${r}webflow-web-design-melbourne/">Webflow</a>/<a href="${r}shopify-web-design-melbourne/">Shopify</a> theme) can look great and launch fast for A$1,500–4,000 — ideal when you're testing an idea or on a tight budget. The trade-off is flexibility: you're designing within someone else's system, and heavy customisation eventually costs more than a custom build would have.</p>
     <p>Custom design earns its premium when your brand needs to stand apart, when conversion matters commercially, or when you have specific functionality no theme handles cleanly. Most established Melbourne businesses land here — which is why the A$3,000–10,000 custom band is the market's centre of gravity.</p>
 
     <div class="callout">
@@ -782,7 +843,7 @@ function pageCost() {
     <p>A good agency will lay all of this out before you sign. If ongoing costs only appear after launch, treat it as a warning sign.</p>
 
     <h2>Getting an accurate quote</h2>
-    <p>The fastest way to a real number is a clear brief: your goal, rough budget band, timeline and any must-have features. That's exactly what our free matching does — you answer a few questions and get pointed to the right Melbourne agency for your budget, with a senior strategist replying within one business day.</p>
+    <p>The fastest way to a real number is a clear brief: your goal, rough budget band, timeline and any must-have features. It's also worth reading <a href="${r}how-to-choose-a-web-designer-melbourne/">how to choose a web designer in Melbourne</a> before you sign — the red flags and questions there save more than they cost. Or skip the shortlisting: our free matching points you to the right Melbourne agency for your budget, with a senior strategist replying within one business day.</p>
   </div>
 </section>
 
@@ -1113,6 +1174,21 @@ function pageProfile(a, index) {
   const platformChips = (a.platforms || []).map((p) => chip(p)).join("");
   const serviceChips = (a.services || []).map((s) => chip(s)).join("");
 
+  // internal links to matching platform-specialist pages where this agency
+  // builds on WordPress / Shopify / Webflow.
+  const platformLinks = PLATFORM_PAGES
+    .filter((p) => (a.platforms || []).includes(p.platform))
+    .map((p) => `<a href="${r}${p.path}">More ${esc(p.platform)} specialists in Melbourne <span class="arr">→</span></a>`)
+    .join("\n            ");
+  const platformLinksHtml = platformLinks
+    ? `<div class="profile-section">
+          <h2>Related specialists</h2>
+          <div class="related-links">
+            ${platformLinks}
+          </div>
+        </div>`
+    : "";
+
   const specRows = [];
   specRows.push(["Location", a.suburb + ", Melbourne"]);
   if (a.founded != null) specRows.push(["Founded", String(a.founded)]);
@@ -1182,6 +1258,8 @@ function pageProfile(a, index) {
           <div class="chips">${serviceChips}</div>
         </div>
 
+        ${platformLinksHtml}
+
         <div class="profile-section">
           <h2>At a glance</h2>
           <div class="spec-list">
@@ -1238,6 +1316,314 @@ function truncate(s, n) {
   s = String(s).replace(/\s+/g, " ").trim();
   if (s.length <= n) return s;
   return s.slice(0, n - 1).replace(/[\s,.;:]+\S*$/, "") + "…";
+}
+
+// -------------------------------------------------------------------------
+// PAGE: Platform specialist (WordPress / Shopify / Webflow)
+// -------------------------------------------------------------------------
+
+// per-platform editorial content — intro prose (300–500 words), FAQs and meta.
+// Cost bands here are deliberately aligned with the cost-guide page.
+const PLATFORM_CONTENT = {
+  wordpress: {
+    title: "Best WordPress Web Designers in Melbourne (2026)",
+    metaTitle: "Best WordPress Web Designers Melbourne (2026) — The Shortlist",
+    description:
+      "Melbourne WordPress web design specialists compared. When WordPress is the right call, realistic 2026 costs (A$3k–15k), what to look for, and the agencies that build on it — plus a free match.",
+    intro: `
+    <p>WordPress still runs a large share of the web for one honest reason: it hands you a content engine and an ecosystem no other platform matches. If you publish regularly — blog posts, case studies, events, resources — or you need a site your own team can edit without a developer on standby, WordPress is usually the right call. It's also the platform with the deepest bench of Melbourne talent and the widest choice of ongoing care plans, so you're never locked to a single studio to keep the site running.</p>
+    <p>WordPress earns its keep when you want <strong>flexibility and control</strong>. A well-built custom theme gives you a design that's genuinely yours, an editing experience tailored to non-technical staff, and a plugin ecosystem that covers memberships, bookings, learning platforms, multilingual sites and more without bespoke engineering. Pair it with WooCommerce and it handles serious e-commerce too. The trade-off is stewardship: WordPress rewards a proper maintenance plan — updates, security patches and backups — which is exactly why the mature care-plan market around it is a feature, not a chore.</p>
+    <p>For a custom WordPress build from an established Melbourne agency, budget roughly <strong>A$3,000–10,000</strong> for a designed business site, and <strong>A$10,000–15,000+</strong> once you add bespoke templates, integrations, copywriting and strategy. Template-based builds can start lower (around A$1,500–3,000), but heavy customisation of a theme eventually costs more than a custom build would have. Ongoing care plans typically run A$80–500/month. See the full breakdown on our <a href="../web-design-cost-melbourne/">Melbourne web design cost guide</a>.</p>
+    <p>What to look for in a WordPress specialist: custom theme development (not a marketplace theme resold as "custom"), a clean editing experience for your team, a documented CMS handover, and a real maintenance or care plan with security and backups included. Ask to see live WordPress sites they've built and — critically — confirm you'll own the hosting, the domain and the admin logins. The agencies below all build on WordPress; ordering follows the same editorial rules as the main directory.</p>`,
+    faqs: [
+      {
+        q: "How much does a WordPress website cost in Melbourne?",
+        a: "A custom WordPress site from an established Melbourne agency typically runs A$3,000–10,000 for a designed business site, rising to A$10,000–15,000+ with bespoke templates, integrations and copywriting. Template-based builds start lower (around A$1,500–3,000). Budget A$80–500/month for an ongoing care plan. Our Melbourne web design cost guide breaks down every band."
+      },
+      {
+        q: "When is WordPress the right choice over Shopify or Webflow?",
+        a: "Choose WordPress when content and flexibility matter most — a blog or resource library you publish to often, complex functionality via plugins (memberships, bookings, learning platforms), or a site your own team needs to edit freely. Shopify is the better call for a retail store; Webflow suits design-led marketing sites with low maintenance. For serious e-commerce on WordPress, WooCommerce is the usual pairing."
+      },
+      {
+        q: "Do I need a maintenance plan for a WordPress site?",
+        a: "Yes — for anything running your business. WordPress needs regular core, theme and plugin updates plus security patching and backups. A Melbourne care plan (commonly A$80–500/month) covers this along with uptime monitoring and small changes. It's the single biggest difference between a WordPress site that stays healthy and one that gets hacked or breaks."
+      },
+      {
+        q: "Will I be locked in to the agency that builds my WordPress site?",
+        a: "You shouldn't be. WordPress is open-source, so any competent WordPress developer can take over an existing site. Insist on owning your hosting, domain and admin logins, and get a documented handover. If an agency hosts you on a locked platform you can't move off, treat it as a red flag — see our guide to choosing a web designer."
+      }
+    ]
+  },
+  shopify: {
+    title: "Best Shopify Web Designers in Melbourne (2026)",
+    metaTitle: "Best Shopify Web Designers Melbourne (2026) — The Shortlist",
+    description:
+      "Melbourne Shopify web design specialists compared. When Shopify is the right call for retail, realistic 2026 costs (A$5k–50k+), what to look for, and the agencies that build stores — plus a free match.",
+    intro: `
+    <p>If you sell products, Shopify is almost always the right starting point. It's built for retail from the ground up — inventory, checkout, payments, shipping, tax and the operational plumbing of an online store are handled for you, hosted and PCI-compliant, so your agency spends its hours on conversion and brand rather than reinventing a cart. For most Melbourne retailers, that's the difference between launching this quarter and next year.</p>
+    <p>Shopify shines when <strong>selling is the point</strong>. The platform scales from a first store to high-volume Shopify Plus without a re-platform, the app ecosystem covers subscriptions, loyalty, reviews, bundles and marketplace feeds, and it plugs cleanly into the tools retailers actually use — email, ads, POS and 3PL fulfilment. A specialist store designer earns their fee on the details that move revenue: a fast, trustworthy product page, a frictionless checkout, and a theme tuned to your catalogue rather than a generic template stretched to fit.</p>
+    <p>For a Melbourne agency Shopify build, budget roughly <strong>A$5,000</strong> for a well-configured store on a customised theme, and <strong>A$50,000+</strong> at the top end for a custom Shopify Plus or headless build with migrations, integrations and bespoke design. Most established retail brands land in the middle. On top of the build, factor Shopify's monthly platform subscription and payment-processing fees on every sale. Our <a href="../web-design-cost-melbourne/">Melbourne web design cost guide</a> covers e-commerce pricing in full.</p>
+    <p>What to look for in a Shopify specialist: a portfolio of live stores (not just brochure sites), Shopify Partner status, real experience with the apps and integrations you'll need, and a clear plan for migrating your existing products, customers and SEO if you're moving platforms. Ask how they approach checkout and product-page conversion, and confirm you'll own the store and its data outright. The agencies below all build on Shopify; ordering follows the same editorial rules as the main directory.</p>`,
+    faqs: [
+      {
+        q: "How much does a Shopify store cost in Melbourne?",
+        a: "A Shopify store from a Melbourne agency typically ranges from about A$5,000 for a well-configured build on a customised theme to A$50,000+ for a custom Shopify Plus or headless commerce platform with migrations, integrations and bespoke design. On top of the build, budget for Shopify's monthly subscription and payment-processing fees on every sale."
+      },
+      {
+        q: "Is Shopify better than WooCommerce for a Melbourne store?",
+        a: "For most retailers, yes — Shopify is purpose-built for e-commerce, fully hosted and PCI-compliant, so there's less to maintain and it scales to Shopify Plus without re-platforming. WooCommerce (on WordPress) suits businesses that want maximum control or already run a content-heavy WordPress site. The right answer depends on your catalogue, integrations and in-house skills."
+      },
+      {
+        q: "Can a Melbourne agency migrate my existing store to Shopify?",
+        a: "Yes. Store migration — moving products, customers, order history and preserving SEO with proper redirects — is a common project for Shopify specialists. It's more involved than a fresh build, so expect it to add cost and testing time. Ask any agency how they handle URL redirects and SEO preservation, since a botched migration can cost you search rankings."
+      },
+      {
+        q: "What should I look for in a Shopify specialist?",
+        a: "A portfolio of live stores (not just brochure sites), Shopify Partner status, real experience with the apps you'll need (subscriptions, reviews, loyalty, feeds), and a clear approach to product-page and checkout conversion. Confirm you'll own the store and its data. See our guide to choosing a web designer for the full checklist and red flags."
+      }
+    ]
+  },
+  webflow: {
+    title: "Best Webflow Web Designers in Melbourne (2026)",
+    metaTitle: "Best Webflow Web Designers Melbourne (2026) — The Shortlist",
+    description:
+      "Melbourne Webflow web design specialists compared. When Webflow is the right call for design-led marketing sites, realistic 2026 costs (A$3k–15k), what to look for, and the agencies — plus a free match.",
+    intro: `
+    <p>Webflow has become the platform of choice for design-led marketing sites — the kind where the visual craft is the point and the maintenance burden needs to stay low. It gives designers pixel-level control and rich interactions without the plugin sprawl of WordPress, then hosts the result on a fast, secure CDN with nothing to patch. For a brand site, a startup's homepage or a campaign microsite, that combination is hard to beat.</p>
+    <p>Webflow is the right call when <strong>design and low maintenance both matter</strong>. There are no plugins to update and no security patch treadmill, so once a site is built it largely looks after itself — a genuine advantage for teams without a developer on hand. Its built-in CMS handles blogs, case studies and dynamic collections cleanly, and its animation and interaction tools let a good designer ship motion and polish that would be fiddly and fragile elsewhere. Where Webflow is <em>not</em> the best fit is heavy transactional e-commerce (Shopify wins there) or sites that lean on a deep plugin ecosystem (WordPress).</p>
+    <p>For a Webflow build from a Melbourne specialist, budget roughly <strong>A$3,000–10,000</strong> for a designed marketing site, rising to <strong>A$10,000–15,000+</strong> for larger sites with custom interactions, a structured CMS and copywriting. Many Webflow projects also move faster than equivalent custom builds — four to six weeks is common. Hosting runs on a Webflow plan rather than a separate host. See our <a href="../web-design-cost-melbourne/">Melbourne web design cost guide</a> for the full picture.</p>
+    <p>What to look for in a Webflow specialist: a portfolio of live Webflow sites, Webflow Partner status where relevant, clean use of the CMS (so your team can edit content), and a considered approach to interactions that enhances rather than distracts. Confirm you'll own the Webflow project and hosting account, and ask how they handle SEO and page speed. The agencies below all build on Webflow; ordering follows the same editorial rules as the main directory.</p>`,
+    faqs: [
+      {
+        q: "How much does a Webflow website cost in Melbourne?",
+        a: "A Webflow site from a Melbourne specialist typically runs A$3,000–10,000 for a designed marketing site, rising to A$10,000–15,000+ for larger sites with custom interactions, a structured CMS and copywriting. Hosting is on a Webflow plan rather than a separate host. Many Webflow projects also ship faster than equivalent custom builds — four to six weeks is common."
+      },
+      {
+        q: "When should I choose Webflow over WordPress?",
+        a: "Choose Webflow for design-led marketing sites where visual craft and low maintenance matter — there are no plugins to update and no security patch treadmill. Choose WordPress when you need a deep plugin ecosystem (memberships, complex functionality) or a content-first site your team publishes to constantly. For a transactional store, neither is ideal — Shopify is the better call."
+      },
+      {
+        q: "Is Webflow good for SEO?",
+        a: "Yes — Webflow generates clean, fast-loading code and gives you full control over meta titles, descriptions, alt text, URL structure and schema, all of which support strong technical SEO. As with any platform, the outcome depends on how well the site is built and its content strategy, so ask a specialist how they approach on-page SEO and page speed."
+      },
+      {
+        q: "Will I be able to edit a Webflow site myself?",
+        a: "Yes, if it's built well. Webflow's Editor and CMS let non-technical team members update text, images and collection items (blog posts, case studies) without touching the design. Ask your agency to structure the CMS around the content you'll actually manage, and to hand over the project and hosting account so you're not locked in."
+      }
+    ]
+  }
+};
+
+function pagePlatform(cfg) {
+  const depth = 1;
+  const r = rel(depth);
+  const content = PLATFORM_CONTENT[cfg.key];
+
+  // filter agencies whose platforms include the exact platform token, then
+  // apply the site's editorial ordering.
+  const matches = ORDERED.filter((a) => (a.platforms || []).includes(cfg.platform));
+  const cards = matches.map((a, i) => agencyCard(depth, a, i + 1)).join("\n");
+
+  // ItemList JSON-LD of the filtered list (editorial order; featured card is
+  // separate and not part of the editorial ItemList).
+  const itemListLd = {
+    "@context": "https://schema.org", "@type": "ItemList",
+    name: `${cfg.platform} web design agencies in Melbourne`,
+    numberOfItems: matches.length,
+    itemListElement: matches.map((a, i) => ({
+      "@type": "ListItem", position: i + 1,
+      item: { "@type": "ProfessionalService", name: a.name, url: `${SITE_URL}/agencies/${a.slug}/`, areaServed: "Melbourne, Australia" }
+    }))
+  };
+
+  const faqs = content.faqs;
+  const faqLd = faqPageLd(faqs);
+
+  const body = `
+<section class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="${r}index.html">Directory</a><span class="sep">/</span><span>${esc(cfg.platform)} web design in Melbourne</span>
+    </nav>
+    <p class="eyebrow">${esc(cfg.platform)} specialists · Melbourne · Updated ${esc(TODAY_HUMAN)}</p>
+    <h1>Best ${esc(cfg.platform)} Web Designers in Melbourne (2026)</h1>
+    <p class="lead">The Melbourne agencies that build on ${esc(cfg.platform)} — when it's the right platform, what it costs in 2026, and how to pick a specialist. Then get matched free with the right team for your budget.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap wrap-narrow prose">
+    ${content.intro}
+  </div>
+</section>
+
+<section id="directory" class="section-tight">
+  <div class="wrap">
+    ${featuredCard(depth)}
+
+    <div class="dir-head" style="margin-top:3.5rem">
+      <div>
+        <p class="eyebrow">The editorial shortlist</p>
+        <h2>${matches.length} Melbourne ${esc(cfg.platform)} web design ${matches.length === 1 ? "agency" : "agencies"}</h2>
+      </div>
+      <span class="updated">Reviewed ${esc(TODAY_HUMAN)}</span>
+    </div>
+    <p class="dir-note">Every agency below builds on ${esc(cfg.platform)}, ordered with established multi-decade studios first, then by breadth of platforms and services. An independent editorial list — not pay-for-placement. <a href="${r}methodology/">See our full methodology →</a></p>
+
+    <div class="grid">
+      ${cards}
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="wrap wrap-narrow">
+    <p class="eyebrow center">Questions</p>
+    <h2 class="center">${esc(cfg.platform)} web design in Melbourne — FAQs</h2>
+    ${faqBlock(faqs)}
+  </div>
+</section>
+
+${ctaBand(depth, {
+    eyebrow: "Free, no obligation",
+    title: `Need a ${cfg.platform} website? Get matched free.`,
+    text: `Tell us about your project and your budget. We'll match you with the right Melbourne ${cfg.platform} specialist — a senior strategist replies within one business day.`
+  })}
+`;
+
+  return layout({
+    depth, active: null, canonicalPath: cfg.path,
+    title: content.metaTitle,
+    ogTitle: content.title,
+    description: content.description,
+    jsonld: [orgLd(), itemListLd, faqLd],
+    body
+  });
+}
+
+// -------------------------------------------------------------------------
+// PAGE: How to choose a web designer in Melbourne (guide)
+// -------------------------------------------------------------------------
+function pageChooseGuide() {
+  const depth = 1;
+  const r = rel(depth);
+
+  // Article JSON-LD — author = the site Organization (not a person).
+  const articleLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "How to Choose a Web Designer in Melbourne (2026 Guide)",
+    description:
+      "A practical guide to choosing a web design agency in Melbourne: a 7-step checklist, 7 red flags, realistic budget bands, and 10 questions to ask before you sign.",
+    inLanguage: "en-AU",
+    author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL + "/" },
+    publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL + "/" },
+    mainEntityOfPage: { "@type": "WebPage", "@id": SITE_URL + "/" + GUIDE_PATH },
+    datePublished: TODAY,
+    dateModified: TODAY
+  };
+
+  const body = `
+<section class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="${r}index.html">Directory</a><span class="sep">/</span><span>How to choose a web designer in Melbourne</span>
+    </nav>
+    <p class="eyebrow">Buyer's guide · Melbourne · Updated ${esc(TODAY_HUMAN)}</p>
+    <h1>How to choose a web designer in Melbourne (2026 guide)</h1>
+    <p class="lead">Hiring the wrong agency is expensive — a rebuild within 18 months is the most costly kind of website. This is the practical checklist: how to shortlist, what to ask, the red flags that predict a bad project, and what to budget.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap wrap-narrow prose">
+    <p>Choosing a web designer in Melbourne is harder than it should be. Every agency says it's the best, quotes vary wildly for what looks like the same job, and the real differences — who owns your site, what happens after launch, whether the design is genuinely custom — are buried in the fine print. This guide gives you a repeatable way to pick well, whatever your budget.</p>
+    <p>Work through it in order: get the brief right, shortlist on the seven signals below, screen for the red flags, ask the ten questions, then compare quotes on like-for-like scope. It takes an afternoon and it routinely saves five figures.</p>
+
+    <h2>Get a brief together before you ask for quotes</h2>
+    <p>The single biggest cause of wildly different quotes is a vague request. Before you approach anyone, write down four things: your <strong>goal</strong> (more leads, sell online, look credible, rebrand), a rough <strong>budget band</strong>, your <strong>timeline</strong>, and any <strong>must-have features</strong> (bookings, payments, a blog, integrations). You don't need a formal document — a one-page brief is plenty. It lets agencies quote the same scope, which is the only way to compare prices honestly. A studio that quotes a firm price with no brief and no questions is guessing, and you'll pay for the guess later in change requests.</p>
+    <p>It also helps to gather a handful of reference sites you like — and a note on <em>why</em> you like each one — plus a rough sense of who you're competing with online. That context lets a good agency pitch the right approach rather than a generic one, and it surfaces mismatches early: if a studio's portfolio looks nothing like the direction you're drawn to, that's useful to know before you're three weeks into a project.</p>
+
+    <h2>The 7-step checklist for shortlisting</h2>
+    <p>Use these seven signals to build a shortlist of two or three agencies worth briefing properly:</p>
+    <ol>
+      <li><strong>A portfolio with live URLs.</strong> Not screenshots — actual links to sites you can open, ideally in your industry or at your level of complexity. If they won't show live work, walk.</li>
+      <li><strong>Relevant experience.</strong> A retail store needs a Shopify specialist; a content-heavy site needs WordPress depth; a design-led brand site suits Webflow. Match the agency's strength to your platform. See our <a href="${r}wordpress-web-design-melbourne/">WordPress</a>, <a href="${r}shopify-web-design-melbourne/">Shopify</a> and <a href="${r}webflow-web-design-melbourne/">Webflow</a> specialist shortlists.</li>
+      <li><strong>A clear, written process.</strong> Discovery, design, build, launch — a good agency can tell you what happens at each stage and what they need from you.</li>
+      <li><strong>Genuine custom design.</strong> Confirm whether you're getting a bespoke design or a marketplace theme lightly restyled. Both are valid — but you should know which, and pay accordingly.</li>
+      <li><strong>A real maintenance / care plan.</strong> Ask what happens after launch: updates, security, backups, small changes. A site with no care plan is a liability waiting to happen.</li>
+      <li><strong>Transparent ownership.</strong> You should own your domain, hosting and admin logins outright. Anything else is lock-in.</li>
+      <li><strong>Reviews and references you can verify.</strong> Public Google reviews, testimonials you can trace to a real business, or a client you can call. Be sceptical of ratings with no source.</li>
+    </ol>
+
+    <h2>7 red flags to walk away from</h2>
+    <p>Any one of these should give you pause; two or more, and you should keep looking:</p>
+    <ul>
+      <li><strong>A quote that's too cheap.</strong> A "full custom website" under about A$1,500 almost always means a locked template, offshore production with no local accountability, or hidden ongoing fees. Cheap up front is the most expensive option over 18 months.</li>
+      <li><strong>No CMS handover.</strong> If you can't edit your own content — or they won't hand over admin access and documentation — you're captive.</li>
+      <li><strong>Lock-in hosting.</strong> Being hosted on a proprietary platform you can't migrate off, with your site held hostage to a monthly fee, is a classic trap. Insist on portable hosting you control.</li>
+      <li><strong>No portfolio URLs.</strong> Screenshots without live links, or "we can't show that work", usually means the work isn't theirs or isn't good.</li>
+      <li><strong>A template sold as custom.</strong> A marketplace theme lightly restyled and billed as bespoke design. Ask directly and get the answer in writing.</li>
+      <li><strong>No timeline in writing.</strong> "A few weeks" with no milestones is how projects drift for six months. Get key dates in the contract.</li>
+      <li><strong>Vague scope.</strong> A proposal with no page count, no list of deliverables, no content plan and no mention of SEO or performance is a blank cheque. Nail down exactly what's included before you sign.</li>
+    </ul>
+
+    <h2>What to budget: Melbourne 2026 bands</h2>
+    <p>Prices vary with scope, but these are the honest bands from the current Melbourne market. Use them to sanity-check any quote:</p>
+    <ul>
+      <li><strong>Template / small brochure site:</strong> A$1,500–3,000 — a tidy few-page site on a theme, best for very early-stage businesses.</li>
+      <li><strong>Custom business website:</strong> A$3,000–10,000 — designed for you, CMS, mobile-first, basic SEO. This is the market's centre of gravity.</li>
+      <li><strong>Premium / larger custom site:</strong> A$10,000–25,000 — bespoke design system, custom templates, copywriting, integrations.</li>
+      <li><strong>E-commerce store:</strong> A$5,000–50,000+ — Shopify or WooCommerce; higher end adds migrations and custom features.</li>
+    </ul>
+    <p>On top of the build, budget for ongoing costs: hosting (A$20–100/month), a domain (A$15–30/year) and a care plan (commonly A$80–500/month). Our <a href="${r}web-design-cost-melbourne/">Melbourne web design cost guide</a> breaks every band down with a live estimator, including what actually drives the number up.</p>
+
+    <h2>10 questions to ask before you sign</h2>
+    <p>Put these to any agency you're seriously considering. The quality of the answers tells you more than the quote:</p>
+    <ol>
+      <li>Can I see three live sites you've built for businesses like mine?</li>
+      <li>Is the design genuinely custom, or based on a theme? Which theme?</li>
+      <li>Who owns the domain, hosting and admin logins when we're done — me?</li>
+      <li>What CMS will I use to edit content, and will you train my team?</li>
+      <li>What's included after launch — and what does your care plan cost?</li>
+      <li>What's the fixed price and payment schedule, and what would trigger extra cost?</li>
+      <li>What's the timeline, with key milestones and a launch date?</li>
+      <li>Who exactly will do the work — in-house or subcontracted, and where?</li>
+      <li>How do you approach SEO, page speed and mobile performance?</li>
+      <li>If we're moving platforms, how do you preserve our SEO and set up redirects?</li>
+    </ol>
+
+    <h2>Compare quotes on like-for-like scope</h2>
+    <p>Once you have two or three proposals, line them up against the same brief. A cheaper quote that omits SEO, content, a care plan or proper discovery isn't cheaper — it's a smaller job. Read what's <em>included</em>, not just the headline number, and give weight to the agency that asked the best questions. The right choice is rarely the cheapest and almost never the one that promised the most for the least.</p>
+
+    <div class="callout">
+      <p><strong>The shortcut.</strong> If working through all of this yourself sounds like a lot, that's exactly what our free matching does. Tell us your goal, budget and timeline, and we'll point you to the right Melbourne agency — starting with our featured partner SOCIALFUEL where it fits, and elsewhere when it doesn't. A senior strategist replies within one business day.</p>
+    </div>
+  </div>
+</section>
+
+${ctaBand(depth, {
+    eyebrow: "Skip the shortlisting",
+    title: "Let us match you with the right Melbourne agency — free.",
+    text: "Answer six quick questions about your project and budget. We'll point you to the right web designer and a strategist will come back within one business day."
+  })}
+
+<section class="section-tight">
+  <div class="wrap wrap-narrow center">
+    <p class="dir-note" style="margin-inline:auto">Prefer to browse yourself? <a href="${r}index.html#directory">See the full independent shortlist of Melbourne web design agencies →</a></p>
+  </div>
+</section>
+`;
+
+  return layout({
+    depth, active: null, canonicalPath: GUIDE_PATH,
+    title: "How to Choose a Web Designer in Melbourne (2026 Guide)",
+    ogTitle: "How to Choose a Web Designer in Melbourne (2026 Guide)",
+    description:
+      "A practical guide to choosing a web designer in Melbourne: a 7-step checklist, 7 red flags, realistic 2026 budget bands, and 10 questions to ask before you sign a contract.",
+    jsonld: [articleLd, orgLd()],
+    body
+  });
 }
 
 // -------------------------------------------------------------------------
@@ -1332,8 +1718,17 @@ MelbourneWebDesigners.com is operated by SOCIALFUEL, a Melbourne web design and 
 - [Home — the Melbourne web design shortlist](${SITE_URL}/) : hero, featured partner, filterable directory of 28 agencies, how-it-works, FAQ.
 - [Get a free quote / get matched](${SITE_URL}/get-quote/) : multi-step form that matches a business with the right Melbourne web design agency for its budget; a senior strategist replies within one business day.
 - [How much does web design cost in Melbourne? (2026 prices)](${SITE_URL}/web-design-cost-melbourne/) : current Melbourne pricing — business sites A$3k–10k, e-commerce A$5k–50k+, agency rates A$150–200/hr — with an interactive estimator and FAQs.
+- [How to choose a web designer in Melbourne (2026 guide)](${SITE_URL}/${GUIDE_PATH}) : a 7-step shortlisting checklist, 7 red flags, 2026 budget bands, and 10 questions to ask before signing.
 - [Methodology & disclosure](${SITE_URL}/methodology/) : how the shortlist is selected and ordered, commercial-placement policy, ratings policy, and the free removal promise.
 - [About](${SITE_URL}/about/) : who operates the directory and how it makes money.
+
+## Browse by platform specialty
+
+Platform-specialist shortlists — each filters the editorial directory to Melbourne agencies that build on that platform, with SOCIALFUEL shown as a labelled Featured Partner.
+
+- [Best WordPress web designers in Melbourne (2026)](${SITE_URL}/wordpress-web-design-melbourne/) : Melbourne WordPress specialists, when WordPress is the right choice (content, flexibility, care-plan ecosystem), 2026 costs and FAQs.
+- [Best Shopify web designers in Melbourne (2026)](${SITE_URL}/shopify-web-design-melbourne/) : Melbourne Shopify specialists for retail and e-commerce, 2026 store costs (A$5k–50k+) and FAQs.
+- [Best Webflow web designers in Melbourne (2026)](${SITE_URL}/webflow-web-design-melbourne/) : Melbourne Webflow specialists for design-led, low-maintenance marketing sites, 2026 costs and FAQs.
 
 ## Featured Partner
 
@@ -1428,6 +1823,10 @@ function build() {
     "agencies",
     "get-quote",
     "web-design-cost-melbourne",
+    "wordpress-web-design-melbourne",
+    "shopify-web-design-melbourne",
+    "webflow-web-design-melbourne",
+    "how-to-choose-a-web-designer-melbourne",
     "methodology",
     "about",
     "privacy",
@@ -1437,6 +1836,7 @@ function build() {
     "sitemap.xml",
     "robots.txt",
     "llms.txt",
+    INDEXNOW_KEY + ".txt",
     ".nojekyll"
   ];
   OWNED.forEach((rel) => rmrf(path.join(OUT, rel)));
@@ -1457,6 +1857,10 @@ function build() {
   pages.push(["index.html", pageHome()]);
   pages.push(["get-quote/index.html", pageQuote()]);
   pages.push(["web-design-cost-melbourne/index.html", pageCost()]);
+  PLATFORM_PAGES.forEach((cfg) => {
+    pages.push([cfg.path + "index.html", pagePlatform(cfg)]);
+  });
+  pages.push([GUIDE_PATH + "index.html", pageChooseGuide()]);
   pages.push(["methodology/index.html", pageMethodology()]);
   pages.push(["about/index.html", pageAbout()]);
   pages.push(["privacy/index.html", pagePrivacy()]);
@@ -1474,6 +1878,10 @@ function build() {
     { loc: "", freq: "weekly", pri: "1.0" },
     { loc: "get-quote/", freq: "monthly", pri: "0.9" },
     { loc: "web-design-cost-melbourne/", freq: "monthly", pri: "0.9" },
+    { loc: "wordpress-web-design-melbourne/", freq: "monthly", pri: "0.8" },
+    { loc: "shopify-web-design-melbourne/", freq: "monthly", pri: "0.8" },
+    { loc: "webflow-web-design-melbourne/", freq: "monthly", pri: "0.8" },
+    { loc: "how-to-choose-a-web-designer-melbourne/", freq: "monthly", pri: "0.8" },
     { loc: "methodology/", freq: "yearly", pri: "0.5" },
     { loc: "about/", freq: "yearly", pri: "0.5" },
     { loc: "privacy/", freq: "yearly", pri: "0.3" },
@@ -1484,6 +1892,7 @@ function build() {
   writeFile("sitemap.xml", buildSitemap(sitemapUrls));
   writeFile("robots.txt", buildRobots());
   writeFile("llms.txt", buildLlms());
+  writeFile(INDEXNOW_KEY + ".txt", INDEXNOW_KEY); // IndexNow ownership verification
   writeFile(".nojekyll", ""); // ensure GitHub Pages serves files/underscore paths as-is
 
   const htmlCount = pages.length;

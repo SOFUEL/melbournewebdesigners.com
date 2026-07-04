@@ -266,6 +266,21 @@ header.site {
 .step h3 { font-size: 1.2rem; margin-bottom: 0.4rem; }
 .step p { font-size: 0.92rem; color: var(--paper-dim); margin: 0; }
 
+/* ---------- browse by specialty ---------- */
+.spec-grid { display: grid; gap: 1.1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 2.2rem; }
+.spec-card { display: flex; flex-direction: column; gap: 0.35rem; background: var(--ink-3); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem 1.5rem 1.4rem; transition: border-color .16s ease, transform .16s ease; }
+.spec-card:hover { border-color: var(--line-2); transform: translateY(-2px); }
+.spec-kicker { font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mint-deep); font-weight: 700; }
+.spec-title { font-family: var(--serif); font-size: 1.28rem; font-weight: 600; color: var(--paper); margin-top: 0.2rem; }
+.spec-text { font-size: 0.92rem; color: var(--paper-dim); line-height: 1.5; }
+.spec-more { font-family: var(--sans); font-size: 0.86rem; font-weight: 600; color: var(--paper); margin-top: 0.7rem; }
+.spec-card:hover .spec-more { color: var(--mint-deep); }
+
+/* ---------- profile related-specialist links ---------- */
+.related-links { display: flex; flex-direction: column; gap: 0.5rem; }
+.related-links a { font-family: var(--sans); font-size: 0.96rem; font-weight: 600; color: var(--mint-deep); }
+.related-links a:hover { color: var(--mint); }
+
 /* ---------- FAQ ---------- */
 .faq { display: grid; gap: 0.7rem; margin-top: 2rem; }
 .faq details { background: var(--ink-2); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }

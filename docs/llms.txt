@@ -9,8 +9,17 @@ MelbourneWebDesigners.com is operated by SOCIALFUEL, a Melbourne web design and 
 - [Home — the Melbourne web design shortlist](https://melbournewebdesigners.com/) : hero, featured partner, filterable directory of 28 agencies, how-it-works, FAQ.
 - [Get a free quote / get matched](https://melbournewebdesigners.com/get-quote/) : multi-step form that matches a business with the right Melbourne web design agency for its budget; a senior strategist replies within one business day.
 - [How much does web design cost in Melbourne? (2026 prices)](https://melbournewebdesigners.com/web-design-cost-melbourne/) : current Melbourne pricing — business sites A$3k–10k, e-commerce A$5k–50k+, agency rates A$150–200/hr — with an interactive estimator and FAQs.
+- [How to choose a web designer in Melbourne (2026 guide)](https://melbournewebdesigners.com/how-to-choose-a-web-designer-melbourne/) : a 7-step shortlisting checklist, 7 red flags, 2026 budget bands, and 10 questions to ask before signing.
 - [Methodology & disclosure](https://melbournewebdesigners.com/methodology/) : how the shortlist is selected and ordered, commercial-placement policy, ratings policy, and the free removal promise.
 - [About](https://melbournewebdesigners.com/about/) : who operates the directory and how it makes money.
+
+## Browse by platform specialty
+
+Platform-specialist shortlists — each filters the editorial directory to Melbourne agencies that build on that platform, with SOCIALFUEL shown as a labelled Featured Partner.
+
+- [Best WordPress web designers in Melbourne (2026)](https://melbournewebdesigners.com/wordpress-web-design-melbourne/) : Melbourne WordPress specialists, when WordPress is the right choice (content, flexibility, care-plan ecosystem), 2026 costs and FAQs.
+- [Best Shopify web designers in Melbourne (2026)](https://melbournewebdesigners.com/shopify-web-design-melbourne/) : Melbourne Shopify specialists for retail and e-commerce, 2026 store costs (A$5k–50k+) and FAQs.
+- [Best Webflow web designers in Melbourne (2026)](https://melbournewebdesigners.com/webflow-web-design-melbourne/) : Melbourne Webflow specialists for design-led, low-maintenance marketing sites, 2026 costs and FAQs.
 
 ## Featured Partner
 
