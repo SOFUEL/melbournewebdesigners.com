@@ -3,297 +3,555 @@
     "name": "Luminary",
     "website": "https://www.luminary.com",
     "suburb": "CBD",
-    "platforms": ["Custom", "WordPress", "Drupal", "Kentico"],
-    "services": ["Web Design", "Web Development", "UX", "Digital Strategy", "SEO"],
+    "platforms": [
+      "Custom",
+      "WordPress",
+      "Drupal",
+      "Kentico"
+    ],
+    "services": [
+      "Web Design",
+      "Web Development",
+      "UX",
+      "Digital Strategy",
+      "SEO"
+    ],
     "blurb": "Luminary is a long-established Australian digital agency and certified B Corp with its Melbourne office on Little Collins Street, plus offices in Sydney, Brisbane and Jakarta. It focuses on web development, UX and digital strategy for enterprise and government clients.",
     "founded": 1999,
     "teamSize": "50+",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/luminary.svg"
   },
   {
     "name": "Butterfly",
     "website": "https://butterfly.com.au",
     "suburb": "CBD",
-    "platforms": ["Custom", "WordPress", "Drupal"],
-    "services": ["Web Design", "Web Development", "Custom Applications", "Accessibility", "E-commerce"],
+    "platforms": [
+      "Custom",
+      "WordPress",
+      "Drupal"
+    ],
+    "services": [
+      "Web Design",
+      "Web Development",
+      "Custom Applications",
+      "Accessibility",
+      "E-commerce"
+    ],
     "blurb": "Butterfly is a Melbourne CBD digital agency (Queen Street) that has built websites and custom applications since 2007, with a focus on accessibility, security and compliance. It works heavily with government, healthcare, education and non-profit clients.",
     "founded": 2007,
     "teamSize": "10-50",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/butterfly.svg"
   },
   {
     "name": "Emote Digital",
     "website": "https://www.emotedigital.com.au",
     "suburb": "Hawthorn",
-    "platforms": ["WordPress", "WooCommerce", "BigCommerce", "Shopify"],
-    "services": ["Web Design", "E-commerce", "Web Development", "SEO", "Digital Marketing"],
+    "platforms": [
+      "WordPress",
+      "WooCommerce",
+      "BigCommerce",
+      "Shopify"
+    ],
+    "services": [
+      "Web Design",
+      "E-commerce",
+      "Web Development",
+      "SEO",
+      "Digital Marketing"
+    ],
     "blurb": "Emote Digital is an award-winning web design and digital marketing agency based on Church Street in Hawthorn, with over 20 years in the industry. It specialises in WordPress/WooCommerce and BigCommerce e-commerce builds alongside SEO and digital marketing.",
     "founded": null,
     "teamSize": "10-50",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/emote-digital.webp"
   },
   {
     "name": "Chromatix",
     "website": "https://www.chromatix.com.au",
     "suburb": "CBD",
-    "platforms": ["WordPress", "Custom"],
-    "services": ["Web Design", "Web Development", "UX/UI", "Conversion Strategy", "E-commerce"],
+    "platforms": [
+      "WordPress",
+      "Custom"
+    ],
+    "services": [
+      "Web Design",
+      "Web Development",
+      "UX/UI",
+      "Conversion Strategy",
+      "E-commerce"
+    ],
     "blurb": "Chromatix is a Melbourne web design and development agency operating since 2009, combining conversion-focused design with development and strategy. It reports a team of 15+ full-time specialists and a strong record of Google reviews.",
     "founded": 2009,
     "teamSize": "10-50",
-    "googleRating": 4.9
+    "googleRating": 4.9,
+    "logo": "assets/logos/chromatix.svg"
   },
   {
     "name": "Bright Labs",
     "website": "https://www.brightlabs.com.au",
     "suburb": "CBD",
-    "platforms": ["Custom", "WordPress", "Drupal"],
-    "services": ["Web Design", "Web Development", "Digital Marketing", "SEO", "UX"],
+    "platforms": [
+      "Custom",
+      "WordPress",
+      "Drupal"
+    ],
+    "services": [
+      "Web Design",
+      "Web Development",
+      "Digital Marketing",
+      "SEO",
+      "UX"
+    ],
     "blurb": "Bright Labs (Brightlabs) is a Melbourne digital agency that has been building websites and digital marketing programs since 2004, working with large brands and organisations. Services span web design, development and performance marketing.",
     "founded": 2004,
     "teamSize": "50+",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/bright-labs.svg"
   },
   {
     "name": "Convert Digital",
     "website": "https://www.convertdigital.com.au",
     "suburb": "Abbotsford",
-    "platforms": ["Shopify", "BigCommerce", "commercetools"],
-    "services": ["E-commerce", "Web Design", "Web Development", "Conversion Optimisation", "Digital Strategy"],
+    "platforms": [
+      "Shopify",
+      "BigCommerce",
+      "commercetools"
+    ],
+    "services": [
+      "E-commerce",
+      "Web Design",
+      "Web Development",
+      "Conversion Optimisation",
+      "Digital Strategy"
+    ],
     "blurb": "Convert Digital is a Melbourne e-commerce agency headquartered on Hoddle Street in Abbotsford, with additional offices in Sydney and Brisbane. It focuses on Shopify Plus design, development and conversion optimisation for retail brands.",
     "founded": null,
     "teamSize": "10-50",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/convert-digital.svg"
   },
   {
     "name": "Overdose Digital",
     "website": "https://overdose.digital",
     "suburb": "South Yarra",
-    "platforms": ["Shopify", "BigCommerce", "Adobe Commerce", "commercetools"],
-    "services": ["E-commerce", "Web Design", "Web Development", "Digital Commerce Consulting", "Digital Marketing"],
+    "platforms": [
+      "Shopify",
+      "BigCommerce",
+      "Adobe Commerce",
+      "commercetools"
+    ],
+    "services": [
+      "E-commerce",
+      "Web Design",
+      "Web Development",
+      "Digital Commerce Consulting",
+      "Digital Marketing"
+    ],
     "blurb": "Overdose is a global digital commerce agency whose Melbourne office in South Yarra anchors its APAC operations, part of a 200+ person team across offices worldwide. It specialises in enterprise e-commerce across Shopify Plus, Adobe Commerce and BigCommerce.",
     "founded": null,
     "teamSize": "50+",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/overdose-digital.svg"
   },
   {
     "name": "PixelStorm",
     "website": "https://pixelstorm.com.au",
     "suburb": "Cremorne",
-    "platforms": ["WordPress", "Shopify", "WooCommerce", "Drupal"],
-    "services": ["Web Design", "Web Development", "SEO", "Google Ads", "Conversion Optimisation"],
+    "platforms": [
+      "WordPress",
+      "Shopify",
+      "WooCommerce",
+      "Drupal"
+    ],
+    "services": [
+      "Web Design",
+      "Web Development",
+      "SEO",
+      "Google Ads",
+      "Conversion Optimisation"
+    ],
     "blurb": "PixelStorm is a Melbourne web design and digital agency based on Dover Street in Cremorne, with an end-to-end team of designers, developers, marketers and strategists. It was a finalist in the Australian Web Awards 2026.",
     "founded": null,
     "teamSize": "10-50",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/pixelstorm.svg"
   },
   {
     "name": "Atollon",
     "website": "https://atollon.com.au",
     "suburb": "Fitzroy",
-    "platforms": ["Shopify", "WordPress", "Custom"],
-    "services": ["Branding", "Web Design", "Web Development", "Marketing", "Social"],
+    "platforms": [
+      "Shopify",
+      "WordPress",
+      "Custom"
+    ],
+    "services": [
+      "Branding",
+      "Web Design",
+      "Web Development",
+      "Marketing",
+      "Social"
+    ],
     "blurb": "Atollon is a Melbourne creative agency with a design office in Fitzroy that offers integrated brand identity, web design and digital work. It serves both large and small businesses across brand, digital and code.",
     "founded": null,
     "teamSize": "1-10",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/atollon.png"
   },
   {
     "name": "Your Creative",
     "website": "https://yourcreative.com.au",
     "suburb": "Brunswick",
-    "platforms": ["WordPress", "Shopify", "Webflow"],
-    "services": ["Branding", "Web Design", "Digital Strategy", "Creative"],
+    "platforms": [
+      "WordPress",
+      "Shopify",
+      "Webflow"
+    ],
+    "services": [
+      "Branding",
+      "Web Design",
+      "Digital Strategy",
+      "Creative"
+    ],
     "blurb": "Your Creative is a creative agency based on Tripovich Street in Brunswick (with a Sydney presence) offering branding, web design and digital strategy. It positions itself around brand-led creative work for growing businesses.",
     "founded": null,
     "teamSize": "1-10",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/your-creative.png"
   },
   {
     "name": "Round",
     "website": "https://www.round.com.au",
     "suburb": "Fitzroy",
-    "platforms": ["Custom", "WordPress"],
-    "services": ["Branding", "Brand Strategy", "Digital", "Art Direction", "Web Design"],
+    "platforms": [
+      "Custom",
+      "WordPress"
+    ],
+    "services": [
+      "Branding",
+      "Brand Strategy",
+      "Digital",
+      "Art Direction",
+      "Web Design"
+    ],
     "blurb": "Round is a Melbourne branding and design studio located on Rose Street in Fitzroy, working across strategy, brand identity, campaign and digital. Its capabilities include brand voice, art direction, packaging and web design.",
     "founded": null,
     "teamSize": "1-10",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/round.png"
   },
   {
     "name": "Xugar",
     "website": "https://xugar.com.au",
     "suburb": "Southbank",
-    "platforms": ["Shopify", "WordPress", "WooCommerce", "Magento", "BigCommerce"],
-    "services": ["E-commerce", "Web Design", "Web Development", "SEO", "Digital Marketing"],
+    "platforms": [
+      "Shopify",
+      "WordPress",
+      "WooCommerce",
+      "Magento",
+      "BigCommerce"
+    ],
+    "services": [
+      "E-commerce",
+      "Web Design",
+      "Web Development",
+      "SEO",
+      "Digital Marketing"
+    ],
     "blurb": "Xugar is a Melbourne web development and digital marketing agency based on Coventry Street in Southbank, and a certified Shopify, Google, Meta and TikTok partner. It builds e-commerce stores across Shopify, WooCommerce, Magento and BigCommerce alongside SEO and paid media.",
     "founded": null,
     "teamSize": "10-50",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/xugar.svg"
   },
   {
     "name": "The Web Wombat",
     "website": "https://www.thewebwombat.com.au",
     "suburb": "Melbourne",
-    "platforms": ["Webflow", "Shopify"],
-    "services": ["Web Design", "Web Development", "Website Maintenance", "White-label Development"],
+    "platforms": [
+      "Webflow",
+      "Shopify"
+    ],
+    "services": [
+      "Web Design",
+      "Web Development",
+      "Website Maintenance",
+      "White-label Development"
+    ],
     "blurb": "The Web Wombat is a Melbourne-based Webflow and Shopify studio led by a developer with 7+ years of experience. It offers web design, development, ongoing maintenance and white-label website builds.",
     "founded": null,
     "teamSize": "1-10",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/the-web-wombat.webp"
   },
   {
     "name": "Loadout Studio",
     "website": "https://loadoutstudio.com",
     "suburb": "Melbourne",
-    "platforms": ["Webflow"],
-    "services": ["Web Design", "Web Development", "Brand Design", "SEO"],
+    "platforms": [
+      "Webflow"
+    ],
+    "services": [
+      "Web Design",
+      "Web Development",
+      "Brand Design",
+      "SEO"
+    ],
     "blurb": "Loadout Studio is a Melbourne Webflow agency (with a remote UK team) specialising in custom Webflow development and strategic, conversion-focused web design. Most projects are delivered within four to six weeks.",
     "founded": null,
     "teamSize": "1-10",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/loadout-studio.webp"
   },
   {
     "name": "Confetti Design",
     "website": "https://confettidesign.com.au",
     "suburb": "Bayside",
-    "platforms": ["Shopify", "WordPress", "WooCommerce", "Webflow", "Laravel"],
-    "services": ["Web Design", "E-commerce", "SEO", "Website Support", "Custom Software"],
+    "platforms": [
+      "Shopify",
+      "WordPress",
+      "WooCommerce",
+      "Webflow",
+      "Laravel"
+    ],
+    "services": [
+      "Web Design",
+      "E-commerce",
+      "SEO",
+      "Website Support",
+      "Custom Software"
+    ],
     "blurb": "Confetti Design is a boutique Melbourne (Bayside) web studio with more than a decade of work for small businesses, startups and e-commerce brands, and is a Shopify expert partner. It builds on Shopify, WordPress, Webflow and Laravel.",
     "founded": null,
     "teamSize": "1-10",
-    "googleRating": 5.0
+    "googleRating": 5,
+    "logo": "assets/logos/confetti-design.png"
   },
   {
     "name": "WP Creative",
     "website": "https://wpcreative.com.au",
     "suburb": "Cremorne",
-    "platforms": ["WordPress", "Shopify", "WooCommerce"],
-    "services": ["Web Design", "Web Development", "E-commerce", "WordPress Development", "SEO"],
+    "platforms": [
+      "WordPress",
+      "Shopify",
+      "WooCommerce"
+    ],
+    "services": [
+      "Web Design",
+      "Web Development",
+      "E-commerce",
+      "WordPress Development",
+      "SEO"
+    ],
     "blurb": "WP Creative is a Melbourne web design agency based in Cremorne with 12+ years of experience and over 1,200 projects. It specialises in custom WordPress builds and Shopify e-commerce development.",
     "founded": null,
     "teamSize": "10-50",
-    "googleRating": null
+    "googleRating": null,
+    "logo": null
   },
   {
     "name": "Sleekflows",
     "website": "https://sleekflows.com",
     "suburb": "Melbourne",
-    "platforms": ["Webflow"],
-    "services": ["Web Design", "Web Development", "Strategy"],
+    "platforms": [
+      "Webflow"
+    ],
+    "services": [
+      "Web Design",
+      "Web Development",
+      "Strategy"
+    ],
     "blurb": "Sleekflows is a Melbourne Webflow agency positioned around strategy-first web design. It builds custom Webflow websites for businesses across Australia.",
     "founded": null,
     "teamSize": "1-10",
-    "googleRating": null
-  },
-  {
-    "name": "Spacey Studios",
-    "website": "https://www.spaceystudios.com",
-    "suburb": "Melbourne",
-    "platforms": ["Webflow", "Custom"],
-    "services": ["Branding", "Web Design", "Web Development", "Strategy"],
-    "blurb": "Spacey Studios is a Melbourne design and development studio partnering with businesses on strategy-led branding and custom websites. It works with clients across Melbourne and wider Australia.",
-    "founded": null,
-    "teamSize": "1-10",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/sleekflows.svg"
   },
   {
     "name": "ONETOO",
     "website": "https://www.onetoo.com.au",
     "suburb": "Melbourne",
-    "platforms": ["Webflow"],
-    "services": ["Web Design", "Web Development", "Branding", "Digital Strategy"],
+    "platforms": [
+      "Webflow"
+    ],
+    "services": [
+      "Web Design",
+      "Web Development",
+      "Branding",
+      "Digital Strategy"
+    ],
     "blurb": "ONETOO is a Melbourne creative and strategic agency and Webflow Partner offering premium Webflow web design and development. It works with local businesses and clients around Australia.",
     "founded": null,
     "teamSize": "1-10",
-    "googleRating": null
+    "googleRating": null,
+    "logo": null
   },
   {
     "name": "Uprise Digital",
     "website": "https://uprisedigital.com.au",
     "suburb": "Cremorne",
-    "platforms": ["WordPress", "Shopify"],
-    "services": ["Web Design", "Web Development", "SEO", "Digital Marketing"],
+    "platforms": [
+      "WordPress",
+      "Shopify"
+    ],
+    "services": [
+      "Web Design",
+      "Web Development",
+      "SEO",
+      "Digital Marketing"
+    ],
     "blurb": "Uprise Digital is a website design agency based in Cremorne, Melbourne, focused on conversion-oriented websites. It offers web design and development alongside digital marketing services.",
     "founded": null,
     "teamSize": "1-10",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/uprise-digital.webp"
   },
   {
     "name": "23 Digital",
     "website": "https://www.23digital.com.au",
     "suburb": "St Kilda",
-    "platforms": ["WordPress", "Shopify", "Magento", "WooCommerce"],
-    "services": ["Web Design", "Web Development", "E-commerce", "SEO", "Branding"],
+    "platforms": [
+      "WordPress",
+      "Shopify",
+      "Magento",
+      "WooCommerce"
+    ],
+    "services": [
+      "Web Design",
+      "Web Development",
+      "E-commerce",
+      "SEO",
+      "Branding"
+    ],
     "blurb": "23 Digital is a web design agency on Wellington Street in St Kilda offering custom website design, WordPress development and e-commerce builds. It works across Shopify, Magento and WooCommerce.",
     "founded": null,
     "teamSize": "1-10",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/23-digital.webp"
   },
   {
     "name": "Made Visual",
     "website": "https://www.madevisual.com.au",
     "suburb": "Fitzroy",
-    "platforms": ["WordPress", "Custom"],
-    "services": ["Graphic Design", "Branding", "Web Design", "Logo Design"],
+    "platforms": [
+      "WordPress",
+      "Custom"
+    ],
+    "services": [
+      "Graphic Design",
+      "Branding",
+      "Web Design",
+      "Logo Design"
+    ],
     "blurb": "Made Visual is a boutique multidisciplinary design studio based in Fitzroy, Melbourne, specialising in graphic, logo and website design. It works with small and medium businesses on brand and web projects.",
     "founded": null,
     "teamSize": "1-10",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/made-visual.webp"
   },
   {
     "name": "WOOF Creative",
     "website": "https://www.woofcreative.com.au",
     "suburb": "Collingwood",
-    "platforms": ["WordPress", "Shopify"],
-    "services": ["Branding", "Web Design", "Advertising", "Email Marketing", "Social Media"],
+    "platforms": [
+      "WordPress",
+      "Shopify"
+    ],
+    "services": [
+      "Branding",
+      "Web Design",
+      "Advertising",
+      "Email Marketing",
+      "Social Media"
+    ],
     "blurb": "WOOF Creative is a Melbourne branding and creative agency based in Collingwood, offering brand development, advertising, website design and build, and email and social marketing. It works across brand and digital campaigns.",
     "founded": null,
     "teamSize": "1-10",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/woof-creative.webp"
   },
   {
     "name": "Thirst Creative",
     "website": "https://thirstcreative.com.au",
     "suburb": "Cremorne",
-    "platforms": ["WordPress", "Custom"],
-    "services": ["Branding", "Web Design", "Digital", "Strategy", "Print"],
+    "platforms": [
+      "WordPress",
+      "Custom"
+    ],
+    "services": [
+      "Branding",
+      "Web Design",
+      "Digital",
+      "Strategy",
+      "Print"
+    ],
     "blurb": "Thirst Creative is a Melbourne branding, design and digital studio working across strategy, brand identity, web and print. It delivers brand-led design and digital projects for a range of clients.",
     "founded": null,
     "teamSize": "1-10",
-    "googleRating": null
+    "googleRating": null,
+    "logo": null
   },
   {
     "name": "Seriously Good Design",
     "website": "https://sgd.com.au",
     "suburb": "Melbourne",
-    "platforms": ["WordPress", "WooCommerce"],
-    "services": ["Web Design", "WordPress Development", "SEO", "Google Ads"],
+    "platforms": [
+      "WordPress",
+      "WooCommerce"
+    ],
+    "services": [
+      "Web Design",
+      "WordPress Development",
+      "SEO",
+      "Google Ads"
+    ],
     "blurb": "Seriously Good Design (SGD) is a Melbourne web design, SEO and Google Ads agency with 300+ custom WordPress projects. It focuses on custom WordPress builds paired with search marketing.",
     "founded": null,
     "teamSize": "1-10",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/seriously-good-design.svg"
   },
   {
     "name": "Christom",
     "website": "https://www.christom.com.au",
     "suburb": "Melbourne",
-    "platforms": ["WordPress", "WooCommerce", "Custom"],
-    "services": ["Web Design", "Web Development", "E-commerce", "SEO"],
+    "platforms": [
+      "WordPress",
+      "WooCommerce",
+      "Custom"
+    ],
+    "services": [
+      "Web Design",
+      "Web Development",
+      "E-commerce",
+      "SEO"
+    ],
     "blurb": "Christom is a Melbourne web design and development company that started in the city's inner north and has operated since 2008. It specialises in WordPress design, custom web solutions and e-commerce for small businesses.",
     "founded": 2008,
     "teamSize": "1-10",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/christom.avif"
   },
   {
     "name": "Studio Bravo",
     "website": "https://www.studiobravo.com.au",
     "suburb": "Melbourne",
-    "platforms": ["Umbraco", "Custom"],
-    "services": ["Web Design", "Web Development", "UX", "Digital Strategy"],
+    "platforms": [
+      "Umbraco",
+      "Custom"
+    ],
+    "services": [
+      "Web Design",
+      "Web Development",
+      "UX",
+      "Digital Strategy"
+    ],
     "blurb": "Studio Bravo is a Melbourne digital agency specialising in UX, arts and technology, and is known for Umbraco and Tessitura expertise. It builds websites and digital platforms often for arts and cultural organisations.",
     "founded": null,
     "teamSize": "1-10",
-    "googleRating": null
+    "googleRating": null,
+    "logo": "assets/logos/studio-bravo.svg"
   }
 ]

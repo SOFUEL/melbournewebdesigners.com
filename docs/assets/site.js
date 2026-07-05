@@ -1,28 +1,49 @@
 /* ==========================================================================
-   MelbourneWebDesigners.com — small progressive-enhancement helpers
-   Mobile nav toggle · directory platform filter · cost estimator.
-   All optional: the site is fully functional without JS.
+   MelbourneWebDesigners.com — progressive-enhancement helpers
+   Mobile nav · sticky-header state · list filter · scroll reveals ·
+   row link propagation · cost estimator. The site is fully functional
+   without JS; all of this is enhancement. Motion respects reduced-motion.
    ========================================================================== */
 (function () {
   "use strict";
 
-  /* ---- mobile nav ---- */
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- sticky header: add .scrolled once the page moves ---- */
+  var header = document.getElementById("site-header");
+  if (header) {
+    var onScroll = function () {
+      if (window.scrollY > 8) header.classList.add("scrolled");
+      else header.classList.remove("scrolled");
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  /* ---- mobile nav (full-screen overlay) ---- */
   var toggle = document.getElementById("nav-toggle");
-  var links = document.getElementById("nav-links");
-  if (toggle && links) {
-    toggle.addEventListener("click", function () {
-      var open = links.classList.toggle("open");
+  var menu = document.getElementById("nav-menu");
+  var closeBtn = document.getElementById("nav-close");
+  if (toggle && menu) {
+    var setOpen = function (open) {
+      menu.classList.toggle("open", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      document.documentElement.style.overflow = open ? "hidden" : "";
+    };
+    toggle.addEventListener("click", function () { setOpen(!menu.classList.contains("open")); });
+    if (closeBtn) closeBtn.addEventListener("click", function () { setOpen(false); });
+    menu.addEventListener("click", function (e) {
+      if (e.target.tagName === "A") setOpen(false);
     });
-    links.addEventListener("click", function (e) {
-      if (e.target.tagName === "A") { links.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); }
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && menu.classList.contains("open")) setOpen(false);
     });
   }
 
-  /* ---- directory platform filter ---- */
+  /* ---- THE LIST filter: platform tokens + an "ecom" pseudo-filter ---- */
   var filterBar = document.getElementById("dir-filters");
-  var cards = Array.prototype.slice.call(document.querySelectorAll("[data-platforms]"));
-  if (filterBar && cards.length) {
+  var rows = Array.prototype.slice.call(document.querySelectorAll("[data-platforms]"));
+  if (filterBar && rows.length) {
     var btns = Array.prototype.slice.call(filterBar.querySelectorAll(".filter-btn"));
     filterBar.addEventListener("click", function (e) {
       var btn = e.target.closest(".filter-btn");
@@ -30,15 +51,40 @@
       var want = btn.getAttribute("data-filter");
       btns.forEach(function (b) { b.setAttribute("aria-pressed", b === btn ? "true" : "false"); });
       var shown = 0;
-      cards.forEach(function (card) {
-        var plats = (card.getAttribute("data-platforms") || "").split("|");
-        var match = want === "all" || plats.indexOf(want) !== -1;
-        card.classList.toggle("hide", !match);
+      rows.forEach(function (row) {
+        var match;
+        if (want === "all") match = true;
+        else if (want === "ecom") match = row.getAttribute("data-ecom") === "1";
+        else match = (row.getAttribute("data-platforms") || "").split("|").indexOf(want) !== -1;
+        row.classList.toggle("hide", !match);
         if (match) shown++;
       });
       var empty = document.getElementById("dir-empty");
       if (empty) empty.classList.toggle("hide", shown > 0);
     });
+  }
+
+  /* ---- row external link: don't trigger the whole-row profile link ---- */
+  document.querySelectorAll("[data-stop]").forEach(function (el) {
+    el.addEventListener("click", function (e) { e.stopPropagation(); });
+  });
+
+  /* ---- scroll reveals (IntersectionObserver), reduced-motion safe ---- */
+  var revealEls = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]"));
+  if (revealEls.length) {
+    if (reduce || !("IntersectionObserver" in window)) {
+      revealEls.forEach(function (el) { el.classList.add("in"); });
+    } else {
+      var io = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+      revealEls.forEach(function (el) { io.observe(el); });
+    }
   }
 
   /* ---- cost estimator ---- */

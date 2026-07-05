@@ -47,7 +47,8 @@
     current = i;
     var pct = Math.round(((i + 1) / totalSteps()) * 100);
     if (progressBar) progressBar.style.width = pct + "%";
-    if (stepCount) stepCount.textContent = "Step " + (i + 1) + " of " + totalSteps();
+    var pad = function (n) { return (n < 10 ? "0" : "") + n; };
+    if (stepCount) stepCount.textContent = pad(i + 1) + " / " + pad(totalSteps());
     // The global chrome "Back" serves the auto-advancing choice steps (1-4).
     // Context/contact steps carry their own inline Back button, so hide the
     // global one there to avoid a doubled control.

@@ -7,7 +7,7 @@
   <meta name="description" content="Answer six quick questions and get matched free with the right Melbourne web design agency for your budget and timeline. A senior strategist replies within one business day.">
   <link rel="canonical" href="https://melbournewebdesigners.com/get-quote/">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="theme-color" content="#0B0E14">
+  <meta name="theme-color" content="#0A0A0B">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MelbourneWebDesigners.com">
   <meta property="og:title" content="Get matched with the right Melbourne web designer — free">
@@ -24,90 +24,88 @@
   <link rel="icon" type="image/png" sizes="100x100" href="../assets/SF-TINY.png">
   <link rel="apple-touch-icon" href="../assets/SF-TINY.png">
   <link rel="preconnect" href="https://socialfuel.app.n8n.cloud">
+  <link rel="preload" href="../assets/fonts/bricolage-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../assets/style.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-63LHZZEP85"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-63LHZZEP85',{anonymize_ip:true});</script>
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"MelbourneWebDesigners.com","url":"https://melbournewebdesigners.com/","description":"Independent editorial directory of Melbourne web design agencies, operated by SOCIALFUEL.","parentOrganization":{"@type":"Organization","name":"SOCIALFUEL","url":"https://socialfuel.media"},"email":"hello@socialfuel.media"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"MelbourneWebDesigners.com","url":"https://melbournewebdesigners.com/","description":"Independent editorial directory of Melbourne web design agencies, owned and operated by Helou Holdings Pty Ltd.","publisher":{"@type":"Organization","name":"Helou Holdings Pty Ltd"},"email":"hello@socialfuel.media"}</script>
 </head>
 <body>
 
-<header class="site">
+<header class="site" id="site-header">
   <div class="wrap nav">
-    <a class="brand" href="../index.html" aria-label="MelbourneWebDesigners.com home">
-      <span>Melbourne<b>Web</b>Designers<span class="dot">.</span></span>
-      <span class="tld">au</span>
-    </a>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
-    <nav class="nav-links" id="nav-links" aria-label="Primary">
-      <a href="../index.html#directory">Directory</a>
-      <a href="../web-design-cost-melbourne/">Cost Guide</a>
-      <a href="../methodology/">Methodology</a>
-      <a href="../about/">About</a>
-      <span class="nav-cta"><a href="../get-quote/" aria-current="page"><span class="btn btn-primary">Get a quote</span></a></span>
+    <a class="brand" href="../index.html" aria-label="MelbourneWebDesigners.com home">MWD<span class="reg" aria-hidden="true">&reg;</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg></button>
+    <nav class="nav-menu" id="nav-menu" aria-label="Primary">
+      <button class="nav-close" id="nav-close" aria-label="Close menu"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg></button>
+      <a class="navlink" href="../index.html#the-list">Directory</a>
+      <a class="navlink" href="../web-design-cost-melbourne/">Cost Guide</a>
+      <a class="navlink" href="../how-to-choose-a-web-designer-melbourne/">How to choose</a>
+      <a class="navlink" href="../methodology/">Methodology</a>
+      <span class="nav-cta"><a class="btn btn-primary" href="../get-quote/" aria-current="page">Get matched <span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></span></a></span>
     </nav>
   </div>
 </header>
 <main>
 
-<section class="funnel-wrap">
-  <div class="wrap wrap-narrow">
+<section class="funnel">
+  <div class="wrap funnel-inner">
 
     <form id="quote-form" novalidate>
       <div class="funnel-chrome">
         <div class="progress" aria-hidden="true"><div class="progress-bar" id="progress-bar"></div></div>
-        <div class="step-count" id="step-count">Step 1 of 6</div>
+        <div class="step-count" id="step-count">01 / 06</div>
       </div>
 
       <!-- Step 1: project type -->
       <div class="q-step active" data-step="choice" data-name="project_type">
         <h2 class="q-title">What do you need built?</h2>
-        <p class="q-sub">Pick the closest fit — you can add detail later.</p>
+        <p class="q-sub">Pick the closest fit &mdash; you can add detail later.</p>
         <div class="options">
-        <button type="button" class="opt" data-value="New website" aria-pressed="false">New website<span class="tick"></span></button>
-        <button type="button" class="opt" data-value="Website redesign" aria-pressed="false">Website redesign<span class="tick"></span></button>
-        <button type="button" class="opt" data-value="E-commerce store" aria-pressed="false">E-commerce store<span class="tick"></span></button>
-        <button type="button" class="opt" data-value="Landing page" aria-pressed="false">Landing page<span class="tick"></span></button>
-        <button type="button" class="opt" data-value="Not sure yet" aria-pressed="false">Not sure yet<span class="tick"></span></button>
+          <button type="button" class="opt" data-value="New website" aria-pressed="false">New website<span class="tick" aria-hidden="true"></span></button>
+          <button type="button" class="opt" data-value="Website redesign" aria-pressed="false">Website redesign<span class="tick" aria-hidden="true"></span></button>
+          <button type="button" class="opt" data-value="E-commerce store" aria-pressed="false">E-commerce store<span class="tick" aria-hidden="true"></span></button>
+          <button type="button" class="opt" data-value="Landing page" aria-pressed="false">Landing page<span class="tick" aria-hidden="true"></span></button>
+          <button type="button" class="opt" data-value="Not sure yet" aria-pressed="false">Not sure yet<span class="tick" aria-hidden="true"></span></button>
         </div>
       </div>
 
       <!-- Step 2: goal -->
       <div class="q-step" data-step="choice" data-name="goal">
-        <h2 class="q-title">What's the main goal?</h2>
+        <h2 class="q-title">What&rsquo;s the main goal?</h2>
         <p class="q-sub">This helps us match you with the right specialists.</p>
         <div class="options">
-        <button type="button" class="opt" data-value="Generate more leads" aria-pressed="false">Generate more leads<span class="tick"></span></button>
-        <button type="button" class="opt" data-value="Sell online" aria-pressed="false">Sell online<span class="tick"></span></button>
-        <button type="button" class="opt" data-value="Look more credible" aria-pressed="false">Look more credible<span class="tick"></span></button>
-        <button type="button" class="opt" data-value="Full rebrand" aria-pressed="false">Full rebrand<span class="tick"></span></button>
+          <button type="button" class="opt" data-value="Generate more leads" aria-pressed="false">Generate more leads<span class="tick" aria-hidden="true"></span></button>
+          <button type="button" class="opt" data-value="Sell online" aria-pressed="false">Sell online<span class="tick" aria-hidden="true"></span></button>
+          <button type="button" class="opt" data-value="Look more credible" aria-pressed="false">Look more credible<span class="tick" aria-hidden="true"></span></button>
+          <button type="button" class="opt" data-value="Full rebrand" aria-pressed="false">Full rebrand<span class="tick" aria-hidden="true"></span></button>
         </div>
       </div>
 
       <!-- Step 3: budget -->
       <div class="q-step" data-step="choice" data-name="budget">
-        <h2 class="q-title">What's your budget?</h2>
-        <p class="q-sub">A rough band is fine — it lets us match you honestly, not oversell.</p>
+        <h2 class="q-title">What&rsquo;s your budget?</h2>
+        <p class="q-sub">A rough band is fine &mdash; it lets us match you honestly, not oversell.</p>
         <div class="options">
-        <button type="button" class="opt" data-value="Under $4k" aria-pressed="false">Under $4k<span class="tick"></span></button>
-        <button type="button" class="opt" data-value="$4k – $8k" aria-pressed="false">$4k – $8k<span class="tick"></span></button>
-        <button type="button" class="opt" data-value="$8k – $15k" aria-pressed="false">$8k – $15k<span class="tick"></span></button>
-        <button type="button" class="opt" data-value="$15k+" aria-pressed="false">$15k+<span class="tick"></span></button>
-        <button type="button" class="opt" data-value="Not sure yet" aria-pressed="false">Not sure yet<span class="tick"></span></button>
+          <button type="button" class="opt" data-value="Under $4k" aria-pressed="false">Under $4k<span class="tick" aria-hidden="true"></span></button>
+          <button type="button" class="opt" data-value="$4k – $8k" aria-pressed="false">$4k – $8k<span class="tick" aria-hidden="true"></span></button>
+          <button type="button" class="opt" data-value="$8k – $15k" aria-pressed="false">$8k – $15k<span class="tick" aria-hidden="true"></span></button>
+          <button type="button" class="opt" data-value="$15k+" aria-pressed="false">$15k+<span class="tick" aria-hidden="true"></span></button>
+          <button type="button" class="opt" data-value="Not sure yet" aria-pressed="false">Not sure yet<span class="tick" aria-hidden="true"></span></button>
         </div>
       </div>
 
       <!-- Step 4: timeline -->
       <div class="q-step" data-step="choice" data-name="timeline">
         <h2 class="q-title">When do you want to start?</h2>
-        <p class="q-sub">No pressure — "just exploring" is a perfectly good answer.</p>
+        <p class="q-sub">No pressure &mdash; &ldquo;just exploring&rdquo; is a perfectly good answer.</p>
         <div class="options">
-        <button type="button" class="opt" data-value="ASAP" aria-pressed="false">ASAP<span class="tick"></span></button>
-        <button type="button" class="opt" data-value="Within 1 month" aria-pressed="false">Within 1 month<span class="tick"></span></button>
-        <button type="button" class="opt" data-value="1–3 months" aria-pressed="false">1–3 months<span class="tick"></span></button>
-        <button type="button" class="opt" data-value="Just exploring" aria-pressed="false">Just exploring<span class="tick"></span></button>
+          <button type="button" class="opt" data-value="ASAP" aria-pressed="false">ASAP<span class="tick" aria-hidden="true"></span></button>
+          <button type="button" class="opt" data-value="Within 1 month" aria-pressed="false">Within 1 month<span class="tick" aria-hidden="true"></span></button>
+          <button type="button" class="opt" data-value="1–3 months" aria-pressed="false">1–3 months<span class="tick" aria-hidden="true"></span></button>
+          <button type="button" class="opt" data-value="Just exploring" aria-pressed="false">Just exploring<span class="tick" aria-hidden="true"></span></button>
         </div>
       </div>
 
@@ -126,14 +124,14 @@
         <div class="field">
           <label>Your relationship to it</label>
           <div class="options">
-        <button type="button" class="opt" data-value="It&#39;s my business" aria-pressed="false">It&#39;s my business<span class="tick"></span></button>
-        <button type="button" class="opt" data-value="I work there" aria-pressed="false">I work there<span class="tick"></span></button>
-        <button type="button" class="opt" data-value="Agency, on behalf of a client" aria-pressed="false">Agency, on behalf of a client<span class="tick"></span></button>
+            <button type="button" class="opt" data-value="It&#39;s my business" aria-pressed="false">It&#39;s my business<span class="tick" aria-hidden="true"></span></button>
+          <button type="button" class="opt" data-value="I work there" aria-pressed="false">I work there<span class="tick" aria-hidden="true"></span></button>
+          <button type="button" class="opt" data-value="Agency, on behalf of a client" aria-pressed="false">Agency, on behalf of a client<span class="tick" aria-hidden="true"></span></button>
           </div>
         </div>
         <div class="funnel-nav">
           <button type="button" class="btn-back" id="btn-back-ctx" data-back>&larr; Back</button>
-          <button type="button" class="btn btn-primary" data-action="next">Continue <span class="arr">→</span></button>
+          <button type="button" class="btn btn-primary" data-action="next">Continue <span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></span></button>
         </div>
         <div class="funnel-err" id="funnel-err-ctx" role="alert"></div>
       </div>
@@ -166,7 +164,7 @@
         </div>
         <div class="funnel-nav">
           <button type="button" class="btn-back" data-back>&larr; Back</button>
-          <button type="button" class="btn btn-primary btn-lg" data-action="submit">Get my free match <span class="arr">→</span></button>
+          <button type="button" class="btn btn-primary btn-lg" data-action="submit">Get my free match <span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></span></button>
         </div>
         <div class="funnel-err" id="funnel-err" role="alert"></div>
         <div class="trust-row">
@@ -185,18 +183,18 @@
 
     <!-- Thank-you state -->
     <div class="result-state" id="state-thanks" role="status">
-      <div class="result-icon ok">✓</div>
+      <span class="result-spark spin" aria-hidden="true">✺</span>
       <h2>Locked in.</h2>
-      <p>A senior strategist from our featured partner SOCIALFUEL will reply within 1 business day. Keep an eye on your inbox — and check spam just in case.</p>
-      <a class="btn btn-ghost" href="../index.html">Back to the directory</a>
+      <p>A senior strategist from our featured partner SOCIALFUEL replies within 1 business day. Keep an eye on your inbox &mdash; and check spam just in case.</p>
+      <a class="btn btn-ghost" href="../index.html">Back to the shortlist</a>
     </div>
 
     <!-- Error / fallback state -->
     <div class="result-state" id="state-error" role="alert">
       <div class="result-icon err">!</div>
-      <h2>That didn't go through.</h2>
-      <p>Something on our end hiccuped. Don't lose your brief — send it straight to us by email and we'll pick it up right away.</p>
-      <a class="btn btn-primary" id="fallback-mailto" href="mailto:hello@socialfuel.media">Email us your brief <span class="arr">→</span></a>
+      <h2>That didn&rsquo;t go through.</h2>
+      <p>Something on our end hiccuped. Don&rsquo;t lose your brief &mdash; send it straight to us by email and we&rsquo;ll pick it up right away.</p>
+      <a class="btn btn-primary" id="fallback-mailto" href="mailto:hello@socialfuel.media">Email us your brief <span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></span></a>
     </div>
 
   </div>
@@ -205,35 +203,41 @@
 </main>
 
 <footer class="site">
-  <div class="wrap footer-grid">
-    <div class="footer-brand">
-      <a class="brand" href="../index.html">
-        <span>Melbourne<b>Web</b>Designers<span class="dot">.</span></span><span class="tld">au</span>
-      </a>
-      <p class="footer-disclosure">MelbourneWebDesigners.com is an independent editorial directory operated by SOCIALFUEL, a Melbourne web design and growth agency. SOCIALFUEL appears as a labelled Featured Partner; the 27-agency shortlist below is editorial and not pay-for-placement. Listing details are drawn from public sources — any listed agency can request free removal or correction at any time.</p>
+  <div class="wrap">
+    <div class="footer-a">
+      <h2>Find your team.</h2>
+      <a class="footer-arrow" href="../get-quote/" aria-label="Get matched free"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></a>
     </div>
-    <div class="footer-col">
-      <h4>Directory</h4>
-      <a href="../index.html#directory">All agencies</a>
-      <a href="../wordpress-web-design-melbourne/">WordPress designers</a>
-      <a href="../shopify-web-design-melbourne/">Shopify designers</a>
-      <a href="../webflow-web-design-melbourne/">Webflow designers</a>
-      <a href="../how-to-choose-a-web-designer-melbourne/">How to choose</a>
-    </div>
-    <div class="footer-col">
-      <h4>About</h4>
-      <a href="../web-design-cost-melbourne/">Web design cost</a>
-      <a href="../get-quote/">Get a quote</a>
-      <a href="../about/">Who runs this</a>
-      <a href="../methodology/">Methodology</a>
-      <a href="../privacy/">Privacy</a>
-      <a href="../terms/">Terms</a>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Browse</h4>
+        <a href="../index.html#the-list">Directory</a>
+        <a href="../wordpress-web-design-melbourne/">WordPress</a>
+        <a href="../shopify-web-design-melbourne/">Shopify</a>
+        <a href="../webflow-web-design-melbourne/">Webflow</a>
+      </div>
+      <div class="footer-col">
+        <h4>Guides</h4>
+        <a href="../web-design-cost-melbourne/">Cost guide</a>
+        <a href="../how-to-choose-a-web-designer-melbourne/">How to choose</a>
+        <a href="../methodology/">Methodology</a>
+      </div>
+      <div class="footer-col">
+        <h4>Site</h4>
+        <a href="../about/">About</a>
+        <a href="../privacy/">Privacy</a>
+        <a href="../terms/">Terms</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:hello@socialfuel.media">hello@socialfuel.media</a>
+        <span style="color:var(--muted);font-size:.82rem;display:block;padding:.32rem 0">Partner contact desk</span>
+      </div>
+      <p class="footer-legal">&copy; 2026 MelbourneWebDesigners.com. MelbourneWebDesigners.com is owned and operated by Helou Holdings Pty Ltd, Melbourne, Australia. Featured placements are commercial, always labelled, and never affect the <a href="../methodology/">editorial list</a>.</p>
     </div>
   </div>
-  <div class="wrap footer-bottom">
-    <span>© 2026 MelbourneWebDesigners.com · Operated by SOCIALFUEL</span>
-    <span>Made in Melbourne · <a href="mailto:hello@socialfuel.media">hello@socialfuel.media</a></span>
-  </div>
+  <div class="footer-marq marquee marquee--thin" aria-hidden="true"><div class="marquee__track" aria-hidden="true"><span class="marquee__item">EST. 2026 <span class="sep">✺</span> MELBOURNE <span class="sep">✺</span> THE HONEST SHORTLIST <span class="sep">✺</span> EST. 2026 <span class="sep">✺</span> MELBOURNE <span class="sep">✺</span> THE HONEST SHORTLIST <span class="sep">✺</span> EST. 2026 <span class="sep">✺</span> MELBOURNE <span class="sep">✺</span> THE HONEST SHORTLIST <span class="sep">✺</span> EST. 2026 <span class="sep">✺</span> MELBOURNE <span class="sep">✺</span> THE HONEST SHORTLIST <span class="sep">✺</span> EST. 2026 <span class="sep">✺</span> MELBOURNE <span class="sep">✺</span> THE HONEST SHORTLIST <span class="sep">✺</span> EST. 2026 <span class="sep">✺</span> MELBOURNE <span class="sep">✺</span> THE HONEST SHORTLIST <span class="sep">✺</span> </span><span class="marquee__item">EST. 2026 <span class="sep">✺</span> MELBOURNE <span class="sep">✺</span> THE HONEST SHORTLIST <span class="sep">✺</span> EST. 2026 <span class="sep">✺</span> MELBOURNE <span class="sep">✺</span> THE HONEST SHORTLIST <span class="sep">✺</span> EST. 2026 <span class="sep">✺</span> MELBOURNE <span class="sep">✺</span> THE HONEST SHORTLIST <span class="sep">✺</span> EST. 2026 <span class="sep">✺</span> MELBOURNE <span class="sep">✺</span> THE HONEST SHORTLIST <span class="sep">✺</span> EST. 2026 <span class="sep">✺</span> MELBOURNE <span class="sep">✺</span> THE HONEST SHORTLIST <span class="sep">✺</span> EST. 2026 <span class="sep">✺</span> MELBOURNE <span class="sep">✺</span> THE HONEST SHORTLIST <span class="sep">✺</span> </span></div></div>
+  <div class="wrap"><div class="footer-giant" aria-hidden="true">MELBOURNE WEB DESIGNERS<span class="reg">&reg;</span></div></div>
 </footer>
 <script src="../assets/site.js" defer></script>
 <script src="../assets/quote.js" defer></script>
