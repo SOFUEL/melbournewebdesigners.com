@@ -232,7 +232,7 @@
   },
   {
     "name": "Made Visual",
-    "website": "http://www.madevisual.com.au",
+    "website": "https://www.madevisual.com.au",
     "suburb": "Fitzroy",
     "platforms": ["WordPress", "Custom"],
     "services": ["Graphic Design", "Branding", "Web Design", "Logo Design"],

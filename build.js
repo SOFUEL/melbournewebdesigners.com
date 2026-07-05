@@ -1074,7 +1074,7 @@ function pagePrivacy() {
     <p>We use this information solely to respond to your enquiry, to match you with a suitable web design agency (starting with our featured partner SOCIALFUEL where appropriate), and to follow up about your project. We do not sell your personal information to third parties.</p>
 
     <h2>How it's handled</h2>
-    <p>Form submissions are transmitted securely to our lead-processing system and stored in the systems we use to manage enquiries (including our CRM and email). Access is limited to the people who need it to respond to you. We retain enquiry data only as long as needed for the purpose it was collected, or as required by law.</p>
+    <p>Form submissions are transmitted securely to our lead-processing system and stored in the systems we use to manage enquiries (including our CRM and email). Some of these providers may process or store data outside Australia (including in the United States); by submitting the form you consent to this handling. Access is limited to the people who need it to respond to you. We retain enquiry data only as long as needed for the purpose it was collected, or as required by law. If you have a concern we can't resolve, you can contact the Office of the Australian Information Commissioner (oaic.gov.au).</p>
 
     <h2>Cookies &amp; analytics</h2>
     <p>The site is a static website and does not set advertising cookies. If we add privacy-respecting analytics in future to understand aggregate traffic, we will update this policy. The site does not track you across other websites.</p>
