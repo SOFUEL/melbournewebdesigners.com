@@ -215,6 +215,13 @@
     })
       .then(function (res) {
         if (!res.ok) throw new Error("HTTP " + res.status);
+        if (typeof window.gtag === "function") {
+          window.gtag("event", "generate_lead", {
+            budget: answers.budget || "(not set)",
+            project_type: answers.project_type || "(not set)",
+            timeline: answers.timeline || "(not set)"
+          });
+        }
         showThanks();
       })
       .catch(function () {

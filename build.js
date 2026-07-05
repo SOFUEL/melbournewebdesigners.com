@@ -235,6 +235,8 @@ function layout(opts) {
   <link rel="apple-touch-icon" href="${r}assets/SF-TINY.png">
   <link rel="preconnect" href="https://socialfuel.app.n8n.cloud">
   <link rel="stylesheet" href="${r}assets/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-63LHZZEP85"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-63LHZZEP85',{anonymize_ip:true});</script>
   ${opts.extraHead || ""}
   ${jsonldBlock}
 </head>
