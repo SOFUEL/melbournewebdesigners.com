@@ -1008,7 +1008,7 @@ footer.site {
 .footer-giant {
   font-family: var(--display);
   font-weight: 800;
-  font-size: 11vw;
+  font-size: 6.9vw;
   line-height: .82;
   letter-spacing: -.04em;
   text-transform: uppercase;
@@ -1018,6 +1018,8 @@ footer.site {
   color: transparent;
   padding-top: .35rem;
   user-select: none;
+  width: 100%;
+  text-align: center;
 }
 .footer-giant .reg { -webkit-text-stroke: 1px var(--acid); text-stroke: 1px var(--acid); }
 

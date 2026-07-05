@@ -267,7 +267,7 @@ function footer(depth) {
     </div>
   </div>
   <div class="footer-marq marquee marquee--thin" aria-hidden="true">${marqTrack}</div>
-  <div class="wrap"><div class="footer-giant" aria-hidden="true">MELBOURNE WEB DESIGNERS<span class="reg">&reg;</span></div></div>
+  <div class="footer-giant" aria-hidden="true">MELBOURNE WEB DESIGNERS<span class="reg">&reg;</span></div>
 </footer>`;
 }
 
