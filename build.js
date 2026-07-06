@@ -207,7 +207,7 @@ function header(depth, active) {
   return `
 <header class="site" id="site-header">
   <div class="wrap nav">
-    <a class="brand" href="${r}index.html" aria-label="${escAttr(SITE_NAME)} home">MWD<span class="reg" aria-hidden="true">&reg;</span></a>
+    <a class="brand" href="${r}index.html" aria-label="${escAttr(SITE_NAME)} home">MWD</a>
     <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">${ICON_MENU}</button>
     <nav class="nav-menu" id="nav-menu" aria-label="Primary">
       <button class="nav-close" id="nav-close" aria-label="Close menu">${ICON_CLOSE}</button>
@@ -267,7 +267,7 @@ function footer(depth) {
     </div>
   </div>
   <div class="footer-marq marquee marquee--thin" aria-hidden="true">${marqTrack}</div>
-  <div class="footer-giant" aria-hidden="true">MELBOURNE WEB DESIGNERS<span class="reg">&reg;</span></div>
+  <div class="footer-giant" aria-hidden="true">MELBOURNE WEB DESIGNERS</div>
 </footer>`;
 }
 

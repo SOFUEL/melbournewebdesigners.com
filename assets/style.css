@@ -260,7 +260,6 @@ header.site.scrolled {
   display: inline-flex;
   align-items: baseline;
 }
-.brand .reg { color: var(--acid); font-size: .62em; transform: translateY(-.55em); margin-left: .04em; font-weight: 800; }
 
 .nav-menu {
   display: flex;
@@ -1057,7 +1056,6 @@ footer.site {
   width: 100%;
   text-align: center;
 }
-.footer-giant .reg { -webkit-text-stroke: 1px var(--acid); text-stroke: 1px var(--acid); }
 
 @media (max-width: 780px) {
   .footer-cols { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 2rem; }
