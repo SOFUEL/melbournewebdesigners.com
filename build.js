@@ -495,6 +495,8 @@ function pageHome() {
 
   const body = `
 <section class="hero">
+  <canvas id="hero-dust" class="hero-dust" aria-hidden="true"></canvas>
+  <div class="hero-static" aria-hidden="true"></div>
   <div class="wrap hero-inner">
     <p class="eyebrow boxed hero-kicker">THE INDEPENDENT SHORTLIST · MELBOURNE · 2026</p>
     <h1><span class="line">Melbourne&rsquo;s</span> <span class="line"><span class="outline">Best</span> Web</span> <span class="line">Designers</span></h1>
@@ -582,6 +584,7 @@ ${ctaBand(depth)}
     ogTitle: "Best Web Designers Melbourne (2026) — The Independent Shortlist",
     description: "Compare " + TOTAL_STUDIOS + " established Melbourne web design studios in one honest, independent shortlist — then get matched free with the right team for your budget. Updated " + TODAY_HUMAN + ".",
     jsonld: [websiteLd(), orgLd(), itemListLd, faqLd],
+    bodyScripts: `<script src="assets/hero-dust.js" defer></script>`,
     body
   });
 }

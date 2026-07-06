@@ -364,6 +364,38 @@ header.site.scrolled {
 }
 .hero-inner { position: relative; z-index: 1; width: 100%; }
 
+/* ------------------------------------------------ hero dust (Flinders) --- */
+.hero-dust {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(130% 100% at 62% 55%, #000 52%, transparent 85%);
+  mask-image: radial-gradient(130% 100% at 62% 55%, #000 52%, transparent 85%);
+}
+.hero-static {
+  display: none;
+  position: absolute;
+  right: 4%;
+  top: 50%;
+  transform: translateY(-52%);
+  width: min(48vw, 620px);
+  opacity: .08;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-static svg { width: 100%; height: auto; }
+
+/* -------------------------------------- custom cursor: 3×3 acid square --- */
+html {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='3' height='3'><rect width='3' height='3' rx='1' fill='%23D9FF3F'/></svg>") 1 1, auto;
+}
+a, button, [role="button"], summary, select, label { cursor: inherit; }
+input:not([type="radio"]):not([type="checkbox"]), textarea { cursor: text; }
+.band-paper, .band-paper *, .cta-band, .cta-band * {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='3' height='3'><rect width='3' height='3' rx='1' fill='%230A0A0B'/></svg>") 1 1, auto;
+}
+
 .hero-kicker { margin-bottom: clamp(1.6rem, 4vw, 2.4rem); }
 
 .hero h1, h1.display {
