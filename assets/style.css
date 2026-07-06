@@ -370,21 +370,21 @@ header.site.scrolled {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(130% 100% at 62% 55%, #000 52%, transparent 85%);
-  mask-image: radial-gradient(130% 100% at 62% 55%, #000 52%, transparent 85%);
+  -webkit-mask-image: radial-gradient(155% 135% at 50% 80%, #000 58%, transparent 96%);
+  mask-image: radial-gradient(155% 135% at 50% 80%, #000 58%, transparent 96%);
 }
 .hero-static {
   display: none;
   position: absolute;
-  right: 4%;
-  top: 50%;
-  transform: translateY(-52%);
-  width: min(48vw, 620px);
-  opacity: .08;
+  left: 50%;
+  bottom: 5%;
+  transform: translateX(-50%);
+  width: min(97%, 1680px);
+  opacity: .07;
   pointer-events: none;
   z-index: 0;
 }
-.hero-static svg { width: 100%; height: auto; }
+.hero-static svg { width: 100%; height: auto; transform: scaleX(-1); }
 
 /* -------------------------------------- custom cursor: 3×3 acid square --- */
 html {
