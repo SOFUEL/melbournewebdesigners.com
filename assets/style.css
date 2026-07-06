@@ -374,8 +374,8 @@ header.site.scrolled {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(155% 135% at 50% 80%, #000 58%, transparent 96%);
-  mask-image: radial-gradient(155% 135% at 50% 80%, #000 58%, transparent 96%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 11%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 11%);
 }
 .hero-static {
   display: none;
@@ -392,12 +392,12 @@ header.site.scrolled {
 
 /* -------------------------------------- custom cursor: 3×3 acid square --- */
 html {
-  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='3' height='3'><rect width='3' height='3' rx='1' fill='%23D9FF3F'/></svg>") 1 1, auto;
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='9' height='9'><rect width='9' height='9' rx='3' fill='%23D9FF3F'/></svg>") 4 4, auto;
 }
 a, button, [role="button"], summary, select, label { cursor: inherit; }
 input:not([type="radio"]):not([type="checkbox"]), textarea { cursor: text; }
 .band-paper, .band-paper *, .cta-band, .cta-band * {
-  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='3' height='3'><rect width='3' height='3' rx='1' fill='%230A0A0B'/></svg>") 1 1, auto;
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='9' height='9'><rect width='9' height='9' rx='3' fill='%230A0A0B'/></svg>") 4 4, auto;
 }
 
 .hero-kicker { margin-bottom: clamp(1.6rem, 4vw, 2.4rem); }
