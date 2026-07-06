@@ -223,6 +223,12 @@
             timeline: answers.timeline || "(not set)"
           });
         }
+        if (typeof window.fbq === "function") {
+          window.fbq("track", "Lead", {
+            content_name: "quote-funnel",
+            content_category: answers.budget || "(not set)"
+          });
+        }
         showThanks();
       })
       .catch(function () {

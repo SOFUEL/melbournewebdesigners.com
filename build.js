@@ -318,10 +318,12 @@ function layout(opts) {
   <link rel="stylesheet" href="${r}assets/style.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-63LHZZEP85"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-63LHZZEP85',{anonymize_ip:true});</script>
+  <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','728805897182538');fbq('track','PageView');if(location.pathname.indexOf('get-quote')!==-1)fbq('track','ViewContent',{content_name:'quote-funnel'});</script>
   ${opts.extraHead || ""}
   ${jsonldBlock}
 </head>
 <body>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=728805897182538&ev=PageView&noscript=1" alt=""></noscript>
 ${header(opts.depth, opts.active)}
 <main>
 ${opts.body}
@@ -1161,7 +1163,7 @@ function pagePrivacy() {
     <p>Enquiries submitted through the form are handled by our affiliated agency SOCIALFUEL and stored in our CRM and email systems. Submissions are transmitted securely to our lead-processing system. Some of these providers may process or store data outside Australia (including in the United States) — consistent with Australian Privacy Principle 8, and by submitting the form you consent to this cross-border handling. Access is limited to the people who need it to respond to you. We retain enquiry data only as long as needed for the purpose it was collected, or as required by law. If you have a concern we can't resolve, you can contact the Office of the Australian Information Commissioner (oaic.gov.au).</p>
 
     <h2>Cookies &amp; analytics</h2>
-    <p>The site is a static website and does not set advertising cookies. If we add privacy-respecting analytics in future to understand aggregate traffic, we will update this policy. The site does not track you across other websites.</p>
+    <p>We use Google Analytics 4 to understand aggregate traffic (with IP anonymisation enabled), and the Meta Pixel, which sets cookies so that we can measure how the site is used and — if we run advertising in future — show relevant ads and build advertising audiences on Meta platforms (Facebook and Instagram). Data collected by the Meta Pixel is also processed by Meta under <a href="https://www.facebook.com/privacy/policy/" rel="noopener" target="_blank">Meta's Privacy Policy</a>. You can opt out of ads personalisation via <a href="https://www.facebook.com/adpreferences/ad_settings" rel="noopener" target="_blank">Meta's Ad preferences</a> or <a href="https://youradchoices.com.au/" rel="noopener" target="_blank">Your Ad Choices (Australia)</a>, and you can block cookies entirely in your browser settings — the site keeps working without them.</p>
 
     <h2>Third parties</h2>
     <p>To operate the matching service we use reputable third-party tools (for example, secure form/webhook processing, email and CRM software). These providers process data on our behalf under their own security and privacy obligations. Outbound links to agency websites are governed by those sites' own policies.</p>
