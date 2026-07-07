@@ -591,6 +591,8 @@ input:not([type="radio"]):not([type="checkbox"]), textarea { cursor: text; }
   margin-bottom: 1rem;
 }
 .featured-body .blurb { color: var(--muted); max-width: 54ch; margin-bottom: 1.4rem; }
+.featured-body .blurb a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: rgba(244,242,236,.4); transition: text-decoration-color .18s var(--ease); }
+.featured-body .blurb a:hover, .featured-body .blurb a:focus-visible { text-decoration-color: var(--acid); }
 .featured-actions { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; margin-top: .4rem; }
 .featured-affil {
   margin-top: 1.2rem;

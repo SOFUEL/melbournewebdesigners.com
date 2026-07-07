@@ -70,6 +70,15 @@ function esc(s) {
 // attribute-safe (same as esc; kept explicit for readability)
 const escAttr = esc;
 
+// Escape a blurb for visible HTML, then linkify the socialfuel.io mention.
+// Use for on-page copy only — never for meta descriptions (keep those raw).
+function blurbHtml(text) {
+  return esc(text).replace(
+    /socialfuel\.io/g,
+    '<a href="https://socialfuel.io" target="_blank" rel="nofollow noopener">socialfuel.io</a>'
+  );
+}
+
 // relative prefix from a page at the given depth back to the site root.
 // depth 0 = "/" (root index)         -> ""      (assets/… )
 // depth 1 = "/get-quote/"            -> "../"
@@ -414,7 +423,7 @@ function featuredCard(depth) {
       </div>
       <div class="featured-body">
         <h2>${esc(f.name)}</h2>
-        <p class="blurb">${esc(f.blurb)}</p>
+        <p class="blurb">${blurbHtml(f.blurb)}</p>
         <div class="chips" style="margin-bottom:1.5rem">${chip(f.suburb, "chip-suburb")}${plats}</div>
         <div class="featured-actions">
           <a class="btn btn-primary" href="${r}get-quote/">Get a free quote <span class="arr">${ICON_ARROW}</span></a>
@@ -1149,7 +1158,7 @@ function pageAbout() {
     <p>Two ways, both disclosed. First, the featured placement is our affiliated agency, SOCIALFUEL — when a project we're matched to is a fit, they may take it on. Second, in future we may offer labelled featured listings to other agencies. The editorial shortlist itself is not monetised and its order is never for sale.</p>
 
     <h2>About SOCIALFUEL, our featured partner</h2>
-    <p>${esc(featured.blurb)}</p>
+    <p>${blurbHtml(featured.blurb)}</p>
 
     <h2>Contact</h2>
     <p>Questions, corrections, listing removals, or partnership enquiries — email our partner contact desk at <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a> and a real person will reply. If you're a business looking for a website, the fastest path is to <a href="${r}get-quote/">get matched free</a>.</p>
