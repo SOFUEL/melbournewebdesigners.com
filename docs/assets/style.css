@@ -871,6 +871,11 @@ h2.center, .sec-head--center { text-align: center; }
 }
 @media (max-width: 780px) {
   .steps { grid-template-columns: 1fr; gap: 2.5rem; }
+  /* stacked steps sit outside .wrap — give them the heading's gutter so they
+     line up with "SHORTLIST…" (reset under hscroll-on so the desktop reticle,
+     which is JS-positioned, is unaffected in the 761–780px overlap) */
+  .hs-stage { padding-inline: var(--gut); }
+  .hscroll-on .hs-stage { padding-inline: 0; }
   /* CTA card: lead with the action, not the number — small "04" label, big
      "Start now" (base styles make the outlined number dwarf the CTA text) */
   .step-cta { padding: 1.7rem 1.6rem; }
