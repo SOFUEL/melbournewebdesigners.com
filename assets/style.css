@@ -590,6 +590,13 @@ input:not([type="radio"]):not([type="checkbox"]), textarea { cursor: text; }
   letter-spacing: -.03em;
   margin-bottom: 1rem;
 }
+.featured-body h2 .tm {
+  font-size: .34em;
+  font-weight: 700;
+  vertical-align: super;
+  letter-spacing: 0;
+  margin-left: .08em;
+}
 .featured-body .blurb { color: var(--muted); max-width: 54ch; margin-bottom: 1.4rem; }
 .featured-body .blurb a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: rgba(244,242,236,.4); transition: text-decoration-color .18s var(--ease); }
 .featured-body .blurb a:hover, .featured-body .blurb a:focus-visible { text-decoration-color: var(--acid); }

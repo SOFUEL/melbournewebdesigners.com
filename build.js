@@ -422,7 +422,7 @@ function featuredCard(depth) {
         ${rating}
       </div>
       <div class="featured-body">
-        <h2>${esc(f.name)}</h2>
+        <h2>${esc(f.name)}<span class="tm" aria-hidden="true">&trade;</span></h2>
         <p class="blurb">${blurbHtml(f.blurb)}</p>
         <div class="chips" style="margin-bottom:1.5rem">${chip(f.suburb, "chip-suburb")}${plats}</div>
         <div class="featured-actions">
