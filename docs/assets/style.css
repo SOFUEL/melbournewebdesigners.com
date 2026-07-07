@@ -895,6 +895,12 @@ h2.center, .sec-head--center { text-align: center; }
 .step-cta:hover .cta-arr svg, .step-cta:focus-visible .cta-arr svg { transform: translate(3px, -3px); }
 .step-cta:hover h3, .step-cta:focus-visible h3 { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 4px; }
 
+/* The section's own overflow must NOT be `hidden` — that makes it the sticky
+   containing box and the pin never locks to the viewport. `clip` still contains
+   the horizontally-sliding cards but keeps the pin's sticky viewport-relative
+   (same reason page-main uses clip for the sticky header). */
+.band-paper.hscroll { overflow: clip; }
+
 /* 1 — whole section pins at 100vh, anchored top, cleared of the sticky header */
 .hscroll-on .hscroll-pin {
   position: sticky;
