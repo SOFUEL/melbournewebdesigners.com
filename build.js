@@ -549,10 +549,12 @@ function pageHome() {
   </div>
 </section>
 
-<section class="band-paper">
-  <div class="wrap">
-    <p class="eyebrow">How it works</p>
-    <h2 class="h2">Shortlist to the right team, free.</h2>
+<section class="band-paper hscroll" id="how-it-works">
+  <div class="hscroll-pin">
+    <div class="wrap hscroll-head">
+      <p class="eyebrow">How it works</p>
+      <h2 class="h2">Shortlist to the right team, free.</h2>
+    </div>
     <div class="steps">
       <div class="step" data-reveal style="--i:0">
         <span class="step-ghost" aria-hidden="true">01</span>
@@ -569,7 +571,13 @@ function pageHome() {
         <h3>Get matched free</h3>
         <p>A senior strategist reviews your brief and replies <span class="acc">within 1 business day</span>.</p>
       </div>
+      <a class="step step-cta" href="${r}get-quote/" data-reveal style="--i:3">
+        <span class="step-ghost" aria-hidden="true">04</span>
+        <h3>Start now</h3>
+        <p>Two minutes, no account. <span class="cta-arr">${ICON_ARROW}</span></p>
+      </a>
     </div>
+    <div class="hscroll-bar" aria-hidden="true"><i></i></div>
   </div>
 </section>
 
@@ -599,7 +607,7 @@ ${ctaBand(depth)}
     ogTitle: "Best Web Designers Melbourne (2026) — The Independent Shortlist",
     description: "Compare " + TOTAL_STUDIOS + " established Melbourne web design studios in one honest, independent shortlist — then get matched free with the right team for your budget. Updated " + TODAY_HUMAN + ".",
     jsonld: [websiteLd(), orgLd(), itemListLd, faqLd],
-    bodyScripts: `<script src="assets/hero-dust.js" defer></script>`,
+    bodyScripts: `<script src="assets/hero-dust.js" defer></script><script src="assets/hscroll.js" defer></script>`,
     body
   });
 }

@@ -871,6 +871,67 @@ h2.center, .sec-head--center { text-align: center; }
 }
 @media (max-width: 780px) { .steps { grid-template-columns: 1fr; gap: 2.5rem; } }
 
+/* --- How-it-works: pinned horizontal scrub (desktop, motion-ok; JS gates
+       via .hscroll-on — without it the grid above stands, so no-JS,
+       reduced-motion and mobile all keep the stacked layout). --- */
+.step-ghost { transition: color .35s var(--ease); }
+.hscroll-bar { display: none; }
+.step-cta {
+  display: block;
+  background: var(--acid);
+  color: var(--ink-dark);
+  border-radius: 28px;
+  padding: clamp(1.4rem, 2.5vw, 2.2rem);
+}
+.step-cta .step-ghost { -webkit-text-stroke-color: rgba(10, 10, 11, .32); text-stroke-color: rgba(10, 10, 11, .32); }
+.step-cta p { color: rgba(10, 10, 11, .72); }
+.step-cta .cta-arr { display: inline-flex; vertical-align: middle; margin-left: .2em; }
+.step-cta .cta-arr svg { width: 1.05em; height: 1.05em; transition: transform .25s var(--ease); }
+.step-cta:hover .cta-arr svg, .step-cta:focus-visible .cta-arr svg { transform: translate(3px, -3px); }
+.step-cta:hover h3, .step-cta:focus-visible h3 { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 4px; }
+
+.hscroll-on .hscroll-pin {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: clip;
+}
+.hscroll-on .hscroll-head { width: 100%; }
+.hscroll-on .steps {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  width: max-content;
+  padding-inline: max(var(--gut), calc((100vw - var(--wrap)) / 2 + var(--gut)));
+  margin-top: clamp(2rem, 4vh, 3.5rem);
+  will-change: transform;
+}
+.hscroll-on .step { width: clamp(330px, 36vw, 540px); flex-shrink: 0; }
+.hscroll-on .step p { max-width: 30ch; }
+.hscroll-on .step.is-active .step-ghost { color: var(--acid); }
+.hscroll-on .step-cta.is-active .step-ghost { color: var(--ink-dark); -webkit-text-stroke-color: transparent; text-stroke-color: transparent; }
+.hscroll-on .hscroll-bar {
+  display: block;
+  position: absolute;
+  bottom: clamp(20px, 4.5vh, 44px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(56vw, 560px);
+  height: 2px;
+  background: rgba(10, 10, 11, .15);
+}
+.hscroll-on .hscroll-bar i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--acid);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
 /* ==================================================== PULL-QUOTE (cost) === */
 .pullquote { text-align: left; }
 .pullquote .pq {
