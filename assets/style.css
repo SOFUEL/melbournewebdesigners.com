@@ -869,7 +869,22 @@ h2.center, .sec-head--center { text-align: center; }
   padding: 0 .06em;
   color: var(--ink-dark);
 }
-@media (max-width: 780px) { .steps { grid-template-columns: 1fr; gap: 2.5rem; } }
+@media (max-width: 780px) {
+  .steps { grid-template-columns: 1fr; gap: 2.5rem; }
+  /* CTA card: lead with the action, not the number — small "04" label, big
+     "Start now" (base styles make the outlined number dwarf the CTA text) */
+  .step-cta { padding: 1.7rem 1.6rem; }
+  .step-cta .step-ghost {
+    font-size: 1.4rem;
+    color: rgba(10, 10, 11, .5);
+    -webkit-text-stroke-width: 0;
+    text-stroke-width: 0;
+    margin-bottom: .1rem;
+    letter-spacing: 0;
+  }
+  .step-cta h3 { font-size: clamp(2rem, 8vw, 2.6rem); margin: .1rem 0 .25rem; }
+  .step-cta .step-p { margin-top: .2rem; }
+}
 
 /* --- How-it-works: pinned "focus reticle" scrub (after the MIRA reference).
        Section pins a full 100vh (anchored to top, header-cleared); vertical
