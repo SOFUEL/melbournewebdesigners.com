@@ -237,46 +237,46 @@ function footer(depth) {
 <footer class="site" id="site-footer">
   <canvas class="footer-draw" id="footer-draw" aria-hidden="true"></canvas>
   <div class="footer-inner">
-  <div class="wrap">
-    <div class="footer-a">
+    <div class="wrap footer-a">
       <h2>Find your team.</h2>
       <a class="footer-cta" href="${r}get-quote/">Get matched free ${ICON_ARROW}</a>
     </div>
-    <div class="footer-cols">
-      <div class="footer-col">
-        <h4>Browse</h4>
-        ${col("index.html#the-list", "Directory")}
-        ${col("wordpress-web-design-melbourne/", "WordPress")}
-        ${col("shopify-web-design-melbourne/", "Shopify")}
-        ${col("webflow-web-design-melbourne/", "Webflow")}
+    <div class="footer-giant" aria-hidden="true">${LOGO_SVG}</div>
+    <div class="wrap footer-end">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Browse</h4>
+          ${col("index.html#the-list", "Directory")}
+          ${col("wordpress-web-design-melbourne/", "WordPress")}
+          ${col("shopify-web-design-melbourne/", "Shopify")}
+          ${col("webflow-web-design-melbourne/", "Webflow")}
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          ${col("web-design-cost-melbourne/", "Cost guide")}
+          ${col("how-to-choose-a-web-designer-melbourne/", "How to choose")}
+          ${col("methodology/", "Methodology")}
+        </div>
+        <div class="footer-col">
+          <h4>Site</h4>
+          ${col("about/", "About")}
+          ${col("privacy/", "Privacy")}
+          ${col("terms/", "Terms")}
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:${escAttr(CONTACT_EMAIL)}">${esc(CONTACT_EMAIL)}</a>
+          <span class="footer-desk">Partner contact desk</span>
+        </div>
       </div>
-      <div class="footer-col">
-        <h4>Guides</h4>
-        ${col("web-design-cost-melbourne/", "Cost guide")}
-        ${col("how-to-choose-a-web-designer-melbourne/", "How to choose")}
-        ${col("methodology/", "Methodology")}
-      </div>
-      <div class="footer-col">
-        <h4>Site</h4>
-        ${col("about/", "About")}
-        ${col("privacy/", "Privacy")}
-        ${col("terms/", "Terms")}
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <a href="mailto:${escAttr(CONTACT_EMAIL)}">${esc(CONTACT_EMAIL)}</a>
-        <span class="footer-desk">Partner contact desk</span>
+      <div class="footer-bottom">
+        <p class="footer-legal">&copy; ${new Date(TODAY).getUTCFullYear()} ${esc(SITE_NAME)}. ${legal}</p>
+        <div class="footer-meta">
+          <a class="footer-top" href="#">Back to top &#8599;</a>
+          <span>Made in Melbourne</span>
+        </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p class="footer-legal">&copy; ${new Date(TODAY).getUTCFullYear()} ${esc(SITE_NAME)}. ${legal}</p>
-      <div class="footer-meta">
-        <a class="footer-top" href="#">Back to top &#8599;</a>
-        <span>Made in Melbourne</span>
-      </div>
-    </div>
-  </div>
-  <div class="footer-giant" aria-hidden="true">${LOGO_SVG}</div>
   </div>
 </footer>`;
 }
@@ -597,11 +597,11 @@ function pageHome() {
   </div>
 </section>
 
-<section>
-  <div class="wrap">
-    <div class="pullquote" data-reveal>
-      <p class="pq serif-italic">So&hellip; what should a website <em>actually</em> cost in Melbourne?</p>
-      <a class="btn btn-ghost btn-lg pq-btn" href="${r}web-design-cost-melbourne/">Read the 2026 cost guide <span class="arr">${ICON_ARROW}</span></a>
+<section class="cost-hero" id="cost-hero">
+  <div class="cost-pin">
+    <div class="wrap cost-inner">
+      <h2 class="cost-head">So&hellip; what should a website <em class="cost-em">actually</em> cost in Melbourne?</h2>
+      <a class="cost-btn" href="${r}web-design-cost-melbourne/">Read the 2026 cost guide <span class="arr">${ICON_ARROW}</span></a>
     </div>
   </div>
 </section>

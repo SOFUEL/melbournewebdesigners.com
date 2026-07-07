@@ -1000,7 +1000,9 @@ h2.center, .sec-head--center { text-align: center; }
   align-items: center;
   gap: 16px;
   flex-shrink: 0;
-  padding: 0 var(--gut) clamp(22px, 4.5vh, 44px);
+  /* left/right insets match the .wrap (header logo) margin so the "1" box
+     lines up with the page margin */
+  padding: 0 max(var(--gut), calc((100% - var(--wrap)) / 2 + var(--gut))) clamp(22px, 4.5vh, 44px);
 }
 .hs-count-left, .hs-count-right { display: flex; gap: 8px; }
 .hs-count-mid { position: relative; flex: 1; height: 2px; background: rgba(10, 10, 11, .14); overflow: hidden; }
@@ -1022,19 +1024,73 @@ h2.center, .sec-head--center { text-align: center; }
 .hs-count button.on { background: var(--acid); color: var(--ink-dark); }
 .hs-count button:hover, .hs-count button:focus-visible { transform: translateY(-2px); }
 
-/* ==================================================== PULL-QUOTE (cost) === */
-.pullquote { text-align: left; }
-.pullquote .pq {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(2rem, 6vw, 4.5rem);
-  line-height: 1.02;
-  letter-spacing: -.01em;
-  max-width: 18ch;
+/* ============================================ COST HERO (full-screen) ===== */
+/* Dark full-bleed panel with a rounded top; heading top-left, acid CTA
+   bottom-right. `clip` (not hidden) keeps the sticky pin viewport-relative. */
+.cost-hero {
+  background: var(--ink-dark);
+  color: var(--paper);
+  overflow: clip;
+  border-radius: clamp(24px, 3vw, 44px) clamp(24px, 3vw, 44px) 0 0;
+  position: relative;
 }
-.pullquote .pq em { color: var(--acid); font-style: italic; }
-.pullquote .pq-btn { margin-top: clamp(1.8rem, 4vw, 2.6rem); }
+.cost-inner {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  padding-block: clamp(3rem, 8vw, 5rem);
+}
+.cost-head {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2.3rem, 5.4vw, 5.2rem);
+  line-height: 1.0;
+  letter-spacing: -.03em;
+  max-width: 16ch;
+  margin: 0;
+  color: var(--paper);
+}
+.cost-em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--acid); }
+.cost-btn {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  background: var(--acid);
+  color: var(--acid-ink);
+  border-radius: 999px;
+  padding: clamp(.9rem, 1.5vw, 1.25rem) clamp(1.5rem, 2.5vw, 2.3rem);
+  font-weight: 700;
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  transition: transform .3s var(--ease), background-color .18s var(--ease), color .18s var(--ease), box-shadow .3s var(--ease);
+}
+.cost-btn .arr { display: inline-flex; }
+.cost-btn .arr svg { width: 18px; height: 18px; transition: transform .25s var(--ease); }
+.cost-btn:hover, .cost-btn:focus-visible {
+  background: var(--paper);
+  color: var(--ink-dark);
+  box-shadow: 0 14px 38px rgba(217, 255, 63, .28);
+}
+.cost-btn:hover .arr svg, .cost-btn:focus-visible .arr svg { transform: translate(3px, -3px); }
+@media (prefers-reduced-motion: reduce) { .cost-btn, .cost-btn .arr svg { transition: none; } }
+
+/* full-screen "slightly sticky" pin on desktop; mobile keeps normal flow */
+@media (min-width: 761px) and (min-height: 640px) {
+  .cost-hero { height: calc(100svh + 50vh); }
+  .cost-pin {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: clip;
+  }
+  .cost-inner {
+    height: 100%;
+    justify-content: space-between;
+    padding-block: clamp(84px, 8vh, 116px) clamp(2rem, 5vh, 4rem);
+  }
+  .cost-head { align-self: flex-start; }
+  .cost-btn { align-self: flex-end; }
+}
 
 /* ================================================================= FAQ ==== */
 .faq { border-top: 1px solid var(--line); margin-top: clamp(1.5rem, 3vw, 2.4rem); }
@@ -1148,7 +1204,10 @@ footer.site {
     flex-direction: column;
   }
   .footer-draw { display: block; }
-  .footer-inner { margin-top: auto; display: flex; flex-direction: column; }
+  /* fill the panel: CTA pinned top, columns + legal pinned bottom, wordmark
+     absolutely centred in the viewport between them */
+  .footer-inner { flex: 1; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+  .footer-giant { position: absolute; top: 50%; left: 0; transform: translateY(-50%); pointer-events: none; }
 }
 .footer-a {
   display: flex;
@@ -1156,8 +1215,10 @@ footer.site {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1.5rem;
-  padding-block: clamp(3rem, 7vw, 6rem) clamp(2rem, 4vw, 3rem);
+  flex-shrink: 0;
+  padding-block: clamp(1.6rem, 4vh, 3rem) clamp(1rem, 2vw, 1.5rem);
 }
+.footer-end { flex-shrink: 0; }
 .footer-a h2 {
   font-family: var(--display);
   font-weight: 800;
@@ -1166,12 +1227,13 @@ footer.site {
   letter-spacing: -.03em;
   text-transform: uppercase;
 }
+/* neon-pop CTA — acid by default, inverts to ink on hover/click */
 .footer-cta {
   display: inline-flex;
   align-items: center;
   gap: .7rem;
-  background: var(--ink-dark);
-  color: var(--paper);
+  background: var(--acid);
+  color: var(--acid-ink);
   border-radius: 999px;
   padding: clamp(.95rem, 1.6vw, 1.3rem) clamp(1.6rem, 2.6vw, 2.3rem);
   font-weight: 700;
@@ -1180,10 +1242,10 @@ footer.site {
   transition: transform .3s var(--ease), background-color .18s var(--ease), color .18s var(--ease), box-shadow .3s var(--ease);
 }
 .footer-cta svg { width: 18px; height: 18px; transition: transform .25s var(--ease); }
-.footer-cta:hover, .footer-cta:focus-visible {
-  background: var(--acid);
-  color: var(--acid-ink);
-  box-shadow: 0 14px 38px rgba(217, 255, 63, .35);
+.footer-cta:hover, .footer-cta:focus-visible, .footer-cta:active {
+  background: var(--ink-dark);
+  color: var(--paper);
+  box-shadow: 0 14px 38px rgba(10, 10, 11, .22);
 }
 .footer-cta:hover svg, .footer-cta:focus-visible svg { transform: translate(3px, -3px); }
 @media (prefers-reduced-motion: reduce) { .footer-cta, .footer-cta svg { transition: none; } }
@@ -1247,16 +1309,16 @@ footer.site {
 .footer-giant {
   width: 100%;
   display: flex;
+  align-items: center;
   justify-content: center;
   user-select: none;
   color: var(--ink-dark);
 }
 .footer-giant svg {
-  height: clamp(96px, 18vh, 210px);
+  height: clamp(58px, 11vh, 126px); /* ~40% smaller, centred (no edge crop) */
   width: auto;
-  max-width: 92vw;
+  max-width: 80vw;
   display: block;
-  transform: translateY(12%); /* baseline crop at the viewport edge, Mira-style */
 }
 
 @media (max-width: 780px) {
