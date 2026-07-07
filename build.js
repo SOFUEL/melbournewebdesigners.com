@@ -1149,7 +1149,7 @@ function pageAbout() {
     <p>Two ways, both disclosed. First, the featured placement is our affiliated agency, SOCIALFUEL — when a project we're matched to is a fit, they may take it on. Second, in future we may offer labelled featured listings to other agencies. The editorial shortlist itself is not monetised and its order is never for sale.</p>
 
     <h2>About SOCIALFUEL, our featured partner</h2>
-    <p>${esc(featured.blurb)} SOCIALFUEL builds on WordPress, Shopify, Webflow and custom stacks, and pairs design with the performance marketing to drive traffic to it.</p>
+    <p>${esc(featured.blurb)}</p>
 
     <h2>Contact</h2>
     <p>Questions, corrections, listing removals, or partnership enquiries — email our partner contact desk at <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a> and a real person will reply. If you're a business looking for a website, the fastest path is to <a href="${r}get-quote/">get matched free</a>.</p>
