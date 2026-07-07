@@ -584,13 +584,16 @@ function pageHome() {
       </div>
       <div class="hs-desc" aria-hidden="true"></div>
     </div>
-    <div class="hs-pager">
-      <button type="button" data-i="0" aria-label="Go to step 1">1</button>
-      <button type="button" data-i="1" aria-label="Go to step 2">2</button>
-      <button type="button" data-i="2" aria-label="Go to step 3">3</button>
-      <button type="button" data-i="3" aria-label="Go to step 4">4</button>
+    <div class="hs-count">
+      <div class="hs-count-left"></div>
+      <div class="hs-count-mid" aria-hidden="true"><i></i></div>
+      <div class="hs-count-right">
+        <button type="button" data-i="0" aria-label="Go to step 1">1</button>
+        <button type="button" data-i="1" aria-label="Go to step 2">2</button>
+        <button type="button" data-i="2" aria-label="Go to step 3">3</button>
+        <button type="button" data-i="3" aria-label="Go to step 4">4</button>
+      </div>
     </div>
-    <div class="hscroll-bar" aria-hidden="true"><i></i></div>
   </div>
 </section>
 
