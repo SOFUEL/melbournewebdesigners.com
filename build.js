@@ -232,7 +232,9 @@ function footer(depth) {
   const marqItems = "EST. 2026 ✺ MELBOURNE ✺ THE HONEST SHORTLIST ✺ ";
   const marqTrack = `<div class="marquee__track" aria-hidden="true"><span class="marquee__item">${marqItems.repeat(6).replace(/✺/g, '<span class="sep">✺</span>')}</span><span class="marquee__item">${marqItems.repeat(6).replace(/✺/g, '<span class="sep">✺</span>')}</span></div>`;
   return `
-<footer class="site">
+<footer class="site" id="site-footer">
+  <canvas class="footer-draw" id="footer-draw" aria-hidden="true"></canvas>
+  <div class="footer-inner">
   <div class="wrap">
     <div class="footer-a">
       <h2>Find your team.</h2>
@@ -268,6 +270,7 @@ function footer(depth) {
   </div>
   <div class="footer-marq marquee marquee--thin" aria-hidden="true">${marqTrack}</div>
   <div class="footer-giant" aria-hidden="true">MELBOURNE WEB DESIGNERS</div>
+  </div>
 </footer>`;
 }
 
@@ -324,12 +327,15 @@ function layout(opts) {
 </head>
 <body>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=728805897182538&ev=PageView&noscript=1" alt=""></noscript>
+<div class="page-main">
 ${header(opts.depth, opts.active)}
 <main>
 ${opts.body}
 </main>
+</div>
 ${footer(opts.depth)}
 <script src="${r}assets/site.js" defer></script>
+<script src="${r}assets/footer-fx.js" defer></script>
 ${opts.bodyScripts || ""}
 </body>
 </html>`;
