@@ -45,7 +45,21 @@
   window.addEventListener("resize", onScroll);
   reveal();
 
-  /* ---------- cursor-draw: tonal ink that trails the pointer, then fades ---------- */
+  /* ---------- magnetic CTA: the pill subtly tracks the cursor, springs back ---------- */
+  if (fine && !reduce) {
+    var cta = footer.querySelector(".footer-cta");
+    if (cta) {
+      cta.addEventListener("mousemove", function (e) {
+        var r = cta.getBoundingClientRect();
+        var dx = (e.clientX - r.left - r.width / 2) / (r.width / 2);
+        var dy = (e.clientY - r.top - r.height / 2) / (r.height / 2);
+        cta.style.transform = "translate(" + (dx * 5).toFixed(1) + "px," + (dy * 4).toFixed(1) + "px)";
+      });
+      cta.addEventListener("mouseleave", function () { cta.style.transform = ""; });
+    }
+  }
+
+  /* ---------- cursor-draw: acid ink that trails the pointer, then fades ---------- */
   if (!canvas || reduce || !fine) return;
   var ctx = canvas.getContext("2d");
   var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -54,8 +68,8 @@
   var FADE = PROBE ? 1e9 : 2600; /* ms a stroke lingers after the last move, then gone */
   var GAP = 130;     /* ms pause that starts a fresh stroke */
   var MAXPTS = 1600; /* safety cap on retained points */
-  var INK = "236,176,86";          /* warm gold on the near-black footer */
-  var GLOW = "rgba(217,255,63,.3)"; /* faint acid halo */
+  var INK = "217,255,63";           /* neon acid on the paper footer */
+  var GLOW = "rgba(10,10,11,.18)";  /* soft ink halo for definition on light */
 
   function now() { return (window.performance && performance.now) ? performance.now() : Date.now(); }
 
