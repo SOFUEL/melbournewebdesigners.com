@@ -329,8 +329,9 @@ function layout(opts) {
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escAttr(opts.ogTitle || opts.title)}">
   <meta name="twitter:description" content="${escAttr(opts.description)}">${ogTags}
-  <link rel="icon" type="image/png" sizes="100x100" href="${r}assets/SF-TINY.png">
-  <link rel="apple-touch-icon" href="${r}assets/SF-TINY.png">
+  <link rel="icon" type="image/svg+xml" href="${r}assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="${r}assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="${r}assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://socialfuel.app.n8n.cloud">
   <link rel="preload" href="${r}assets/fonts/bricolage-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="${r}assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -1886,33 +1887,10 @@ ${list}
 // og:image generation (real PNG via sips SVG->PNG rasterisation)
 // -------------------------------------------------------------------------
 function buildOgImage() {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
-  <defs>
-    <radialGradient id="glow" cx="0.85" cy="0.08" r="0.75">
-      <stop offset="0" stop-color="#D9FF3F" stop-opacity="0.16"/>
-      <stop offset="1" stop-color="#D9FF3F" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
-  <rect width="1200" height="630" fill="#0A0A0B"/>
-  <rect width="1200" height="630" fill="url(#glow)"/>
-  <rect x="80" y="150" width="70" height="8" fill="#D9FF3F"/>
-  <text x="164" y="160" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="4" fill="#D9FF3F">THE INDEPENDENT SHORTLIST · 2026</text>
-  <text x="76" y="300" font-family="Arial Black, Helvetica, Arial, sans-serif" font-size="98" font-weight="900" letter-spacing="-3" fill="#F4F2EC">MELBOURNE&#8217;S</text>
-  <text x="76" y="400" font-family="Arial Black, Helvetica, Arial, sans-serif" font-size="98" font-weight="900" letter-spacing="-3" fill="#F4F2EC">BEST WEB</text>
-  <text x="76" y="500" font-family="Arial Black, Helvetica, Arial, sans-serif" font-size="98" font-weight="900" letter-spacing="-3" fill="#F4F2EC">DESIGNERS</text>
-  <text x="80" y="580" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#96938A">MelbourneWebDesigners.com · Compare ${TOTAL_STUDIOS} studios · Get matched free</text>
-</svg>`;
-  const tmpSvg = path.join(OUT, "assets", "_og.svg");
-  const outPng = path.join(OUT, "assets", "og-default.png");
-  fs.writeFileSync(tmpSvg, svg);
-  try {
-    execFileSync("sips", ["-s", "format", "png", tmpSvg, "--out", outPng], { stdio: "ignore" });
-    fs.unlinkSync(tmpSvg);
-    return fs.existsSync(outPng);
-  } catch (e) {
-    try { fs.unlinkSync(tmpSvg); } catch (_) {}
-    return false;
-  }
+  // og-default.png is a committed static asset (1200×630, rendered from the
+  // brand HTML via Chrome — far crisper than sips SVG rasterisation). It ships
+  // in assets/ and is copied by copyDir; just confirm it made it into OUT.
+  return fs.existsSync(path.join(OUT, "assets", "og-default.png"));
 }
 
 // -------------------------------------------------------------------------

@@ -1870,7 +1870,7 @@ footer.site {
 .disclosure-note b { color: var(--acid); font-weight: 500; letter-spacing: .04em; text-transform: uppercase; font-size: .74rem; }
 
 /* dir intro note */
-.dir-note { color: var(--muted); max-width: 68ch; margin-top: 1rem; }
+.dir-note { color: var(--muted); max-width: 68ch; margin-top: 1rem; margin-bottom: clamp(1.6rem, 3.5vw, 2.6rem); }
 .dir-note a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line-strong); }
 .dir-note a:hover { text-decoration-color: var(--acid); }
 
