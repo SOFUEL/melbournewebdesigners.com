@@ -409,6 +409,13 @@ function featuredCard(depth) {
   const f = featured;
   const plats = f.platforms.map((p) => chip(p)).join("");
   const logoSrc = f.logo || "assets/SF-TINY.png";
+  // animated logo (GIF) for everyone; static frame for reduced-motion users
+  const logoMarkup = f.logoAnimated
+    ? `<picture>
+          <source srcset="${escAttr(r + logoSrc)}" media="(prefers-reduced-motion: reduce)">
+          <img src="${escAttr(r + f.logoAnimated)}" alt="${escAttr(f.name)} logo" width="440" height="220" loading="eager" decoding="async">
+        </picture>`
+    : `<img src="${escAttr(r + logoSrc)}" alt="${escAttr(f.name)} logo" width="190" height="60" loading="eager" decoding="async">`;
   const rating = f.googleRating != null
     ? `<span class="featured-rating"><b>${f.googleRating.toFixed(1)}<span class="stars">★</span></b> Google <span>(${f.googleReviewCount} reviews)</span></span>`
     : "";
@@ -418,7 +425,7 @@ function featuredCard(depth) {
     <div class="featured-grid">
       <div class="featured-logo">
         <span class="featured-ribbon">Featured Partner · Commercial placement</span>
-        <span class="featured-tile"><img src="${escAttr(r + logoSrc)}" alt="${escAttr(f.name)} logo" width="190" height="60" loading="eager" decoding="async"></span>
+        <span class="featured-tile">${logoMarkup}</span>
         ${rating}
       </div>
       <div class="featured-body">

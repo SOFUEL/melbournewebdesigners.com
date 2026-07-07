@@ -565,6 +565,9 @@ input:not([type="radio"]):not([type="checkbox"]), textarea { cursor: text; }
   padding: clamp(1rem, 3vw, 2rem) 0;
 }
 .featured-tile img { width: clamp(120px, 60%, 190px); height: auto; }
+/* animated logo ships white-on-black — screen blend drops the black onto the
+   dark card so only the wordmark + flame show, no rectangle */
+.featured-tile picture img { width: clamp(170px, 92%, 250px); mix-blend-mode: screen; }
 .featured-rating {
   display: inline-flex;
   align-items: center;
