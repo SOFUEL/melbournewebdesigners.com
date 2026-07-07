@@ -241,8 +241,8 @@ function footer(depth) {
       <h2>Find your team.</h2>
       <a class="footer-cta" href="${r}get-quote/">Get matched free ${ICON_ARROW}</a>
     </div>
-    <div class="footer-giant" aria-hidden="true">${LOGO_SVG}</div>
     <div class="wrap footer-end">
+      <div class="footer-giant" aria-hidden="true">${LOGO_SVG}</div>
       <div class="footer-cols">
         <div class="footer-col">
           <h4>Browse</h4>
