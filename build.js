@@ -50,6 +50,7 @@ const DISCLOSURE_FOOTER =
 // -------------------------------------------------------------------------
 const agencies = JSON.parse(fs.readFileSync(path.join(DATA_DIR, "agencies.json"), "utf8"));
 const featured = JSON.parse(fs.readFileSync(path.join(DATA_DIR, "featured.json"), "utf8"));
+const BLOG_POSTS = loadPosts(); // data/blog/*.md — function declarations hoist
 
 // Computed studio counts — never hard-code (26 editorial + 1 featured = 27).
 const EDITORIAL_COUNT = agencies.length;               // 26
@@ -224,10 +225,274 @@ function header(depth, active) {
       ${link("web-design-cost-melbourne/", "Cost Guide", "cost")}
       ${link("how-to-choose-a-web-designer-melbourne/", "How to choose", "guide")}
       ${link("methodology/", "Methodology", "methodology")}
+      ${link("blog/", "Journal", "journal")}
       <span class="nav-cta"><a class="btn btn-primary" href="${r}get-quote/"${active === "quote" ? ' aria-current="page"' : ""}>Get matched <span class="arr">${ICON_ARROW}</span></a></span>
     </nav>
   </div>
 </header>`;
+}
+
+// -------------------------------------------------------------------------
+// AI Search Audit lead-magnet popup (assets/popup.js drives triggers/submit)
+// -------------------------------------------------------------------------
+function popupHtml(r) {
+  return `
+<div class="mwd-pop" id="mwd-pop" role="dialog" aria-modal="true" aria-labelledby="pop-title">
+  <div class="pop-card">
+    <button class="pop-close" type="button" aria-label="Close">&#10005;</button>
+    <div class="pop-body">
+      <p class="pop-eyebrow">Free &middot; Valued at $497</p>
+      <h2 id="pop-title">Is your business invisible in AI&nbsp;search?</h2>
+      <p class="pop-sub">ChatGPT recommends just <strong>1.2% of local businesses</strong>. We&rsquo;ll test how yours shows up across ChatGPT, Perplexity &amp; Google AI &mdash; and send you the exact fixes. No sales call. Delivered within 48 hours.</p>
+      <form novalidate>
+        <div class="field hp" aria-hidden="true"><label>Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label></div>
+        <input class="pop-in" type="email" name="email" placeholder="Work email" required autocomplete="email">
+        <input class="pop-in" type="text" name="website" placeholder="yourwebsite.com.au" autocomplete="url" inputmode="url">
+        <button type="submit" class="pop-cta">Get my free AI audit <span class="arr">${ICON_ARROW}</span></button>
+        <p class="pop-err" role="alert"></p>
+      </form>
+      <p class="pop-fine">One audit email, no spam. Fulfilled by SOCIALFUEL, our featured partner &middot; <a href="${r}privacy/">Privacy</a></p>
+    </div>
+    <div class="pop-done hide">
+      <p class="pop-eyebrow">Request received</p>
+      <h2>Your audit is on the way.</h2>
+      <p class="pop-sub">We&rsquo;ll test your AI-search visibility across ChatGPT, Perplexity &amp; Google AI and email your report within 48 hours.</p>
+    </div>
+  </div>
+</div>`;
+}
+
+// -------------------------------------------------------------------------
+// JOURNAL (blog) — data/blog/*.md with simple front-matter, rendered to
+// /blog/ index + /blog/<slug>/ posts + RSS. Markdown is a deliberate subset
+// (headings, paragraphs, lists, quotes, links, bold/italic/code, hr) so the
+// renderer stays dependency-free and the n8n writer has a stable contract.
+// -------------------------------------------------------------------------
+function mdInline(s) {
+  return s
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/\*([^*]+)\*/g, "<em>$1</em>")
+    .replace(/\`([^\`]+)\`/g, "<code>$1</code>")
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (m, t, u) =>
+      /^https?:\/\//.test(u) && !u.startsWith(SITE_URL)
+        ? `<a href="${u}" target="_blank" rel="noopener">${t}</a>`
+        : `<a href="${u}">${t}</a>`);
+}
+function mdToHtml(md) {
+  const esc0 = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const lines = md.split(/\r?\n/);
+  const out = [];
+  let list = null; // "ul" | "ol"
+  const closeList = () => { if (list) { out.push(`</${list}>`); list = null; } };
+  for (let raw of lines) {
+    const line = raw.trimEnd();
+    if (!line.trim()) { closeList(); continue; }
+    let m;
+    if ((m = line.match(/^(#{2,4})\s+(.*)$/))) {
+      closeList();
+      const h = m[1].length;
+      out.push(`<h${h}>${mdInline(esc0(m[2]))}</h${h}>`);
+    } else if (/^---+$/.test(line.trim())) {
+      closeList(); out.push("<hr>");
+    } else if ((m = line.match(/^>\s?(.*)$/))) {
+      closeList(); out.push(`<blockquote><p>${mdInline(esc0(m[1]))}</p></blockquote>`);
+    } else if ((m = line.match(/^[-*]\s+(.*)$/))) {
+      if (list !== "ul") { closeList(); out.push("<ul>"); list = "ul"; }
+      out.push(`<li>${mdInline(esc0(m[1]))}</li>`);
+    } else if ((m = line.match(/^\d+\.\s+(.*)$/))) {
+      if (list !== "ol") { closeList(); out.push("<ol>"); list = "ol"; }
+      out.push(`<li>${mdInline(esc0(m[1]))}</li>`);
+    } else {
+      closeList();
+      out.push(`<p>${mdInline(esc0(line))}</p>`);
+    }
+  }
+  closeList();
+  return out.join("\n");
+}
+function loadPosts() {
+  const dir = path.join(DATA_DIR, "blog");
+  if (!fs.existsSync(dir)) return [];
+  const posts = [];
+  for (const f of fs.readdirSync(dir)) {
+    if (!f.endsWith(".md")) continue;
+    const raw = fs.readFileSync(path.join(dir, f), "utf8");
+    const m = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+    if (!m) continue;
+    const meta = {};
+    for (const line of m[1].split("\n")) {
+      const i = line.indexOf(":");
+      if (i < 0) continue;
+      meta[line.slice(0, i).trim()] = line.slice(i + 1).trim();
+    }
+    const body = m[2].trim();
+    const words = body.split(/\s+/).length;
+    let faq = [], sources = [];
+    try { if (meta.faq) faq = JSON.parse(meta.faq); } catch (e) {}
+    try { if (meta.sources) sources = JSON.parse(meta.sources); } catch (e) {}
+    posts.push({
+      slug: meta.slug || f.replace(/\.md$/, ""),
+      title: meta.title || "Untitled",
+      description: meta.description || "",
+      date: meta.date || TODAY,
+      updated: meta.updated || meta.date || TODAY,
+      tags: (meta.tags || "").split(",").map((t) => t.trim()).filter(Boolean),
+      hero: meta.hero || "",
+      heroAlt: meta.heroAlt || "",
+      heroCredit: meta.heroCredit || "",
+      heroCreditUrl: meta.heroCreditUrl || "",
+      faq, sources,
+      minutes: Math.max(2, Math.round(words / 220)),
+      html: mdToHtml(body)
+    });
+  }
+  posts.sort((a, b) => (a.date < b.date ? 1 : -1));
+  return posts;
+}
+function fmtDate(d) {
+  return new Date(d + "T00:00:00Z").toLocaleDateString("en-AU", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+}
+function postCard(p, r) {
+  const img = p.hero
+    ? `<img src="${r}assets/blog/${escAttr(p.hero)}" alt="${escAttr(p.heroAlt)}" width="800" height="450" loading="lazy" decoding="async">`
+    : "";
+  return `
+      <a class="post-card" href="${r}blog/${p.slug}/">
+        <span class="post-thumb">${img}</span>
+        <span class="post-meta">${p.tags.slice(0, 1).map((t) => `<span class="post-tag">${esc(t)}</span>`).join("")}<span>${fmtDate(p.date)} &middot; ${p.minutes} min</span></span>
+        <span class="post-title">${esc(p.title)}</span>
+        <span class="post-desc">${esc(p.description)}</span>
+      </a>`;
+}
+function pageBlogIndex() {
+  const r = rel(1);
+  const cards = BLOG_POSTS.map((p) => postCard(p, r)).join("\n");
+  return layout({
+    depth: 1,
+    title: `The Journal — Web Design & AI Search Insights | ${SITE_NAME}`,
+    description: "Practical guides on web design, platform choice and AI-search visibility for Melbourne businesses — from the team behind the MWD shortlist.",
+    canonicalPath: "blog/",
+    active: "journal",
+    jsonld: [{
+      "@context": "https://schema.org", "@type": "Blog",
+      "name": "The MWD Journal", "url": `${SITE_URL}/blog/`,
+      "publisher": { "@type": "Organization", "name": SITE_NAME, "url": SITE_URL }
+    }],
+    body: `
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">The Journal</p>
+    <h1 class="h1">Web design, straight answers.</h1>
+    <p class="lead" style="color:var(--muted);max-width:56ch">Practical, current guides on choosing well, paying fairly and staying visible &mdash; in Google <em>and</em> in AI search. New pieces most weeks.</p>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+    <div class="post-grid">${cards}
+    </div>
+  </div>
+</section>`
+  });
+}
+function pageBlogPost(p) {
+  const r = rel(2);
+  const related = BLOG_POSTS.filter((x) => x.slug !== p.slug && x.tags.some((t) => p.tags.includes(t))).slice(0, 3);
+  const faqHtml = p.faq.length ? `
+    <h2>FAQ</h2>
+    <div class="faq">
+      ${p.faq.map((f) => `<details><summary>${esc(f.q)}</summary><div class="faq-body"><p>${esc(f.a)}</p></div></details>`).join("\n      ")}
+    </div>` : "";
+  const srcHtml = p.sources.length ? `
+    <div class="post-sources">
+      <h3>Sources</h3>
+      <ul>${p.sources.map((s) => `<li><a href="${escAttr(s.u)}" target="_blank" rel="noopener">${esc(s.t)}</a></li>`).join("")}</ul>
+    </div>` : "";
+  const relHtml = related.length ? `
+<section class="section-tight">
+  <div class="wrap">
+    <p class="eyebrow">Keep reading</p>
+    <div class="post-grid">${related.map((x) => postCard(x, r)).join("\n")}
+    </div>
+  </div>
+</section>` : "";
+  const jsonld = [{
+    "@context": "https://schema.org", "@type": "Article",
+    "headline": p.title,
+    "description": p.description,
+    "datePublished": p.date,
+    "dateModified": p.updated,
+    "image": p.hero ? [`${SITE_URL}/assets/blog/${p.hero}`] : undefined,
+    "author": { "@type": "Organization", "name": `${SITE_NAME} Editorial` },
+    "publisher": { "@type": "Organization", "name": SITE_NAME, "url": SITE_URL, "logo": { "@type": "ImageObject", "url": `${SITE_URL}/assets/apple-touch-icon.png` } },
+    "mainEntityOfPage": `${SITE_URL}/blog/${p.slug}/`
+  }, {
+    "@context": "https://schema.org", "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Journal", "item": `${SITE_URL}/blog/` },
+      { "@type": "ListItem", "position": 2, "name": p.title, "item": `${SITE_URL}/blog/${p.slug}/` }
+    ]
+  }];
+  if (p.faq.length) jsonld.push({
+    "@context": "https://schema.org", "@type": "FAQPage",
+    "mainEntity": p.faq.map((f) => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
+  });
+  return layout({
+    depth: 2,
+    title: `${p.title} | ${SITE_NAME}`,
+    description: p.description,
+    canonicalPath: `blog/${p.slug}/`,
+    active: "journal",
+    jsonld,
+    body: `
+<section class="page-head">
+  <div class="wrap wrap-narrow">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="${r}blog/">Journal</a><span aria-hidden="true">/</span><span>${esc(p.tags[0] || "Guide")}</span></nav>
+    <h1 class="post-h1">${esc(p.title)}</h1>
+    <p class="post-byline">By the ${esc(SITE_NAME)} editorial desk &middot; ${fmtDate(p.date)}${p.updated !== p.date ? ` &middot; Updated ${fmtDate(p.updated)}` : ""} &middot; ${p.minutes} min read</p>
+  </div>
+</section>
+<section>
+  <div class="wrap wrap-narrow">
+    ${p.hero ? `<figure class="post-hero"><img src="${r}assets/blog/${escAttr(p.hero)}" alt="${escAttr(p.heroAlt)}" width="1600" height="900" loading="eager" decoding="async" fetchpriority="high">${p.heroCredit ? `<figcaption>${p.heroCreditUrl ? `<a href="${escAttr(p.heroCreditUrl)}" target="_blank" rel="noopener">${esc(p.heroCredit)}</a>` : esc(p.heroCredit)}</figcaption>` : ""}</figure>` : ""}
+    <article class="post-body">
+${p.html}
+${faqHtml}
+    </article>
+    ${srcHtml}
+    <div class="post-author">
+      <p><strong>${esc(SITE_NAME)} Editorial</strong> &mdash; the team behind Melbourne&rsquo;s independent web design shortlist. We compare ${TOTAL_STUDIOS} local studios, publish real cost data and test how Melbourne businesses show up in AI search. <a href="${r}methodology/">Our methodology&nbsp;&rarr;</a></p>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+    <div class="cta-band" data-reveal>
+      <p class="eyebrow-dark">Free &middot; two minutes</p>
+      <h2>Get matched with the right Melbourne studio.</h2>
+      <p>Tell us your project and budget &mdash; a senior strategist replies within one business day. No sales calls, no spam.</p>
+      <a class="btn btn-solid-dark btn-lg" href="${r}get-quote/">Get matched free <span class="arr">${ICON_ARROW}</span></a>
+    </div>
+  </div>
+</section>
+${relHtml}`
+  });
+}
+function buildRss() {
+  const items = BLOG_POSTS.map((p) => `
+  <item>
+    <title><![CDATA[${p.title}]]></title>
+    <link>${SITE_URL}/blog/${p.slug}/</link>
+    <guid isPermaLink="true">${SITE_URL}/blog/${p.slug}/</guid>
+    <pubDate>${new Date(p.date + "T09:00:00+10:00").toUTCString()}</pubDate>
+    <description><![CDATA[${p.description}]]></description>
+  </item>`).join("");
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel>
+  <title>The ${SITE_NAME} Journal</title>
+  <link>${SITE_URL}/blog/</link>
+  <description>Web design, platform and AI-search visibility guides for Melbourne businesses.</description>
+  <language>en-au</language>${items}
+</channel></rss>`;
 }
 
 // MWD+ wordmark (Joel's supplied SVG, cleaned: sketch debris stripped, viewBox
@@ -329,6 +594,7 @@ function layout(opts) {
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escAttr(opts.ogTitle || opts.title)}">
   <meta name="twitter:description" content="${escAttr(opts.description)}">${ogTags}
+  <link rel="alternate" type="application/rss+xml" title="The ${escAttr(SITE_NAME)} Journal" href="${SITE_URL}/blog/feed.xml">
   <link rel="icon" type="image/svg+xml" href="${r}assets/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="${r}assets/favicon-32.png">
   <link rel="apple-touch-icon" href="${r}assets/apple-touch-icon.png">
@@ -351,8 +617,10 @@ ${opts.body}
 </main>
 </div>
 ${footer(opts.depth)}
+${opts.noPopup ? "" : popupHtml(r)}
 <script src="${r}assets/site.js" defer></script>
-<script src="${r}assets/footer-fx.js" defer></script>
+<script src="${r}assets/footer-fx.js" defer></script>${opts.noPopup ? "" : `
+<script src="${r}assets/popup.js" defer></script>`}
 ${opts.bodyScripts || ""}
 </body>
 </html>`;
@@ -871,6 +1139,7 @@ function pageQuote() {
 
   return layout({
     depth, active: "quote", canonicalPath: "get-quote/",
+    noPopup: true,
     title: "Get a Free Web Design Quote — Melbourne | MelbourneWebDesigners.com",
     ogTitle: "Get matched with the right Melbourne web designer — free",
     description: "Answer six quick questions and get matched free with the right Melbourne web design agency for your budget and timeline. A senior strategist replies within one business day.",
@@ -1785,6 +2054,7 @@ function page404() {
 `;
   return layout({
     depth, active: null, canonicalPath: "404.html",
+    noPopup: true,
     title: "Page not found — MelbourneWebDesigners.com",
     description: "The page you're looking for doesn't exist. Head back to the independent Melbourne web design directory.",
     ogImage: false,
@@ -1859,6 +2129,10 @@ MelbourneWebDesigners.com is owned and operated by Helou Holdings Pty Ltd. Featu
 - [Methodology & disclosure](${SITE_URL}/methodology/) : how the shortlist is selected and ordered, commercial-placement policy, ratings policy, and the free removal promise.
 - [About](${SITE_URL}/about/) : who operates the directory and how it makes money.
 
+## The Journal (guides & analysis)
+
+${BLOG_POSTS.map((p) => `- [${p.title}](${SITE_URL}/blog/${p.slug}/) : ${p.description}`).join("\n")}
+
 ## Browse by platform specialty
 
 Platform-specialist shortlists — each filters the editorial directory to Melbourne agencies that build on that platform, with SOCIALFUEL shown as a labelled Featured Partner.
@@ -1930,6 +2204,7 @@ function build() {
   const OWNED = [
     "assets",
     "agencies",
+    "blog",
     "get-quote",
     "web-design-cost-melbourne",
     "wordpress-web-design-melbourne",
@@ -1976,6 +2251,13 @@ function build() {
   pages.push(["terms/index.html", pageTerms()]);
   pages.push(["404.html", page404()]);
 
+  // Journal
+  if (BLOG_POSTS.length) {
+    pages.push(["blog/index.html", pageBlogIndex()]);
+    BLOG_POSTS.forEach((p) => pages.push([`blog/${p.slug}/index.html`, pageBlogPost(p)]));
+    writeFile("blog/feed.xml", buildRss());
+  }
+
   ORDERED.forEach((a, i) => {
     pages.push([`agencies/${a.slug}/index.html`, pageProfile(a, i)]);
   });
@@ -1997,6 +2279,10 @@ function build() {
     { loc: "terms/", freq: "yearly", pri: "0.3" }
   ];
   ORDERED.forEach((a) => sitemapUrls.push({ loc: `agencies/${a.slug}/`, freq: "monthly", pri: "0.7" }));
+  if (BLOG_POSTS.length) {
+    sitemapUrls.push({ loc: "blog/", freq: "weekly", pri: "0.8" });
+    BLOG_POSTS.forEach((p) => sitemapUrls.push({ loc: `blog/${p.slug}/`, freq: "monthly", pri: "0.7" }));
+  }
 
   writeFile("sitemap.xml", buildSitemap(sitemapUrls));
   writeFile("robots.txt", buildRobots());

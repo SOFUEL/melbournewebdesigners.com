@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The 20-Minute AI Search Tune-Up — llms.txt, Schema and the Basics Most Melbourne Websites Miss | MelbourneWebDesigners.com</title>
+  <meta name="description" content="Only ~10% of websites have llms.txt and most Melbourne sites still block or ignore AI crawlers. Here&#39;s the practical 20-minute checklist to make your site readable — and quotable — by ChatGPT, Perplexity and Google AI.">
+  <link rel="canonical" href="https://melbournewebdesigners.com/blog/ai-search-tune-up/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#0A0A0B">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MelbourneWebDesigners.com">
+  <meta property="og:title" content="The 20-Minute AI Search Tune-Up — llms.txt, Schema and the Basics Most Melbourne Websites Miss | MelbourneWebDesigners.com">
+  <meta property="og:description" content="Only ~10% of websites have llms.txt and most Melbourne sites still block or ignore AI crawlers. Here&#39;s the practical 20-minute checklist to make your site readable — and quotable — by ChatGPT, Perplexity and Google AI.">
+  <meta property="og:url" content="https://melbournewebdesigners.com/blog/ai-search-tune-up/">
+  <meta property="og:locale" content="en_AU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The 20-Minute AI Search Tune-Up — llms.txt, Schema and the Basics Most Melbourne Websites Miss | MelbourneWebDesigners.com">
+  <meta name="twitter:description" content="Only ~10% of websites have llms.txt and most Melbourne sites still block or ignore AI crawlers. Here&#39;s the practical 20-minute checklist to make your site readable — and quotable — by ChatGPT, Perplexity and Google AI.">
+  <meta property="og:image" content="https://melbournewebdesigners.com/assets/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:image" content="https://melbournewebdesigners.com/assets/og-default.png">
+  <link rel="alternate" type="application/rss+xml" title="The MelbourneWebDesigners.com Journal" href="https://melbournewebdesigners.com/blog/feed.xml">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://socialfuel.app.n8n.cloud">
+  <link rel="preload" href="../../assets/fonts/bricolage-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-63LHZZEP85"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-63LHZZEP85',{anonymize_ip:true});</script>
+  <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','728805897182538');fbq('track','PageView');if(location.pathname.indexOf('get-quote')!==-1)fbq('track','ViewContent',{content_name:'quote-funnel'});</script>
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"The 20-Minute AI Search Tune-Up — llms.txt, Schema and the Basics Most Melbourne Websites Miss","description":"Only ~10% of websites have llms.txt and most Melbourne sites still block or ignore AI crawlers. Here's the practical 20-minute checklist to make your site readable — and quotable — by ChatGPT, Perplexity and Google AI.","datePublished":"2026-07-07","dateModified":"2026-07-07","image":["https://melbournewebdesigners.com/assets/blog/ai-tuneup.jpg"],"author":{"@type":"Organization","name":"MelbourneWebDesigners.com Editorial"},"publisher":{"@type":"Organization","name":"MelbourneWebDesigners.com","url":"https://melbournewebdesigners.com","logo":{"@type":"ImageObject","url":"https://melbournewebdesigners.com/assets/apple-touch-icon.png"}},"mainEntityOfPage":"https://melbournewebdesigners.com/blog/ai-search-tune-up/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Journal","item":"https://melbournewebdesigners.com/blog/"},{"@type":"ListItem","position":2,"name":"The 20-Minute AI Search Tune-Up — llms.txt, Schema and the Basics Most Melbourne Websites Miss","item":"https://melbournewebdesigners.com/blog/ai-search-tune-up/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is llms.txt?","acceptedAnswer":{"@type":"Answer","text":"llms.txt is a plain-text file at your site root (yoursite.com/llms.txt) that gives AI systems a curated index of your site — what you do, your key pages, and short descriptions of each. Think of it as a sitemap written for language models. Adoption is only around 10% of domains in 2026, so having one is still a genuine differentiator."}},{"@type":"Question","name":"Should I block AI crawlers like GPTBot?","acceptedAnswer":{"@type":"Answer","text":"If you want AI assistants to recommend your business — no. Blocking GPTBot, ClaudeBot or PerplexityBot in robots.txt removes you from the sources those assistants can read and cite. Some publishers block them to protect content; for a local business trying to be found, blocking is self-sabotage. Check your robots.txt today — some security plugins and hosts block them by default."}},{"@type":"Question","name":"Does schema markup actually change AI answers?","acceptedAnswer":{"@type":"Answer","text":"Yes — structured data is one of the six signals consistently associated with AI citations (entities, authority, structure, freshness, depth, machine accessibility). Schema tells models exactly what your business is, where it operates and what it offers, which reduces the wrong-details problem and raises citation confidence. LocalBusiness, Organization, Service and FAQPage are the four that matter for most Melbourne businesses."}},{"@type":"Question","name":"How do I know if AI search is sending me traffic?","acceptedAnswer":{"@type":"Answer","text":"Check your analytics referrers for chatgpt.com, perplexity.ai, gemini.google.com and copilot.microsoft.com, and watch for branded searches rising after AI answers mention you. In GA4, build a simple exploration filtering session source by those domains. Numbers are small for most businesses today — but they convert well, because the assistant already pre-sold the click."}}]}</script>
+</head>
+<body>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=728805897182538&ev=PageView&noscript=1" alt=""></noscript>
+<div class="page-main">
+
+<header class="site" id="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="../../index.html" aria-label="MelbourneWebDesigners.com home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="391.3 296.5 456.9 140.5" fill="none" aria-hidden="true"><g fill="currentColor"><polygon points="460.4 402.2 460.1 402.2 435.5 316.9 391.3 316.9 391.3 437 418.6 437 418.6 346.5 418.9 346.5 445.7 437 471.5 437 498.7 346.5 499 346.5 499 437 526.3 437 526.3 316.9 484.5 316.9 460.4 402.2"/><polygon points="646.1 409 645.5 409 627.7 316.9 592.9 316.9 575.6 409 575.1 409 560.4 316.9 528.5 316.9 552.9 437 593.7 437 609.3 346.7 609.9 346.7 625.1 437 666.3 437 690.7 316.9 660.5 316.9 646.1 409"/><path d="M787.7,344.3c-4.2-8.8-10.9-15.6-19.8-20.3-9-4.7-20.6-7.1-34.8-7.1h-40.2v120.1h45.5c5.2,0,10.5-.6,15.8-1.8,5.3-1.2,10.4-3.2,15.1-6,4.7-2.8,9-6.6,12.7-11.3,3.8-4.7,6.7-10.6,8.8-17.5,2.1-6.9,3.2-15.1,3.2-24.6s-2.1-22.8-6.4-31.6ZM759.8,399.1c-2.4,5-5.6,8.5-9.6,10.5-3.9,1.9-8.2,2.9-12.8,2.9h-15.1v-71h12c4.6,0,8.7.6,12.3,1.8,3.6,1.2,6.6,3.2,9.1,5.9,2.5,2.7,4.4,6.4,5.7,11,1.3,4.6,2,10.3,2,17.1s-1.2,16.7-3.6,21.7Z"/></g><polygon fill="#D9FF3F" points="848.2 316.9 829.1 316.9 829.1 296.5 811.1 296.5 811.1 316.9 791.9 316.9 791.9 334.4 811.1 334.4 811.1 354.9 829.1 354.9 829.1 334.4 848.2 334.4 848.2 316.9"/></svg></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg></button>
+    <nav class="nav-menu" id="nav-menu" aria-label="Primary">
+      <button class="nav-close" id="nav-close" aria-label="Close menu"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg></button>
+      <a class="navlink" href="../../index.html#the-list">Directory</a>
+      <a class="navlink" href="../../web-design-cost-melbourne/">Cost Guide</a>
+      <a class="navlink" href="../../how-to-choose-a-web-designer-melbourne/">How to choose</a>
+      <a class="navlink" href="../../methodology/">Methodology</a>
+      <a class="navlink" href="../../blog/" aria-current="page">Journal</a>
+      <span class="nav-cta"><a class="btn btn-primary" href="../../get-quote/">Get matched <span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></span></a></span>
+    </nav>
+  </div>
+</header>
+<main>
+
+<section class="page-head">
+  <div class="wrap wrap-narrow">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../../blog/">Journal</a><span aria-hidden="true">/</span><span>AI Search</span></nav>
+    <h1 class="post-h1">The 20-Minute AI Search Tune-Up — llms.txt, Schema and the Basics Most Melbourne Websites Miss</h1>
+    <p class="post-byline">By the MelbourneWebDesigners.com editorial desk &middot; 7 July 2026 &middot; 3 min read</p>
+  </div>
+</section>
+<section>
+  <div class="wrap wrap-narrow">
+    <figure class="post-hero"><img src="../../assets/blog/ai-tuneup.jpg" alt="HTML code on a laptop screen — the technical layer AI crawlers read before they ever quote your site" width="1600" height="900" loading="eager" decoding="async" fetchpriority="high"><figcaption><a href="https://www.pexels.com/photo/gray-laptop-computer-showing-html-codes-in-shallow-focus-photography-160107/" target="_blank" rel="noopener">Photo by Negative Space on Pexels</a></figcaption></figure>
+    <article class="post-body">
+<p>Most Melbourne websites are invisible to AI assistants for boring, fixable reasons. Not because the business isn't good — because the site never tells the machines what it is.</p>
+<p>The strategic version of this problem (reviews, mentions, authority) is covered in our <a href="https://melbournewebdesigners.com/blog/ai-search-visibility-melbourne/">AI visibility guide</a>. This piece is the technical warm-up: four fixes, about 20 minutes with your developer — or one email to whoever built your site.</p>
+<h2>Minute 0–5: check you're not blocking the crawlers</h2>
+<p>AI assistants can only recommend what their crawlers can read. Open <code>yoursite.com/robots.txt</code> and look for these user agents: <strong>GPTBot</strong> (OpenAI), <strong>ClaudeBot</strong> (Anthropic), <strong>PerplexityBot</strong>, <strong>Google-Extended</strong> and <strong>Bingbot</strong>. If any are Disallowed — and some security plugins and hosts do this silently — you've opted out of being recommended.</p>
+<p>While you're there, confirm your sitemap line exists (<code>Sitemap: https://yoursite.com/sitemap.xml</code>). It's still the fastest way for every crawler, AI or classic, to learn your site's shape.</p>
+<h2>Minute 5–10: add llms.txt</h2>
+<p><code>llms.txt</code> is a curated, plain-language index of your site that lives at <code>yoursite.com/llms.txt</code> — a menu written for machines. Ours describes what this directory is, lists every key page with a one-line summary, and states the disclosure policy. Adoption sits around <strong>10% of domains</strong>, which means for most Melbourne categories you'd be the only business in your niche with one.</p>
+<p>A minimal, effective llms.txt:</p>
+<ul>
+<li>One H1 line: your business name.</li>
+<li>A blockquote paragraph: what you do, for whom, where (suburb/city), since when.</li>
+<li>A "Key pages" list: each important page as a link with a one-sentence description written in plain English — services, pricing, contact, FAQs.</li>
+</ul>
+<p>That's it. Ten lines of honest text beats a thousand lines of markup nobody wrote for the reader.</p>
+<h2>Minute 10–15: schema markup — the four types that matter</h2>
+<p>Structured data is how you stop AI assistants guessing. Four schema types cover most Melbourne businesses:</p>
+<ol>
+<li><strong>LocalBusiness</strong> (or your specific subtype) — name, address, phone, hours, service area. This is the antidote to the wrong-details problem that plagues AI answers.</li>
+<li><strong>Organization</strong> — your entity: legal name, logo, socials, founding date. It anchors who "you" are across the web.</li>
+<li><strong>Service</strong> or <strong>Product</strong> — what you actually sell, in machine-readable form.</li>
+<li><strong>FAQPage</strong> — your real customer questions with direct answers. FAQ schema is disproportionately quoted by assistants because it's literally formatted as question → answer.</li>
+</ol>
+<p>Your developer adds these as JSON-LD in the page head; test with Google's Rich Results tool. If your site was built in the last few years and has none of this, that's a conversation worth having with your agency — or a reason to <a href="https://melbournewebdesigners.com/">find a better one</a>.</p>
+<h2>Minute 15–20: make one page directly quotable</h2>
+<p>Pick your most valuable page — usually pricing or your main service — and restructure the opening to be quotable:</p>
+<ul>
+<li><strong>First two sentences answer the question outright</strong>, with a number and a date: "In 2026, [service] in Melbourne typically costs A$X–Y. Most projects take N weeks."</li>
+<li><strong>Use question-format H2s</strong> ("How much does X cost in Melbourne?") — they map one-to-one onto what people ask assistants.</li>
+<li><strong>Show a visible updated date.</strong> Recency is a citation signal — Perplexity gives pages under 30 days old roughly 3× the citations.</li>
+<li><strong>Cite a source or two.</strong> Content that references data earns more references itself.</li>
+</ul>
+<p>This is the direct-answer format: the difference between a page an assistant can lift a sentence from, and a page it skims past.</p>
+<h2>The honest limits</h2>
+<p>The tune-up makes you <em>readable</em>. It doesn't make you <em>recommended</em> — that still comes from reviews, consistent business data and third-party mentions, which take weeks of graft rather than minutes of markup. Do this first because it's cheap, it compounds everything else, and almost none of your competitors have bothered yet.</p>
+<p>If you'd rather we check all of it for you — crawler access, llms.txt, schema, quotability, plus how you currently show up in ChatGPT, Perplexity and Google AI — request the free <strong>AI Search Visibility Audit</strong> via the popup on this site (valued at $497, no sales call). And if the audit reveals your site needs more than a tune-up, <a href="https://melbournewebdesigners.com/get-quote/">get matched free</a> with a Melbourne studio that builds this in from day one.</p>
+
+    <h2>FAQ</h2>
+    <div class="faq">
+      <details><summary>What is llms.txt?</summary><div class="faq-body"><p>llms.txt is a plain-text file at your site root (yoursite.com/llms.txt) that gives AI systems a curated index of your site — what you do, your key pages, and short descriptions of each. Think of it as a sitemap written for language models. Adoption is only around 10% of domains in 2026, so having one is still a genuine differentiator.</p></div></details>
+      <details><summary>Should I block AI crawlers like GPTBot?</summary><div class="faq-body"><p>If you want AI assistants to recommend your business — no. Blocking GPTBot, ClaudeBot or PerplexityBot in robots.txt removes you from the sources those assistants can read and cite. Some publishers block them to protect content; for a local business trying to be found, blocking is self-sabotage. Check your robots.txt today — some security plugins and hosts block them by default.</p></div></details>
+      <details><summary>Does schema markup actually change AI answers?</summary><div class="faq-body"><p>Yes — structured data is one of the six signals consistently associated with AI citations (entities, authority, structure, freshness, depth, machine accessibility). Schema tells models exactly what your business is, where it operates and what it offers, which reduces the wrong-details problem and raises citation confidence. LocalBusiness, Organization, Service and FAQPage are the four that matter for most Melbourne businesses.</p></div></details>
+      <details><summary>How do I know if AI search is sending me traffic?</summary><div class="faq-body"><p>Check your analytics referrers for chatgpt.com, perplexity.ai, gemini.google.com and copilot.microsoft.com, and watch for branded searches rising after AI answers mention you. In GA4, build a simple exploration filtering session source by those domains. Numbers are small for most businesses today — but they convert well, because the assistant already pre-sold the click.</p></div></details>
+    </div>
+    </article>
+    
+    <div class="post-sources">
+      <h3>Sources</h3>
+      <ul><li><a href="https://llmrefs.com/llm-seo" target="_blank" rel="noopener">LLM SEO in 2026 — llms.txt adoption and citation signals (LLMrefs)</a></li><li><a href="https://searchengineland.com/seo-2026-higher-standards-ai-influence-web-catching-up-473540" target="_blank" rel="noopener">Search Engine Land — SEO in 2026: higher standards, AI influence</a></li><li><a href="https://melbournewebdesigners.com/blog/ai-search-visibility-melbourne/" target="_blank" rel="noopener">Do AI assistants recommend your Melbourne business? (our companion guide)</a></li></ul>
+    </div>
+    <div class="post-author">
+      <p><strong>MelbourneWebDesigners.com Editorial</strong> &mdash; the team behind Melbourne&rsquo;s independent web design shortlist. We compare 27 local studios, publish real cost data and test how Melbourne businesses show up in AI search. <a href="../../methodology/">Our methodology&nbsp;&rarr;</a></p>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+    <div class="cta-band" data-reveal>
+      <p class="eyebrow-dark">Free &middot; two minutes</p>
+      <h2>Get matched with the right Melbourne studio.</h2>
+      <p>Tell us your project and budget &mdash; a senior strategist replies within one business day. No sales calls, no spam.</p>
+      <a class="btn btn-solid-dark btn-lg" href="../../get-quote/">Get matched free <span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="wrap">
+    <p class="eyebrow">Keep reading</p>
+    <div class="post-grid">
+      <a class="post-card" href="../../blog/ai-search-visibility-melbourne/">
+        <span class="post-thumb"><img src="../../assets/blog/ai-search-melbourne.jpg" alt="A Melbourne laneway covered in street art — the kind of local character AI assistants can&#39;t recommend if they can&#39;t see your business" width="800" height="450" loading="lazy" decoding="async"></span>
+        <span class="post-meta"><span class="post-tag">AI Search</span><span>7 July 2026 &middot; 4 min</span></span>
+        <span class="post-title">Do AI Assistants Recommend Your Melbourne Business? How to Check — and How to Fix It</span>
+        <span class="post-desc">ChatGPT recommends just 1.2% of local businesses. Here&#39;s the 10-minute test Melbourne businesses can run today, and the seven fixes that actually move AI-search visibility in 2026.</span>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+</div>
+
+<footer class="site" id="site-footer">
+  <canvas class="footer-draw" id="footer-draw" aria-hidden="true"></canvas>
+  <div class="footer-inner">
+    <div class="wrap footer-a">
+      <h2>Find your team.</h2>
+      <a class="footer-cta" href="../../get-quote/">Get matched free <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></a>
+    </div>
+    <div class="wrap footer-end">
+      <div class="footer-giant" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="391.3 296.5 456.9 140.5" fill="none" aria-hidden="true"><g fill="currentColor"><polygon points="460.4 402.2 460.1 402.2 435.5 316.9 391.3 316.9 391.3 437 418.6 437 418.6 346.5 418.9 346.5 445.7 437 471.5 437 498.7 346.5 499 346.5 499 437 526.3 437 526.3 316.9 484.5 316.9 460.4 402.2"/><polygon points="646.1 409 645.5 409 627.7 316.9 592.9 316.9 575.6 409 575.1 409 560.4 316.9 528.5 316.9 552.9 437 593.7 437 609.3 346.7 609.9 346.7 625.1 437 666.3 437 690.7 316.9 660.5 316.9 646.1 409"/><path d="M787.7,344.3c-4.2-8.8-10.9-15.6-19.8-20.3-9-4.7-20.6-7.1-34.8-7.1h-40.2v120.1h45.5c5.2,0,10.5-.6,15.8-1.8,5.3-1.2,10.4-3.2,15.1-6,4.7-2.8,9-6.6,12.7-11.3,3.8-4.7,6.7-10.6,8.8-17.5,2.1-6.9,3.2-15.1,3.2-24.6s-2.1-22.8-6.4-31.6ZM759.8,399.1c-2.4,5-5.6,8.5-9.6,10.5-3.9,1.9-8.2,2.9-12.8,2.9h-15.1v-71h12c4.6,0,8.7.6,12.3,1.8,3.6,1.2,6.6,3.2,9.1,5.9,2.5,2.7,4.4,6.4,5.7,11,1.3,4.6,2,10.3,2,17.1s-1.2,16.7-3.6,21.7Z"/></g><polygon fill="#D9FF3F" points="848.2 316.9 829.1 316.9 829.1 296.5 811.1 296.5 811.1 316.9 791.9 316.9 791.9 334.4 811.1 334.4 811.1 354.9 829.1 354.9 829.1 334.4 848.2 334.4 848.2 316.9"/></svg></div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Browse</h4>
+          <a href="../../index.html#the-list">Directory</a>
+          <a href="../../wordpress-web-design-melbourne/">WordPress</a>
+          <a href="../../shopify-web-design-melbourne/">Shopify</a>
+          <a href="../../webflow-web-design-melbourne/">Webflow</a>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <a href="../../web-design-cost-melbourne/">Cost guide</a>
+          <a href="../../how-to-choose-a-web-designer-melbourne/">How to choose</a>
+          <a href="../../methodology/">Methodology</a>
+        </div>
+        <div class="footer-col">
+          <h4>Site</h4>
+          <a href="../../about/">About</a>
+          <a href="../../privacy/">Privacy</a>
+          <a href="../../terms/">Terms</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:hello@socialfuel.media">hello@socialfuel.media</a>
+          <span class="footer-desk">Partner contact desk</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-legal">&copy; 2026 MelbourneWebDesigners.com. MelbourneWebDesigners.com is owned and operated by Helou Holdings Pty Ltd, Melbourne, Australia. Featured placements are commercial, always labelled, and never affect the <a href="../../methodology/">editorial list</a>.</p>
+        <div class="footer-meta">
+          <a class="footer-top" href="#">Back to top &#8599;</a>
+          <span>Made in Melbourne</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="mwd-pop" id="mwd-pop" role="dialog" aria-modal="true" aria-labelledby="pop-title">
+  <div class="pop-card">
+    <button class="pop-close" type="button" aria-label="Close">&#10005;</button>
+    <div class="pop-body">
+      <p class="pop-eyebrow">Free &middot; Valued at $497</p>
+      <h2 id="pop-title">Is your business invisible in AI&nbsp;search?</h2>
+      <p class="pop-sub">ChatGPT recommends just <strong>1.2% of local businesses</strong>. We&rsquo;ll test how yours shows up across ChatGPT, Perplexity &amp; Google AI &mdash; and send you the exact fixes. No sales call. Delivered within 48 hours.</p>
+      <form novalidate>
+        <div class="field hp" aria-hidden="true"><label>Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label></div>
+        <input class="pop-in" type="email" name="email" placeholder="Work email" required autocomplete="email">
+        <input class="pop-in" type="text" name="website" placeholder="yourwebsite.com.au" autocomplete="url" inputmode="url">
+        <button type="submit" class="pop-cta">Get my free AI audit <span class="arr"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></span></button>
+        <p class="pop-err" role="alert"></p>
+      </form>
+      <p class="pop-fine">One audit email, no spam. Fulfilled by SOCIALFUEL, our featured partner &middot; <a href="../../privacy/">Privacy</a></p>
+    </div>
+    <div class="pop-done hide">
+      <p class="pop-eyebrow">Request received</p>
+      <h2>Your audit is on the way.</h2>
+      <p class="pop-sub">We&rsquo;ll test your AI-search visibility across ChatGPT, Perplexity &amp; Google AI and email your report within 48 hours.</p>
+    </div>
+  </div>
+</div>
+<script src="../../assets/site.js" defer></script>
+<script src="../../assets/footer-fx.js" defer></script>
+<script src="../../assets/popup.js" defer></script>
+
+</body>
+</html>
