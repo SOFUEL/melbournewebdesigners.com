@@ -141,7 +141,13 @@ function stars(rating) {
 }
 
 function jsonld(obj) {
-  return `<script type="application/ld+json">${JSON.stringify(obj)}</script>`;
+  // Escape the JSON for HTML <script> context: JSON.stringify does NOT escape
+  // "<", so a "</script>" inside any value (e.g. an AI-generated FAQ answer or
+  // an agency blurb) would break out of the block and execute. Neutralise the
+  // three characters that can start a tag/comment breakout.
+  const safe = JSON.stringify(obj).replace(/[<>&\u2028\u2029]/g, (c) =>
+    "\\u" + c.charCodeAt(0).toString(16).padStart(4, "0"));
+  return `<script type="application/ld+json">${safe}</script>`;
 }
 
 // -------------------------------------------------------------------------
@@ -273,10 +279,20 @@ function mdInline(s) {
     .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
     .replace(/\*([^*]+)\*/g, "<em>$1</em>")
     .replace(/\`([^\`]+)\`/g, "<code>$1</code>")
-    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (m, t, u) =>
-      /^https?:\/\//.test(u) && !u.startsWith(SITE_URL)
-        ? `<a href="${u}" target="_blank" rel="noopener">${t}</a>`
-        : `<a href="${u}">${t}</a>`);
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (m, t, u) => {
+      // Scheme allowlist — only http(s), root-relative, anchors and mailto.
+      // Anything else (javascript:, data:, vbscript:, protocol-relative //)
+      // renders as plain text so a malicious markdown link can't inject a
+      // dangerous href. escAttr the URL (esc0 escaped the text but left quotes)
+      // so it can't break out of href="".
+      const safe = /^(https?:\/\/|\/(?!\/)|#|mailto:)/i.test(u);
+      if (!safe) return m;
+      const href = esc(u); // esc() is a hoisted fn (escAttr const is still in TDZ at module-load)
+      const ext = /^https?:\/\//i.test(u) && !u.startsWith(SITE_URL);
+      return ext
+        ? `<a href="${href}" target="_blank" rel="noopener nofollow">${t}</a>`
+        : `<a href="${href}">${t}</a>`;
+    });
 }
 function mdToHtml(md) {
   const esc0 = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -579,6 +595,12 @@ function layout(opts) {
 <html lang="en-AU">
 <head>
   <meta charset="utf-8">
+  <!-- Content-Security-Policy (defense-in-depth XSS lockdown). Delivered via
+       meta so it needs no edge config; frame-ancestors is header-only (set at
+       the Cloudflare edge). All executable JS is external + allowlisted — no
+       'unsafe-inline' in script-src. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://connect.facebook.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://socialfuel.app.n8n.cloud https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://connect.facebook.net https://www.facebook.com; object-src 'none'; base-uri 'self'; form-action 'self' https://socialfuel.app.n8n.cloud; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(opts.title)}</title>
   <meta name="description" content="${escAttr(opts.description)}">
@@ -603,8 +625,7 @@ function layout(opts) {
   <link rel="preload" href="${r}assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="${r}assets/style.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-63LHZZEP85"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-63LHZZEP85',{anonymize_ip:true});</script>
-  <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','728805897182538');fbq('track','PageView');if(location.pathname.indexOf('get-quote')!==-1)fbq('track','ViewContent',{content_name:'quote-funnel'});</script>
+  <script src="${r}assets/analytics.js" defer></script>
   ${opts.extraHead || ""}
   ${jsonldBlock}
 </head>

@@ -2,6 +2,12 @@
 <html lang="en-AU">
 <head>
   <meta charset="utf-8">
+  <!-- Content-Security-Policy (defense-in-depth XSS lockdown). Delivered via
+       meta so it needs no edge config; frame-ancestors is header-only (set at
+       the Cloudflare edge). All executable JS is external + allowlisted — no
+       'unsafe-inline' in script-src. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://connect.facebook.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://socialfuel.app.n8n.cloud https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://connect.facebook.net https://www.facebook.com; object-src 'none'; base-uri 'self'; form-action 'self' https://socialfuel.app.n8n.cloud; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Atollon — Melbourne Web Design Agency (Fitzroy) | Review &amp; Profile</title>
   <meta name="description" content="Atollon is a Melbourne web design agency in Fitzroy. Atollon is a Melbourne creative agency with a design office in Fitzroy that offers integrated brand…">
@@ -30,8 +36,7 @@
   <link rel="preload" href="../../assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../../assets/style.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-63LHZZEP85"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-63LHZZEP85',{anonymize_ip:true});</script>
-  <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','728805897182538');fbq('track','PageView');if(location.pathname.indexOf('get-quote')!==-1)fbq('track','ViewContent',{content_name:'quote-funnel'});</script>
+  <script src="../../assets/analytics.js" defer></script>
   
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Directory","item":"https://melbournewebdesigners.com/"},{"@type":"ListItem","position":2,"name":"Atollon","item":"https://melbournewebdesigners.com/agencies/atollon/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Atollon","url":"https://melbournewebdesigners.com/agencies/atollon/","sameAs":"https://atollon.com.au","areaServed":{"@type":"City","name":"Melbourne"},"address":{"@type":"PostalAddress","addressLocality":"Melbourne","addressRegion":"VIC","addressCountry":"AU"},"description":"Atollon is a Melbourne creative agency with a design office in Fitzroy that offers integrated brand identity, web design and digital work. It serves both large and small businesses across brand, digital and code.","knowsAbout":["Branding","Web Design","Web Development","Marketing","Social"]}</script>
