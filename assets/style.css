@@ -710,6 +710,11 @@ h2.center, .sec-head--center { text-align: center; }
 .filter-btn:hover { color: var(--ink); border-color: var(--ink); }
 .filter-btn[aria-pressed="true"] { background: var(--acid); color: var(--acid-ink); border-color: var(--acid); }
 .filter-btn[aria-pressed="true"] .ct { color: var(--acid-ink); opacity: .7; }
+@media (max-width: 560px) {
+  .filters { gap: .4rem; padding-bottom: 1rem; }
+  .filter-btn { font-size: .78rem; padding: .42rem .78rem; min-height: 36px; gap: .3em; }
+  .filter-btn .ct { font-size: .78em; }
+}
 
 /* =============================================================== THE LIST = */
 .list { border-top: 1px solid var(--line); }
@@ -1989,6 +1994,39 @@ html.pop-lock { overflow: hidden; }
 .pop-fine a { color: var(--ink-dark); text-decoration: underline; text-underline-offset: 2px; }
 .pop-done h2 { margin-bottom: .6rem; }
 .hide { display: none !important; }
+
+/* ==================================================== FLOATING MOBILE CTA === */
+.m-cta {
+  display: none;
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  z-index: 90;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: 1rem 1.4rem;
+  background: var(--acid);
+  color: var(--acid-ink);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1;
+  text-align: center;
+  border-radius: 100px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .3), 0 3px 10px rgba(0, 0, 0, .22);
+  opacity: 0;
+  transform: translateY(150%);
+  pointer-events: none;
+  transition: opacity .35s var(--ease), transform .35s var(--ease);
+}
+@media (max-width: 760px) { .m-cta { display: inline-flex; } }
+.m-cta.show { opacity: 1; transform: none; pointer-events: auto; }
+.m-cta .arr { display: inline-flex; }
+.m-cta .arr svg { width: 17px; height: 17px; }
+@media (prefers-reduced-motion: reduce) {
+  .m-cta { transform: none; transition: opacity .25s var(--ease); }
+}
 
 /* =========================================================== JOURNAL ===== */
 .post-grid {

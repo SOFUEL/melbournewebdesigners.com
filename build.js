@@ -250,7 +250,7 @@ function popupHtml(r) {
     <div class="pop-body">
       <p class="pop-eyebrow">Free &middot; Valued at $497</p>
       <h2 id="pop-title">Is your business invisible in AI&nbsp;search?</h2>
-      <p class="pop-sub">ChatGPT recommends just <strong>1.2% of local businesses</strong>. We&rsquo;ll show exactly how you appear across Claude, ChatGPT, Gemini &amp; Grok &mdash; then send the fixes to get you cited. No sales call, report back within 48&nbsp;hours.</p>
+      <p class="pop-sub">Your customers are already asking ChatGPT, Gemini, Claude &amp; Grok for recommendations &mdash; and ChatGPT names barely <strong>1.2% of local businesses</strong>. See exactly where you show up (or don&rsquo;t), plus the fixes to get cited. No sales call &mdash; in your inbox within 48&nbsp;hours.</p>
       <form novalidate>
         <div class="field hp" aria-hidden="true"><label>Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label></div>
         <input class="pop-in" type="email" name="email" placeholder="Work email" required autocomplete="email">
@@ -724,7 +724,7 @@ function featuredCard(depth) {
         <p class="blurb">${blurbHtml(f.blurb)}</p>
         <div class="chips" style="margin-bottom:1.5rem">${chip(f.suburb, "chip-suburb")}${plats}</div>
         <div class="featured-actions">
-          <a class="btn btn-primary" href="${r}get-quote/">Get a free quote <span class="arr">${ICON_ARROW}</span></a>
+          <a class="btn btn-primary" id="sf-quote" href="${r}get-quote/">Get a free quote <span class="arr">${ICON_ARROW}</span></a>
           <a class="btn btn-ghost" href="${escAttr(f.website)}" target="_blank" rel="nofollow noopener">Visit socialfuel.media</a>
         </div>
         <p class="featured-affil">SOCIALFUEL is affiliated with this site&rsquo;s owner. <a href="${r}methodology/">Methodology <span aria-hidden="true">↗</span></a></p>
@@ -763,6 +763,7 @@ function listFilters() {
     { val: "WordPress", label: "WordPress", n: countPlatform("WordPress") },
     { val: "Shopify", label: "Shopify", n: countPlatform("Shopify") },
     { val: "Webflow", label: "Webflow", n: countPlatform("Webflow") },
+    { val: "Custom", label: "Custom", n: countPlatform("Custom") },
     { val: "ecom", label: "E-commerce", n: countEcom() }
   ];
   return pills.map((p, i) =>
@@ -816,6 +817,7 @@ function pageHome() {
   const marqSpan = `<span class="marquee__item">${marqItems.repeat(2).replace(/✺/g, '<span class="sep">✺</span>')}</span>`;
 
   const body = `
+<a class="m-cta" id="m-cta" href="${r}get-quote/" aria-hidden="true" tabindex="-1">Get matched free <span class="arr" aria-hidden="true">${ICON_ARROW}</span></a>
 <section class="hero">
   <canvas id="hero-dust" class="hero-dust" aria-hidden="true"></canvas>
   <div class="hero-static" aria-hidden="true"></div>

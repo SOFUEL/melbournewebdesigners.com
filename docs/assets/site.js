@@ -183,4 +183,30 @@
 
     recompute();
   }
+
+  /* ---- floating mobile CTA: fade in once the featured "Get a free quote"
+     button scrolls out of view; hide near the footer CTA and when nav is open ---- */
+  var mcta = document.getElementById("m-cta");
+  var mctaTrigger = document.getElementById("sf-quote");
+  if (mcta && mctaTrigger) {
+    var footerCta = document.querySelector(".footer-cta");
+    var mctaShown = false, mctaTick = false;
+    var updateMcta = function () {
+      mctaTick = false;
+      var passed = mctaTrigger.getBoundingClientRect().bottom < 0;
+      var footerIn = footerCta ? footerCta.getBoundingClientRect().top < window.innerHeight : false;
+      var navOpen = menu && menu.classList.contains("open");
+      var show = passed && !footerIn && !navOpen;
+      if (show !== mctaShown) {
+        mcta.classList.toggle("show", show);
+        mcta.setAttribute("aria-hidden", show ? "false" : "true");
+        mcta.setAttribute("tabindex", show ? "0" : "-1");
+        mctaShown = show;
+      }
+    };
+    var onMctaScroll = function () { if (!mctaTick) { mctaTick = true; requestAnimationFrame(updateMcta); } };
+    window.addEventListener("scroll", onMctaScroll, { passive: true });
+    window.addEventListener("resize", onMctaScroll, { passive: true });
+    updateMcta();
+  }
 })();
