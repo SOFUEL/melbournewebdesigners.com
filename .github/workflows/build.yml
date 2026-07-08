@@ -1,0 +1,44 @@
+# Rebuilds the site when source (build.js, assets/, data/ — incl. data/blog
+# posts committed by the n8n daily-blog workflow) changes, then commits the
+# generated docs/ back to main. GitHub Pages serves /docs, so this completes
+# the "n8n commits a markdown post -> site rebuilds -> post is live" loop.
+# Loop-guard: ignores pushes that only touch docs/ and marks its own commits.
+name: Build site
+on:
+  push:
+    branches: [main]
+    paths:
+      - "build.js"
+      - "assets/**"
+      - "data/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-site
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build
+        run: node build.js
+      - name: Commit docs
+        run: |
+          git config user.name "mwd-build-bot"
+          git config user.email "actions@github.com"
+          git add docs
+          if git diff --cached --quiet; then
+            echo "No docs changes."
+          else
+            git commit -m "build: regenerate docs [skip ci]"
+            git pull --rebase origin main
+            git push
+          fi
