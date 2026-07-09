@@ -15,6 +15,7 @@ MelbourneWebDesigners.com is owned and operated by Helou Holdings Pty Ltd. Featu
 
 ## The Journal (guides & analysis)
 
+- [Website Redesign vs Rebuild: What Should Melbourne Businesses Choose?](https://melbournewebdesigners.com/blog/website-redesign-vs-rebuild-melbourne-businesses/) : Explore the key differences between website redesign and rebuild for Melbourne businesses. Learn which option suits your needs and budget best.
 - [WordPress vs Shopify vs Webflow in 2026 — the 10-Minute Decision for Melbourne Businesses](https://melbournewebdesigners.com/blog/wordpress-vs-shopify-vs-webflow-melbourne/) : The honest decision framework Melbourne agencies use — which platform wins for content sites, e-commerce and marketing sites in 2026, what each really costs, and the three mistakes that lock businesses into the wrong stack.
 - [Do AI Assistants Recommend Your Melbourne Business? How to Check — and How to Fix It](https://melbournewebdesigners.com/blog/ai-search-visibility-melbourne/) : ChatGPT recommends just 1.2% of local businesses. Here's the 10-minute test Melbourne businesses can run today, and the seven fixes that actually move AI-search visibility in 2026.
 - [The 20-Minute AI Search Tune-Up — llms.txt, Schema and the Basics Most Melbourne Websites Miss](https://melbournewebdesigners.com/blog/ai-search-tune-up/) : Only ~10% of websites have llms.txt and most Melbourne sites still block or ignore AI crawlers. Here's the practical 20-minute checklist to make your site readable — and quotable — by ChatGPT, Perplexity and Google AI.
