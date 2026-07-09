@@ -455,29 +455,6 @@ input:not([type="radio"]):not([type="checkbox"]), textarea { cursor: text; }
   .hero-meta { font-size: .74rem; letter-spacing: .1em; }
 }
 
-.scroll-cue {
-  position: absolute;
-  bottom: clamp(1.4rem, 4vw, 2.4rem);
-  left: var(--gut);
-  z-index: 1;
-  font-size: .7rem;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: .6rem;
-}
-.scroll-cue::before {
-  content: "";
-  width: 1px; height: 34px;
-  background: linear-gradient(var(--muted), transparent);
-  animation: cue 2.4s var(--ease) infinite;
-  transform-origin: top;
-}
-@keyframes cue { 0%,100% { transform: scaleY(.4); opacity: .4; } 50% { transform: scaleY(1); opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { .scroll-cue::before { animation: none; } }
-
 /* ============================================================== MARQUEE === */
 .marquee {
   border-block: 1px solid var(--line);

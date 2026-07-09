@@ -831,7 +831,6 @@ function pageHome() {
       <a class="btn btn-ghost btn-lg" href="#the-list">Browse the list <span class="arr" aria-hidden="true">↓</span></a>
     </div>
   </div>
-  <span class="scroll-cue" aria-hidden="true">Scroll</span>
 </section>
 
 <div class="marquee" aria-hidden="true">

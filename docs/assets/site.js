@@ -189,14 +189,14 @@
   var mcta = document.getElementById("m-cta");
   var mctaTrigger = document.getElementById("sf-quote");
   if (mcta && mctaTrigger) {
-    var footerCta = document.querySelector(".footer-cta");
+    var footerEl = document.getElementById("site-footer");
     var mctaShown = false, mctaTick = false;
     var updateMcta = function () {
       mctaTick = false;
       var passed = mctaTrigger.getBoundingClientRect().bottom < 0;
-      var footerIn = footerCta ? footerCta.getBoundingClientRect().top < window.innerHeight : false;
+      var footerRevealed = footerEl ? footerEl.getBoundingClientRect().top < window.innerHeight : false;
       var navOpen = menu && menu.classList.contains("open");
-      var show = passed && !footerIn && !navOpen;
+      var show = passed && !footerRevealed && !navOpen;
       if (show !== mctaShown) {
         mcta.classList.toggle("show", show);
         mcta.setAttribute("aria-hidden", show ? "false" : "true");
@@ -207,6 +207,10 @@
     var onMctaScroll = function () { if (!mctaTick) { mctaTick = true; requestAnimationFrame(updateMcta); } };
     window.addEventListener("scroll", onMctaScroll, { passive: true });
     window.addEventListener("resize", onMctaScroll, { passive: true });
+    // reliable "footer revealed" trigger — fires the moment the footer crosses in/out
+    if ("IntersectionObserver" in window && footerEl) {
+      new IntersectionObserver(onMctaScroll, { threshold: 0 }).observe(footerEl);
+    }
     updateMcta();
   }
 })();
