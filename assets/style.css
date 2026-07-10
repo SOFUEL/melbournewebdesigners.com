@@ -244,6 +244,13 @@ header.site.scrolled {
   -webkit-backdrop-filter: blur(14px) saturate(120%);
   border-bottom-color: var(--line);
 }
+/* Mobile: pin the header with position:fixed — the root overflow-x guard breaks
+   position:sticky on iOS/WebKit (header floats down). Fixed is immune; the
+   content offset below replaces the space the in-flow sticky header used to take. */
+@media (max-width: 860px) {
+  header.site { position: fixed; left: 0; right: 0; top: 0; }
+  .page-main { padding-top: 77px; }
+}
 .nav {
   display: flex;
   align-items: center;
@@ -1978,7 +1985,7 @@ html.pop-lock { overflow: hidden; }
   position: fixed;
   left: 16px;
   right: 16px;
-  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  bottom: max(8px, env(safe-area-inset-bottom, 0px));
   z-index: 90;
   align-items: center;
   justify-content: center;
