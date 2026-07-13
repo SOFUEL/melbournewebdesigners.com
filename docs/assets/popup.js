@@ -1,8 +1,8 @@
 /* ==========================================================================
    MelbourneWebDesigners.com — AI Search Audit lead magnet popup
    Free "AI Search Visibility Audit" (valued at $497) in exchange for
-   email + website. Triggers: desktop exit-intent (armed after 8s), 45%
-   scroll, or 28s dwell — whichever first. Mobile: 60% scroll only.
+   email + website. Triggers: 45% scroll or 28s dwell on both platforms,
+   plus desktop exit-intent (armed after 8s) — whichever fires first.
    Suppressed 7 days after dismiss, forever after submit (localStorage).
    Accessible: focus-trapped dialog, ESC closes, focus restored.
    Anti-bot mirrors the funnel: honeypot + minimum-seconds-open.
@@ -54,17 +54,19 @@
   }
 
   /* ---------- triggers ---------- */
-  setTimeout(function () { armed = true; }, 8000);
-
+  /* exit-intent is desktop-only (armed after 8s so it can't fire on entry) */
   if (fine) {
+    setTimeout(function () { armed = true; }, 8000);
     document.addEventListener("mouseout", function (e) {
       if (!armed || shown) return;
       if (!e.relatedTarget && e.clientY <= 0) show();
     });
-    setTimeout(function () { if (!shown) show(); }, 28000);
   }
 
-  var scrollNeed = fine ? 0.45 : 0.6;
+  /* dwell + scroll-depth now fire on BOTH desktop and mobile */
+  setTimeout(function () { if (!shown) show(); }, 28000);
+
+  var scrollNeed = 0.45;
   window.addEventListener("scroll", function () {
     if (shown) return;
     var max = document.documentElement.scrollHeight - window.innerHeight;
