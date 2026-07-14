@@ -138,6 +138,13 @@ const GUIDE_PATH = "how-to-choose-a-web-designer-melbourne/";
 
 function chip(text, cls) { return `<span class="chip ${cls || ""}">${esc(text)}</span>`; }
 
+// Verified = the agency has claimed the listing and confirmed its details.
+// Reward: their outbound links drop nofollow (a real, followed backlink) and
+// they wear the Verified chip. Flip with `"verified": true` in agencies.json.
+// (Uses the shared ICON_CHECK declared with the other icons below.)
+function relFor(a) { return a.verified ? "noopener" : "nofollow noopener"; }
+function verifiedChip(a) { return a.verified ? `<span class="chip chip-verified">${ICON_CHECK} Verified</span>` : ""; }
+
 // star string for a rating (whole + optional half-ish rendered as text)
 function stars(rating) {
   const full = Math.floor(rating);
@@ -754,8 +761,9 @@ function agencyRow(depth, a, rank) {
   <div class="row-meta">
     ${chip(a.suburb, "chip-suburb")}
     ${topPlats}
+    ${verifiedChip(a)}
     ${rating}
-    <a class="row-ext" href="${escAttr(a.website)}" target="_blank" rel="nofollow noopener" data-stop aria-label="Visit ${escAttr(a.name)} website">${ICON_EXT}</a>
+    <a class="row-ext" href="${escAttr(a.website)}" target="_blank" rel="${relFor(a)}" data-stop aria-label="Visit ${escAttr(a.name)} website">${ICON_EXT}</a>
   </div>
 </div>`;
 }
@@ -1672,9 +1680,10 @@ function pageProfile(a, index) {
           ${a.founded != null ? chip("Est. " + a.founded) : ""}
           ${a.teamSize ? chip(a.teamSize + " team") : ""}
           ${a.googleRating != null ? chip(a.googleRating.toFixed(1) + "★ Google", "chip-rating") : ""}
+          ${verifiedChip(a)}
         </div>
         <div class="profile-actions">
-          <a class="btn btn-primary" href="${escAttr(a.website)}" target="_blank" rel="nofollow noopener">Visit website <span aria-hidden="true">↗</span></a>
+          <a class="btn btn-primary" href="${escAttr(a.website)}" target="_blank" rel="${relFor(a)}">Visit website <span aria-hidden="true">↗</span></a>
           <a class="btn btn-ghost" href="${r}get-quote/">Get matched instead</a>
         </div>
       </div>
@@ -1704,7 +1713,7 @@ function pageProfile(a, index) {
         <div class="profile-section">
           <h2>Visit ${esc(a.name)}</h2>
           <p style="color:var(--muted)">See their portfolio and get in touch directly.</p>
-          <a class="ext-link" href="${escAttr(a.website)}" target="_blank" rel="nofollow noopener">${esc(a.website.replace(/^https?:\/\//, ""))} <span aria-hidden="true">↗</span></a>
+          <a class="ext-link" href="${escAttr(a.website)}" target="_blank" rel="${relFor(a)}">${esc(a.website.replace(/^https?:\/\//, ""))} <span aria-hidden="true">↗</span></a>
         </div>
       </div>
 
