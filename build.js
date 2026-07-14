@@ -35,8 +35,13 @@ const PARTNER = "SOCIALFUEL";
 const CONTACT_EMAIL = "hello@socialfuel.media";
 const INDEXNOW_KEY = "4706a4308b21182e1f6919d7fc35268a";
 
-const TODAY = new Date().toISOString().slice(0, 10);       // YYYY-MM-DD
-const TODAY_HUMAN = new Date(TODAY + "T00:00:00Z").toLocaleDateString("en-AU", {
+// Editorial "reviewed / updated" date — STABLE, never new Date(). Keeps the build
+// deterministic: local and CI produce byte-identical docs, so there's no date churn
+// and no push conflicts. Bump this when you actually re-review the directory
+// (aim ~monthly, to honour the "updated monthly" promise).
+const REVIEWED = "2026-07-10";                             // YYYY-MM-DD — bump on review
+const TODAY = REVIEWED;                                    // alias for existing call sites
+const TODAY_HUMAN = new Date(REVIEWED + "T00:00:00Z").toLocaleDateString("en-AU", {
   day: "numeric", month: "long", year: "numeric", timeZone: "UTC"
 });
 
@@ -2090,7 +2095,7 @@ function page404() {
 // -------------------------------------------------------------------------
 function buildSitemap(urls) {
   const items = urls.map((u) =>
-    `  <url>\n    <loc>${SITE_URL}/${u.loc}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>${u.freq}</changefreq>\n    <priority>${u.pri}</priority>\n  </url>`
+    `  <url>\n    <loc>${SITE_URL}/${u.loc}</loc>\n    <lastmod>${u.lastmod || REVIEWED}</lastmod>\n    <changefreq>${u.freq}</changefreq>\n    <priority>${u.pri}</priority>\n  </url>`
   ).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -2303,8 +2308,8 @@ function build() {
   ];
   ORDERED.forEach((a) => sitemapUrls.push({ loc: `agencies/${a.slug}/`, freq: "monthly", pri: "0.7" }));
   if (BLOG_POSTS.length) {
-    sitemapUrls.push({ loc: "blog/", freq: "weekly", pri: "0.8" });
-    BLOG_POSTS.forEach((p) => sitemapUrls.push({ loc: `blog/${p.slug}/`, freq: "monthly", pri: "0.7" }));
+    sitemapUrls.push({ loc: "blog/", freq: "weekly", pri: "0.8", lastmod: BLOG_POSTS.map((p) => p.updated || p.date).sort().pop() });
+    BLOG_POSTS.forEach((p) => sitemapUrls.push({ loc: `blog/${p.slug}/`, freq: "monthly", pri: "0.7", lastmod: p.updated || p.date }));
   }
 
   writeFile("sitemap.xml", buildSitemap(sitemapUrls));
