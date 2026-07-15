@@ -86,7 +86,8 @@
     "founded": 2009,
     "teamSize": "10-50",
     "googleRating": 4.9,
-    "logo": "assets/logos/chromatix.svg"
+    "logo": "assets/logos/chromatix.svg",
+    "verified": true
   },
   {
     "name": "Bright Labs",
