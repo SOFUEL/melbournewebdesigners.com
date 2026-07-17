@@ -9,6 +9,29 @@
 
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---- smooth scroll (Lenis) ----------------------------------------------
+     Eases the REAL scroll position, so everything that reads window.scrollY
+     (curtain footer, hscroll, popup trigger, sticky header) keeps working.
+     Touch stays native (Lenis doesn't sync touch by default); off entirely for
+     reduced-motion. Exposed as window.__lenis so scroll-locks can pause it. */
+  var lenis = null;
+  if (!reduce && window.Lenis) {
+    lenis = new window.Lenis({ duration: 1.05, smoothWheel: true });
+    window.__lenis = lenis;
+    (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(0);
+    /* Lenis disables native scroll-behavior, so drive in-page anchors itself */
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="#"]');
+      if (!a) return;
+      var id = a.getAttribute("href");
+      if (!id || id === "#") return;
+      var target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      lenis.scrollTo(target);
+    });
+  }
+
   /* ---- sticky header: add .scrolled once the page moves ---- */
   var header = document.getElementById("site-header");
   if (header) {
@@ -29,6 +52,7 @@
       menu.classList.toggle("open", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
       document.documentElement.style.overflow = open ? "hidden" : "";
+      if (lenis) { if (open) lenis.stop(); else lenis.start(); }
     };
     toggle.addEventListener("click", function () { setOpen(!menu.classList.contains("open")); });
     if (closeBtn) closeBtn.addEventListener("click", function () { setOpen(false); });

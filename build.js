@@ -657,6 +657,7 @@ ${opts.body}
 </div>
 ${footer(opts.depth)}
 ${opts.noPopup ? "" : popupHtml(r)}
+<script src="${r}assets/lenis.min.js" defer></script>
 <script src="${r}assets/site.js" defer></script>
 <script src="${r}assets/footer-fx.js" defer></script>${opts.noPopup ? "" : `
 <script src="${r}assets/popup.js" defer></script>`}

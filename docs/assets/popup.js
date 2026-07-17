@@ -38,6 +38,7 @@
     lastFocus = document.activeElement;
     root.classList.add("on");
     document.documentElement.classList.add("pop-lock");
+    if (window.__lenis) window.__lenis.stop();
     var first = root.querySelector("input[name=email]");
     if (first) setTimeout(function () { first.focus(); }, 60);
     if (typeof window.gtag === "function") window.gtag("event", "audit_popup_view");
@@ -46,6 +47,7 @@
   function hide(dismissed) {
     root.classList.remove("on");
     document.documentElement.classList.remove("pop-lock");
+    if (window.__lenis) window.__lenis.start();
     if (dismissed) {
       state.dismissedAt = Date.now();
       try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
