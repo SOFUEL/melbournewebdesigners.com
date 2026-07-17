@@ -507,6 +507,9 @@ input:not([type="radio"]):not([type="checkbox"]), textarea { cursor: text; }
 }
 .marquee--thin .marquee__item .sep { color: var(--acid); }
 @keyframes marq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+/* scroll-driven mode (site.js): the strip's position follows the page scroll
+   instead of auto-looping. The keyframe loop above stays as the no-JS fallback. */
+.marquee.scroll-driven .marquee__track { animation: none; will-change: transform; }
 
 /* ============================================================= FEATURED === */
 .featured-wrap { position: relative; }
@@ -952,7 +955,8 @@ h2.center, .sec-head--center { text-align: center; }
    containing box and the pin never locks to the viewport. `clip` still contains
    the horizontally-sliding cards but keeps the pin's sticky viewport-relative
    (same reason page-main uses clip for the sticky header). */
-.band-paper.hscroll { overflow: clip; }
+/* neutral grey band (vs the site's warm paper) so the white cards pop */
+.band-paper.hscroll { overflow: clip; background: #f5f5f5; }
 
 /* 1 — whole section pins at 100vh, anchored top, cleared of the sticky header */
 .hscroll-on .hscroll-pin {
@@ -977,7 +981,8 @@ h2.center, .sec-head--center { text-align: center; }
   width: max-content;
   margin: 0;
   will-change: transform;
-  transition: transform .6s cubic-bezier(.22, .9, .24, 1);
+  /* no transform transition — hscroll.js lerps the position every frame;
+     a tween on top would fight it and bring back the stepped feel */
 }
 /* 3 — the FEATURED focus card: 5:3, sized/centred by JS */
 .hscroll-on .step {
@@ -991,16 +996,17 @@ h2.center, .sec-head--center { text-align: center; }
   text-align: center;
   border-radius: 20px;
   padding: 1.2rem;
-  background: rgba(10, 10, 11, .05);
-  border: 1px solid rgba(10, 10, 11, .08);
+  background: #fff;
+  border: 1px solid rgba(10, 10, 11, .07);
+  box-shadow: 0 18px 44px -20px rgba(10, 10, 11, .22);
   filter: blur(8px);
-  opacity: .4;
+  opacity: .55;
   transition: filter .55s var(--ease), opacity .55s var(--ease),
               background-color .55s var(--ease), border-color .55s var(--ease),
-              transform .55s var(--ease);
+              box-shadow .55s var(--ease), transform .55s var(--ease);
 }
-.hscroll-on .step.is-active { filter: none; opacity: 1; background: transparent; border-color: transparent; }
-.hscroll-on .step.is-past { opacity: 0; filter: blur(10px); }
+.hscroll-on .step.is-active { filter: none; opacity: 1; background: transparent; border-color: transparent; box-shadow: none; }
+.hscroll-on .step.is-past { opacity: 0; filter: blur(10px); box-shadow: none; }
 /* 4 — bigger number + title */
 .hscroll-on .step .step-ghost {
   position: absolute;

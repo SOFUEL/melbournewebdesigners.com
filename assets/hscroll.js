@@ -34,19 +34,39 @@
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
 
   var seg = -1, SEG = 0, cardW = 0, cardH = 0, gap = 0, slotX = 0, slotY = 0;
+  /* buttery track: fx() feeds a continuous fractional target; a lerp follower
+     writes the transform every frame (the old per-index CSS tween stepped) */
+  var curTx = null, targetTx = null, rafOn = false;
 
   function reset() {
     sec.classList.remove("hscroll-on");
     sec.style.height = "";
     track.style.transform = "";
     track.style.top = "";
+    curTx = targetTx = null;
     if (fill) fill.style.transform = "";
     for (var i = 0; i < n; i++) cards[i].classList.remove("is-active", "is-past");
     for (i = 0; i < chips.length; i++) { chips[i].classList.remove("on"); countR.appendChild(chips[i]); }
     seg = -1;
   }
 
-  function txFor(i) { return Math.round(slotX - (i * (cardW + gap) + cardW / 2)); }
+  function txForF(f) { return slotX - (f * (cardW + gap) + cardW / 2); }
+  function txFor(i) { return Math.round(txForF(i)); }
+
+  function writeTx() { track.style.transform = "translate3d(" + curTx.toFixed(2) + "px,-50%,0)"; }
+  function followTx() {
+    if (!on() || targetTx === null || curTx === null) { rafOn = false; return; }
+    var d = targetTx - curTx;
+    if (Math.abs(d) < 0.08) { curTx = targetTx; writeTx(); rafOn = false; return; }
+    curTx += d * 0.14;
+    writeTx();
+    requestAnimationFrame(followTx);
+  }
+  function nudgeTx() {
+    if (curTx === null && targetTx !== null) { curTx = targetTx; writeTx(); return; }
+    if (!rafOn) { rafOn = true; requestAnimationFrame(followTx); }
+  }
+  function snapTx(tx) { targetTx = tx; curTx = tx; writeTx(); }
 
   function measure() {
     var sr = stage.getBoundingClientRect();
@@ -86,9 +106,9 @@
   var swT;
   function apply(i, instant) {
     i = clamp(i, 0, n - 1);
+    if (instant) snapTx(txFor(i));
     if (i === seg) return;
     seg = i;
-    track.style.transform = "translate3d(" + txFor(i) + "px,-50%,0)";
     for (var k = 0; k < n; k++) {
       cards[k].classList.toggle("is-active", k === i);
       cards[k].classList.toggle("is-past", k < i);
@@ -131,6 +151,10 @@
     var span = r.height - window.innerHeight;
     var p = span > 0 ? clamp(-r.top / span, 0, 1) : 0;
     if (fill) fill.style.transform = "scaleX(" + p.toFixed(4) + ")";
+    /* continuous track position (each slide holds at its segment centre),
+       discrete index still drives card states / counter / description */
+    targetTx = txForF(clamp(p * n - 0.5, 0, n - 1));
+    nudgeTx();
     apply(clamp(Math.floor(p * n), 0, n - 1), false);
   }
 
@@ -151,7 +175,8 @@
       if (!on()) return;
       var i = clamp(parseInt(b.getAttribute("data-i"), 10) || 0, 0, n - 1);
       var top = Math.round(sec.getBoundingClientRect().top + window.scrollY + (i + 0.5) * SEG);
-      window.scrollTo({ top: top, behavior: "smooth" });
+      if (window.__lenis) window.__lenis.scrollTo(top);
+      else window.scrollTo({ top: top, behavior: "smooth" });
     });
   });
 

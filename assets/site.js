@@ -43,6 +43,37 @@
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
+  /* ---- marquee: scroll-driven strip (no auto-loop; CSS keyframes remain the
+     no-JS fallback). Content is duplicated x2, so wrapping modulo half the
+     track width is seamless. Movement is user-driven, so it also behaves
+     under prefers-reduced-motion (the old loop never stopped). ---- */
+  var marqTracks = [];
+  Array.prototype.forEach.call(document.querySelectorAll(".marquee"), function (m) {
+    var t = m.querySelector(".marquee__track");
+    if (!t) return;
+    m.classList.add("scroll-driven");
+    marqTracks.push({ t: t, half: 0 });
+  });
+  if (marqTracks.length) {
+    var marqMeasure = function () {
+      marqTracks.forEach(function (o) { o.half = o.t.scrollWidth / 2; });
+    };
+    var marqTick = false;
+    var marqDraw = function () {
+      marqTick = false;
+      marqTracks.forEach(function (o) {
+        if (!o.half) return;
+        var x = -((window.scrollY * 0.5) % o.half);
+        o.t.style.transform = "translate3d(" + x.toFixed(2) + "px,0,0)";
+      });
+    };
+    var onMarq = function () { if (!marqTick) { marqTick = true; requestAnimationFrame(marqDraw); } };
+    marqMeasure();
+    window.addEventListener("scroll", onMarq, { passive: true });
+    window.addEventListener("resize", function () { marqMeasure(); onMarq(); }, { passive: true });
+    marqDraw();
+  }
+
   /* ---- mobile nav (full-screen overlay) ---- */
   var toggle = document.getElementById("nav-toggle");
   var menu = document.getElementById("nav-menu");
