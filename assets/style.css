@@ -632,15 +632,28 @@ input:not([type="radio"]):not([type="checkbox"]), textarea { cursor: text; }
 }
 .chip-suburb { color: var(--ink); }
 .chip-rating { color: var(--acid-ink); background: var(--acid); border-color: var(--acid); font-weight: 500; }
-.chip-verified {
+/* X/Meta-style verification mark — sits inline beside the agency name.
+   Fixed px (not em) so it stays a small annotation next to any name size. */
+.vmark {
   display: inline-flex;
   align-items: center;
   gap: .35em;
+  vertical-align: middle;
+  margin-left: 9px;
+  position: relative;
+  top: -.06em;
+  font-family: var(--body);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
   color: var(--acid);
-  border-color: rgba(217, 255, 63, .45);
-  font-weight: 500;
 }
-.chip-verified svg { flex: 0 0 auto; width: 12px; height: 12px; stroke-width: 3; }
+.vmark svg { width: 14px; height: 14px; flex: 0 0 auto; }
+.vmark svg circle { fill: var(--acid); }
+.vmark svg path { fill: none; stroke: var(--acid-ink); stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ============================================================ SECTIONHEAD = */
 .sec-head {
@@ -815,7 +828,8 @@ h2.center, .sec-head--center { text-align: center; }
 .row:hover .chip, .row:focus-within .chip { color: var(--muted-paper); border-color: var(--line-paper); }
 .row:hover .chip-suburb, .row:focus-within .chip-suburb { color: var(--ink-dark); }
 .row:hover .chip-rating, .row:focus-within .chip-rating { color: var(--acid-ink); border-color: var(--acid); }
-.row:hover .chip-verified, .row:focus-within .chip-verified { color: var(--ink-dark); border-color: var(--ink-dark); }
+/* row inverts to paper on hover — keep the word legible (the acid seal still pops) */
+.row:hover .vmark-word, .row:focus-within .vmark-word { color: var(--ink-dark); }
 .row:hover .row-ext, .row:focus-within .row-ext { border-color: var(--line-paper-strong); color: var(--ink-dark); transform: translate(3px, -3px); }
 .row:hover .row-logo, .row:focus-within .row-logo { background: #fff; }
 /* dark tiles stay dark on row invert — white marks on white would vanish */

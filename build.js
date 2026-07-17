@@ -140,10 +140,15 @@ function chip(text, cls) { return `<span class="chip ${cls || ""}">${esc(text)}<
 
 // Verified = the agency has claimed the listing and confirmed its details.
 // Reward: their outbound links drop nofollow (a real, followed backlink) and
-// they wear the Verified chip. Flip with `"verified": true` in agencies.json.
-// (Uses the shared ICON_CHECK declared with the other icons below.)
+// they get an X/Meta-style verification mark inline beside their name.
+// Flip with `"verified": true` in agencies.json.
+const ICON_VERIFIED = `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="12"/><path d="M17.1 8.4 10.4 15.4 6.9 11.9"/></svg>`;
 function relFor(a) { return a.verified ? "noopener" : "nofollow noopener"; }
-function verifiedChip(a) { return a.verified ? `<span class="chip chip-verified">${ICON_CHECK} Verified</span>` : ""; }
+function verifiedMark(a) {
+  return a.verified
+    ? `<span class="vmark" title="Verified — this agency has confirmed its listing">${ICON_VERIFIED}<span class="vmark-word">Verified</span></span>`
+    : "";
+}
 
 // star string for a rating (whole + optional half-ish rendered as text)
 function stars(rating) {
@@ -757,11 +762,10 @@ function agencyRow(depth, a, rank) {
 <div class="row" data-platforms="${escAttr(platAttr)}" data-ecom="${isEcom(a) ? "1" : "0"}" data-reveal>
   <span class="row-index">${String(rank).padStart(2, "0")}</span>
   ${logoTile(depth, a, "row-logo")}
-  <h3 class="row-name"><a href="${r}agencies/${a.slug}/">${esc(a.name)}</a><span class="row-sub">${esc(a.suburb)}</span></h3>
+  <h3 class="row-name"><a href="${r}agencies/${a.slug}/">${esc(a.name)}</a>${verifiedMark(a)}<span class="row-sub">${esc(a.suburb)}</span></h3>
   <div class="row-meta">
     ${chip(a.suburb, "chip-suburb")}
     ${topPlats}
-    ${verifiedChip(a)}
     ${rating}
     <a class="row-ext" href="${escAttr(a.website)}" target="_blank" rel="${relFor(a)}" data-stop aria-label="Visit ${escAttr(a.name)} website">${ICON_EXT}</a>
   </div>
@@ -1673,14 +1677,13 @@ function pageProfile(a, index) {
     <div class="profile-hero">
       <div>
         <p class="eyebrow">Melbourne web design agency</p>
-        <h1>${esc(a.name)}</h1>
+        <h1>${esc(a.name)}${verifiedMark(a)}</h1>
         <div class="chips" style="margin-top:1rem">
           ${chip(a.suburb, "chip-suburb")}
           ${(a.platforms || []).slice(0, 3).map((p) => chip(p)).join("")}
           ${a.founded != null ? chip("Est. " + a.founded) : ""}
           ${a.teamSize ? chip(a.teamSize + " team") : ""}
           ${a.googleRating != null ? chip(a.googleRating.toFixed(1) + "★ Google", "chip-rating") : ""}
-          ${verifiedChip(a)}
         </div>
         <div class="profile-actions">
           <a class="btn btn-primary" href="${escAttr(a.website)}" target="_blank" rel="${relFor(a)}">Visit website <span aria-hidden="true">↗</span></a>
