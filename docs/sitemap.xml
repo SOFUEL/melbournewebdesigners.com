@@ -224,9 +224,15 @@
   </url>
   <url>
     <loc>https://melbournewebdesigners.com/blog/</loc>
-    <lastmod>2026-07-12</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://melbournewebdesigners.com/blog/red-flags-hiring-web-design-agency-melbourne/</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://melbournewebdesigners.com/blog/google-business-profile-ai-search-local-visibility-stack-2026/</loc>
