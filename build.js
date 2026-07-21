@@ -57,6 +57,30 @@ const agencies = JSON.parse(fs.readFileSync(path.join(DATA_DIR, "agencies.json")
 const featured = JSON.parse(fs.readFileSync(path.join(DATA_DIR, "featured.json"), "utf8"));
 const BLOG_POSTS = loadPosts(); // data/blog/*.md — function declarations hoist
 
+// One-off URL consolidations: <from> serves a 0-second meta-refresh + a
+// rel=canonical to <to>, so a retired/duplicate post keeps its link equity and
+// funnels visitors to the survivor instead of 404-ing. The build owns docs/blog/,
+// so these stubs regenerate every run. No inline JS (keeps it CSP-agnostic).
+const REDIRECTS = [
+  // 18 Jul auto-journal published a near-duplicate of the 12 Jul "…-stack-2026"
+  // post under a shorter slug; consolidate the dup back onto the original.
+  { from: "blog/google-business-profile-ai-search-local-visibility-2026/", to: "blog/google-business-profile-ai-search-local-visibility-stack-2026/" }
+];
+function redirectPage(to) {
+  const url = SITE_URL + "/" + to;
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="0; url=${url}">
+<link rel="canonical" href="${url}">
+<meta name="robots" content="noindex, follow">
+<title>Redirecting…</title>
+</head>
+<body>This page has moved. If you are not redirected, <a href="${url}">continue here</a>.</body>
+</html>`;
+}
+
 // Computed studio counts — never hard-code (26 editorial + 1 featured = 27).
 const EDITORIAL_COUNT = agencies.length;               // 26
 const TOTAL_STUDIOS = EDITORIAL_COUNT + 1;             // 27 (incl. featured)
@@ -2298,6 +2322,9 @@ function build() {
     BLOG_POSTS.forEach((p) => pages.push([`blog/${p.slug}/index.html`, pageBlogPost(p)]));
     writeFile("blog/feed.xml", buildRss());
   }
+
+  // URL consolidations (retired/duplicate posts → canonical survivor)
+  REDIRECTS.forEach((rd) => pages.push([rd.from + "index.html", redirectPage(rd.to)]));
 
   ORDERED.forEach((a, i) => {
     pages.push([`agencies/${a.slug}/index.html`, pageProfile(a, i)]);
