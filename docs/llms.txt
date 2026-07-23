@@ -15,6 +15,7 @@ MelbourneWebDesigners.com is owned and operated by Helou Holdings Pty Ltd. Featu
 
 ## The Journal (guides & analysis)
 
+- [The Web Accessibility Rules Australian Small Businesses Keep Missing](https://melbournewebdesigners.com/blog/web-accessibility-rules-australian-small-businesses/) : Discover the essential web accessibility rules that Australian small businesses often overlook, ensuring compliance and inclusivity for all users.
 - [7 Red Flags When Hiring a Melbourne Web Design Agency](https://melbournewebdesigners.com/blog/red-flags-hiring-web-design-agency-melbourne/) : Learn the top 7 red flags to watch for when hiring a web design agency in Melbourne. Protect your investment and ensure quality outcomes for your project.
 - [Google Business Profile + AI Search: The Local Visibility Stack for 2026](https://melbournewebdesigners.com/blog/google-business-profile-ai-search-local-visibility-stack-2026/) : Explore how Google Business Profile and AI search will shape local visibility for Melbourne businesses in 2026 and what strategies to adopt.
 - [How to Brief a Web Designer: The Template That Saves $2k of Revisions](https://melbournewebdesigners.com/blog/how-to-brief-a-web-designer/) : Learn how to effectively brief a web designer with our comprehensive template, saving you time and money on revisions in Melbourne's competitive market.
