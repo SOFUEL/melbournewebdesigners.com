@@ -224,9 +224,15 @@
   </url>
   <url>
     <loc>https://melbournewebdesigners.com/blog/</loc>
-    <lastmod>2026-07-28</lastmod>
+    <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://melbournewebdesigners.com/blog/shopify-apps-costs-alternatives-melbourne/</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://melbournewebdesigners.com/blog/ai-search-and-seo-melbourne-businesses/</loc>
