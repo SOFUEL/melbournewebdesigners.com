@@ -249,6 +249,14 @@
   function showThanks() {
     hideAllSteps();
     if (thankState) thankState.classList.add("active");
+    /* Budget-gated booking. Only offer a live call where the project can
+       support one; Under $4k / Not sure get the email path. This is the direct
+       fix for the sub-$4k enquiry that consumed a fortnight and went nowhere. */
+    var book = document.getElementById("thanks-book");
+    if (book) {
+      var QUALIFIES = ["$4k \u2013 $8k", "$8k \u2013 $15k", "$15k+"];
+      if (QUALIFIES.indexOf(answers.budget) !== -1) book.classList.remove("hide");
+    }
     if (progressBar) progressBar.style.width = "100%";
     if (stepCount) stepCount.textContent = "Done";
     try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch (e) {}
@@ -287,27 +295,43 @@
     try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch (e) {}
   }
 
-  // ---- ?budget= deep-link preselect (from the cost page) ----
-  function preselectBudget() {
+  /* ---- deep-link preselect ----------------------------------------------
+     ?project_type= comes from the bridge popup, ?budget= from the cost
+     estimator. This previously only HIGHLIGHTED the matching option and then
+     showStep(0) started the visitor at question 1 regardless — so they
+     re-answered what they had just told us, and the deep link bought nothing.
+     Now it records the answer AND opens the first UNANSWERED step. */
+  function preselectFromUrl() {
     var params = new URLSearchParams(location.search);
-    var b = params.get("budget");
-    if (!b) return;
-    // match against the budget step's option values (case/space tolerant)
-    var step = steps.filter(function (s) { return s.getAttribute("data-name") === "budget"; })[0];
-    if (!step) return;
-    var want = b.trim().toLowerCase();
-    var opts = step.querySelectorAll(".opt");
-    for (var j = 0; j < opts.length; j++) {
-      if (opts[j].getAttribute("data-value").toLowerCase() === want) {
-        answers.budget = opts[j].getAttribute("data-value");
-        opts[j].classList.add("selected");
-        opts[j].setAttribute("aria-pressed", "true");
-        break;
+    ["project_type", "budget"].forEach(function (key) {
+      var raw = params.get(key);
+      if (!raw) return;
+      var step = steps.filter(function (s) { return s.getAttribute("data-name") === key; })[0];
+      if (!step) return;
+      var want = raw.trim().toLowerCase();
+      var opts = step.querySelectorAll(".opt");
+      for (var j = 0; j < opts.length; j++) {
+        if ((opts[j].getAttribute("data-value") || "").toLowerCase() === want) {
+          answers[key] = opts[j].getAttribute("data-value");
+          opts[j].classList.add("selected");
+          opts[j].setAttribute("aria-pressed", "true");
+          break;
+        }
       }
+    });
+  }
+
+  function firstUnansweredStep() {
+    for (var i = 0; i < steps.length; i++) {
+      var type = steps[i].getAttribute("data-step");
+      var name = steps[i].getAttribute("data-name");
+      if (type === "choice" && name && answers[name]) continue;
+      return i;
     }
+    return 0;
   }
 
   // init
-  preselectBudget();
-  showStep(0);
+  preselectFromUrl();
+  showStep(firstUnansweredStep());
 })();

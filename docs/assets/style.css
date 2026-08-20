@@ -1833,6 +1833,11 @@ footer.site {
 
 /* funnel result states */
 .result-state { display: none; text-align: center; padding-block: clamp(2rem, 5vw, 4rem); }
+#thanks-book { margin: 1.6rem auto 1.4rem; padding-top: 1.4rem; border-top: 1px solid var(--line); max-width: 46ch; }
+#thanks-book.hide { display: none; }
+.thanks-book-lead { color: var(--muted); font-size: .95rem; margin-bottom: 1rem; }
+.thanks-book-fine { color: var(--muted); font-size: .8rem; margin-top: .9rem; }
+
 .result-state.active { display: block; animation: qfade .5s var(--ease); }
 .result-state h2 {
   font-family: var(--display);
@@ -2018,6 +2023,40 @@ html.pop-lock { overflow: hidden; }
 .pop-cta:hover, .pop-cta:focus-visible { background: var(--acid); color: var(--acid-ink); box-shadow: 0 12px 32px rgba(217, 255, 63, .35); }
 .pop-err { color: #B3261E; font-size: .85rem; min-height: 1.2em; margin-top: .5rem; }
 .pop-fine { color: var(--muted-paper); font-size: .74rem; margin-top: .9rem; }
+.pop-q {
+  font-family: var(--body);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted-paper);
+  margin: 0 0 .7rem;
+}
+.pop-pills { display: flex; flex-wrap: wrap; gap: .55rem; }
+.pop-pill {
+  font-family: var(--body);
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--ink-dark);
+  background: transparent;
+  border: 1px solid var(--line-paper-strong);
+  border-radius: 100px;
+  padding: .7rem 1.15rem;
+  cursor: pointer;
+  transition: background-color .18s var(--ease), border-color .18s var(--ease), color .18s var(--ease), transform .18s var(--ease);
+}
+.pop-pill:hover, .pop-pill:focus-visible {
+  background: var(--ink-dark);
+  border-color: var(--ink-dark);
+  color: var(--paper);
+  transform: translateY(-1px);
+}
+.pop-alt { margin-top: 1rem; font-size: .85rem; }
+.pop-alt a { color: var(--muted-paper); text-decoration: underline; text-underline-offset: 2px; }
+.pop-alt a:hover, .pop-alt a:focus-visible { color: var(--ink-dark); }
+@media (prefers-reduced-motion: reduce) { .pop-pill { transition: none; } .pop-pill:hover { transform: none; } }
+
+
 .pop-fine a { color: var(--ink-dark); text-decoration: underline; text-underline-offset: 2px; }
 .pop-done h2 { margin-bottom: .6rem; }
 .hide { display: none !important; }
