@@ -283,28 +283,29 @@ function header(depth, active) {
 // AI Search Audit lead-magnet popup (assets/popup.js drives triggers/submit)
 // -------------------------------------------------------------------------
 function popupHtml(r) {
+  // One-question BRIDGE into the existing funnel — not a second capture.
+  // (Was a $497-framed AI-audit email grab: wrong offer for a visitor who is
+  // shopping for a web designer, a price claim on something never sold, and it
+  // fired at agency owners on their own profile pages. The audit offer moved to
+  // socialfuel.media, where every visitor already owns a site.)
+  const pills = [
+    ["New website", "New website"],
+    ["Redesign", "Website redesign"],
+    ["Online store", "E-commerce store"],
+    ["Not sure yet", "Not sure yet"]
+  ].map(([label, val]) => `<button type="button" class="pop-pill" data-project="${escAttr(val)}">${esc(label)}</button>`).join("");
   return `
-<div class="mwd-pop" id="mwd-pop" role="dialog" aria-modal="true" aria-labelledby="pop-title">
+<div class="mwd-pop" id="mwd-pop" role="dialog" aria-modal="true" aria-labelledby="pop-title" data-quote="${r}get-quote/">
   <div class="pop-card">
-    <div class="pop-hero"><img src="${r}assets/popup-ai.jpg" alt="App tiles for Gemini, Claude, ChatGPT and Grok around a search icon" width="1780" height="884" loading="lazy" decoding="async"></div>
     <button class="pop-close" type="button" aria-label="Close">&#10005;</button>
     <div class="pop-body">
-      <p class="pop-eyebrow">Free &middot; Valued at $497</p>
-      <h2 id="pop-title">Is your business invisible in AI&nbsp;search?</h2>
-      <p class="pop-sub">Your customers are already asking ChatGPT, Gemini, Claude &amp; Grok for recommendations &mdash; and ChatGPT names barely <strong>1.2% of local businesses</strong>. See exactly where you show up (or don&rsquo;t), plus the fixes to get cited. No sales call &mdash; in your inbox within 48&nbsp;hours.</p>
-      <form novalidate>
-        <div class="field hp" aria-hidden="true"><label>Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label></div>
-        <input class="pop-in" type="email" name="email" placeholder="Work email" required autocomplete="email">
-        <input class="pop-in" type="text" name="website" placeholder="yourwebsite.com.au" autocomplete="url" inputmode="url">
-        <button type="submit" class="pop-cta">Get my free AI audit <span class="arr">${ICON_ARROW}</span></button>
-        <p class="pop-err" role="alert"></p>
-      </form>
-      <p class="pop-fine">One audit email, no spam. Fulfilled by SOCIALFUEL, our featured partner &middot; <a href="${r}privacy/">Privacy</a></p>
-    </div>
-    <div class="pop-done hide">
-      <p class="pop-eyebrow">Request received</p>
-      <h2>Your audit is on the way.</h2>
-      <p class="pop-sub">We&rsquo;ll test your visibility across Claude, ChatGPT, Gemini &amp; Grok and email your report within 48 hours.</p>
+      <p class="pop-eyebrow">Free &middot; takes about a minute</p>
+      <h2 id="pop-title">${TOTAL_STUDIOS} studios. Which three should you actually call?</h2>
+      <p class="pop-sub">Tell us what you&rsquo;re building and we&rsquo;ll point you at the studios on this list that genuinely fit the brief &mdash; including the ones we&rsquo;d set aside, and why. Where SOCIALFUEL is the right fit we&rsquo;ll say so. Where it isn&rsquo;t, we&rsquo;ll point you elsewhere.</p>
+      <p class="pop-q" id="pop-q">What are you building?</p>
+      <div class="pop-pills" role="group" aria-labelledby="pop-q">${pills}</div>
+      <p class="pop-alt"><a href="${r}web-design-cost-melbourne/">Just after a ballpark price? Try the cost estimator &rarr;</a></p>
+      <p class="pop-fine">Free, no obligation. A senior strategist reads every brief &mdash; you&rsquo;ll get a real reply within one business day, not an auto-responder. Prepared by SOCIALFUEL, our featured partner &middot; <a href="${r}privacy/">Privacy</a></p>
     </div>
   </div>
 </div>`;
@@ -834,15 +835,14 @@ function pageHome() {
   const r = rel(depth);
   const rows = ORDERED.map((a, i) => agencyRow(depth, a, i + 1)).join("\n");
 
-  // ItemList JSON-LD: SOCIALFUEL first (its own org), then editorial order.
+  // ItemList JSON-LD: the EDITORIAL shortlist ONLY. SOCIALFUEL is a labelled
+  // commercial placement, not a ranked entry — emitting it at position 1 both
+  // contradicted this page's own FAQ ("Is SOCIALFUEL ranked number one?" -> "No")
+  // and taught every AI engine that ingests the page "position 1 = SOCIALFUEL".
   const itemListEls = [];
-  itemListEls.push({
-    "@type": "ListItem", position: 1,
-    item: { "@type": "ProfessionalService", name: featured.name, url: "https://socialfuel.media", areaServed: "Melbourne, Australia" }
-  });
   ORDERED.forEach((a, i) => {
     itemListEls.push({
-      "@type": "ListItem", position: i + 2,
+      "@type": "ListItem", position: i + 1,
       item: { "@type": "ProfessionalService", name: a.name, url: `${SITE_URL}/agencies/${a.slug}/`, areaServed: "Melbourne, Australia" }
     });
   });
@@ -1185,8 +1185,13 @@ function pageQuote() {
     <!-- Thank-you state -->
     <div class="result-state" id="state-thanks" role="status">
       <span class="result-spark spin" aria-hidden="true">✺</span>
-      <h2>Locked in.</h2>
-      <p>A senior strategist from our featured partner SOCIALFUEL replies within 1 business day. Keep an eye on your inbox &mdash; and check spam just in case.</p>
+      <h2>Got it &mdash; your brief&rsquo;s with us.</h2>
+      <p>A senior strategist from our featured partner SOCIALFUEL reads these properly, so you&rsquo;ll get a real reply rather than a template &mdash; within 1 business day. Keep an eye on your inbox, and check spam just in case.</p>
+      <div id="thanks-book" class="hide">
+        <p class="thanks-book-lead">Rather just talk it through? Grab a time that suits you.</p>
+        <a class="btn btn-primary" href="https://tidycal.com/socialfuel/free-30-minute-strategy-session" target="_blank" rel="noopener">Book a 30-minute call <span class="arr">${ICON_ARROW}</span></a>
+        <p class="thanks-book-fine">No deck, no pressure. If we&rsquo;re not the right build for you, we&rsquo;ll tell you who is.</p>
+      </div>
       <a class="btn btn-ghost" href="../index.html">Back to the shortlist</a>
     </div>
 
@@ -1712,7 +1717,7 @@ function pageProfile(a, index) {
         </div>
         <div class="profile-actions">
           <a class="btn btn-primary" href="${escAttr(a.website)}" target="_blank" rel="${relFor(a)}">Visit website <span aria-hidden="true">↗</span></a>
-          <a class="btn btn-ghost" href="${r}get-quote/">Get matched instead</a>
+          <a class="btn btn-ghost" href="${r}index.html#the-list">Compare similar studios</a>
         </div>
       </div>
       ${logoTile(depth, a, "profile-logo", true)}
@@ -1746,11 +1751,6 @@ function pageProfile(a, index) {
       </div>
 
       <aside class="profile-aside">
-        <div class="aside-card match-card">
-          <h3>Not sure ${esc(a.name)} is the one?</h3>
-          <p>Tell us your project — get matched free with the Melbourne agency that fits your budget and timeline. A senior strategist replies within one business day.</p>
-          <a class="btn btn-primary" href="${r}get-quote/">Get matched free <span class="arr">${ICON_ARROW}</span></a>
-        </div>
         <div class="aside-card">
           <h3>At a glance</h3>
           <div class="spec-list">
@@ -1768,8 +1768,9 @@ function pageProfile(a, index) {
 </section>
 
 ${ctaBand(depth, {
-    title: `Weighing up ${a.name}?`,
-    text: "Let us do the shortlisting. Answer six quick questions and we'll match you with the right Melbourne agency for your budget — free, with a real reply within one business day."
+    eyebrow: "Sponsored · our featured partner replies",
+    title: "Want a second opinion on your shortlist?",
+    text: "Answer six quick questions and a senior strategist from SOCIALFUEL — this site's featured partner — will point you at the Melbourne studios that fit your brief, including the ones we'd set aside and why. Free, with a real reply within one business day."
   })}
 `;
 

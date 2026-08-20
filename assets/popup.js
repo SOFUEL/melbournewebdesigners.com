@@ -1,11 +1,13 @@
 /* ==========================================================================
-   MelbourneWebDesigners.com — AI Search Audit lead magnet popup
-   Free "AI Search Visibility Audit" (valued at $497) in exchange for
-   email + website. Triggers: 45% scroll or 28s dwell on both platforms,
-   plus desktop exit-intent (armed after 8s) — whichever fires first.
-   Suppressed 7 days after dismiss, forever after submit (localStorage).
+   MelbourneWebDesigners.com — shortlist BRIDGE popup
+   One question ("what are you building?") that hands off into the existing
+   /get-quote/ funnel, resuming at the NEXT question. Deliberately not a second
+   email capture: MWD had two capture endpoints with two different fulfilment
+   promises, competing for the same visitor.
+   Triggers: 45% scroll or 28s dwell (both platforms) + desktop exit-intent
+   (armed after 8s). Suppressed 7 days after dismiss, forever after handoff.
+   Suppressed entirely on the funnel, the cost estimator, and agency profiles.
    Accessible: focus-trapped dialog, ESC closes, focus restored.
-   Anti-bot mirrors the funnel: honeypot + minimum-seconds-open.
    ========================================================================== */
 (function () {
   "use strict";
@@ -14,34 +16,38 @@
   if (!root) return;
 
   var KEY = "mwd_pop";
-  var ENDPOINT = "https://socialfuel.app.n8n.cloud/webhook/mwd-audit";
-  var MIN_SECONDS = 3;
 
-  /* never on the funnel page — don't compete with the primary conversion */
-  if (/get-quote/.test(location.pathname)) return;
+  /* Never interrupt:
+     - /get-quote/  : the primary conversion itself
+     - the cost page: the estimator IS the offer there, and the popup used to
+                      fire at ~45% scroll — right between configuring a project
+                      and seeing the price
+     - /agencies/   : these pages are read by the agency owners we email asking
+                      for a listing link. Do not pitch at them on their own page. */
+  var path = location.pathname;
+  if (/get-quote|web-design-cost-melbourne|\/agencies\//.test(path)) return;
 
   var state = {};
   try { state = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
   if (state.done) return;
   if (state.dismissedAt && (Date.now() - state.dismissedAt) < 7 * 864e5) return;
 
-  var shown = false, openedAt = 0, lastFocus = null, armed = false;
+  var shown = false, lastFocus = null, armed = false;
   var fine = window.matchMedia("(pointer: fine)").matches;
   var card = root.querySelector(".pop-card");
-  var form = root.querySelector("form");
   var closeBtn = root.querySelector(".pop-close");
+  var quoteUrl = root.getAttribute("data-quote") || "/get-quote/";
 
   function show() {
     if (shown) return;
     shown = true;
-    openedAt = Date.now();
     lastFocus = document.activeElement;
     root.classList.add("on");
     document.documentElement.classList.add("pop-lock");
     if (window.__lenis) window.__lenis.stop();
-    var first = root.querySelector("input[name=email]");
+    var first = root.querySelector(".pop-pill");
     if (first) setTimeout(function () { first.focus(); }, 60);
-    if (typeof window.gtag === "function") window.gtag("event", "audit_popup_view");
+    if (typeof window.gtag === "function") window.gtag("event", "bridge_popup_view");
   }
 
   function hide(dismissed) {
@@ -56,7 +62,6 @@
   }
 
   /* ---------- triggers ---------- */
-  /* exit-intent is desktop-only (armed after 8s so it can't fire on entry) */
   if (fine) {
     setTimeout(function () { armed = true; }, 8000);
     document.addEventListener("mouseout", function (e) {
@@ -64,8 +69,6 @@
       if (!e.relatedTarget && e.clientY <= 0) show();
     });
   }
-
-  /* dwell + scroll-depth now fire on BOTH desktop and mobile */
   setTimeout(function () { if (!shown) show(); }, 28000);
 
   var scrollNeed = 0.45;
@@ -89,60 +92,16 @@
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   });
 
-  /* ---------- submit ---------- */
-  var submitting = false;
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    if (submitting) return;
-
-    var email = (form.email.value || "").trim();
-    var website = (form.website.value || "").trim();
-    var errEl = root.querySelector(".pop-err");
-    errEl.textContent = "";
-
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent = "Please enter a valid email."; return; }
-    if (!website) { errEl.textContent = "Please add your website so we can audit it."; return; }
-    if (!/^https?:\/\//i.test(website)) website = "https://" + website;
-
-    /* anti-bot: honeypot filled or submitted too fast -> fake success */
-    var tooFast = (Date.now() - openedAt) / 1000 < MIN_SECONDS;
-    if (form.company_website.value || tooFast) { success(); return; }
-
-    submitting = true;
-    var btn = form.querySelector("button[type=submit]");
-    var orig = btn.textContent;
-    btn.disabled = true; btn.textContent = "Sending…";
-
-    var body = new URLSearchParams();
-    body.append("email", email);
-    body.append("website", website);
-    body.append("source", "popup");
-    body.append("page", location.pathname);
-
-    fetch(ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-      body: body.toString()
-    })
-      .then(function (res) {
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        if (typeof window.gtag === "function") window.gtag("event", "audit_optin", { source: "popup" });
-        if (typeof window.fbq === "function") window.fbq("track", "Lead", { content_name: "ai-audit" });
-        success();
-      })
-      .catch(function () {
-        errEl.textContent = "Something hiccuped — please try again, or email us and mention the free audit.";
-      })
-      .finally(function () {
-        submitting = false;
-        btn.disabled = false; btn.textContent = orig;
-      });
+  /* ---------- handoff: pill -> funnel, resuming at the next question ---------- */
+  root.querySelectorAll(".pop-pill").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var project = btn.getAttribute("data-project") || "";
+      state.done = true; /* answered — don't interrupt again */
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "bridge_popup_answer", { project_type: project });
+      }
+      location.href = quoteUrl + "?project_type=" + encodeURIComponent(project);
+    });
   });
-
-  function success() {
-    root.querySelector(".pop-body").classList.add("hide");
-    root.querySelector(".pop-done").classList.remove("hide");
-    state.done = true;
-    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
-  }
 })();
