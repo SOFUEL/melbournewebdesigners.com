@@ -56,4 +56,4 @@ That's also why we publish this directory the way we do — structured data on e
 
 ## Want the audit done for you?
 
-We run a free **AI Search Visibility Audit** for Melbourne businesses — we test how you show up across ChatGPT, Perplexity and Google AI, check the seven factors above against your web presence, and send you a prioritised fix list. It's valued at $497, it's genuinely free, and there's no sales call attached. Request it via the popup on this site, or [get matched with a web team](https://melbournewebdesigners.com/get-quote/) if your site needs the deeper rebuild first.
+Want the seven factors above checked against your own site? [Tell us what you're working with](https://melbournewebdesigners.com/get-quote/) — a senior strategist reads every brief and replies within one business day, with a prioritised fix list rather than a sales pitch. If it turns out you need the deeper rebuild first, we'll say so and point you at the studios that do it well.
