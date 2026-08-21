@@ -890,7 +890,7 @@ function pageHome() {
     <div class="sec-head">
       <div>
         <h2>The Shortlist</h2>
-        <p class="sub">01 &mdash; ${String(TOTAL_STUDIOS).padStart(2, "0")}, in editorial order</p>
+        <p class="sub">01 &mdash; ${String(EDITORIAL_COUNT).padStart(2, "0")}, in editorial order</p>
       </div>
       <span class="updated">Reviewed ${esc(TODAY_HUMAN)}</span>
     </div>
