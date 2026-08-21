@@ -528,7 +528,7 @@ ${faqHtml}
     <div class="cta-band" data-reveal>
       <p class="eyebrow-dark">Free &middot; two minutes</p>
       <h2>Get matched with the right Melbourne studio.</h2>
-      <p>Tell us your project and budget &mdash; a senior strategist replies within one business day. No sales calls, no spam.</p>
+      <p>Tell us your project and budget &mdash; a senior strategist replies within one business day. No cold calls, no spam.</p>
       <a class="btn btn-solid-dark btn-lg" href="${r}get-quote/">Get matched free <span class="arr">${ICON_ARROW}</span></a>
     </div>
   </div>
@@ -910,7 +910,7 @@ function pageHome() {
         <div class="step">
           <span class="step-ghost" aria-hidden="true">01</span>
           <h3>Browse the shortlist</h3>
-          <p class="step-p">Compare ${TOTAL_STUDIOS} Melbourne studios in one place &mdash; <span class="acc">no sales calls</span>, no sign-up.</p>
+          <p class="step-p">Compare ${TOTAL_STUDIOS} Melbourne studios in one place &mdash; <span class="acc">no cold calls</span>, no sign-up.</p>
         </div>
         <div class="step">
           <span class="step-ghost" aria-hidden="true">02</span>
